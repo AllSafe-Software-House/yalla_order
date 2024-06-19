@@ -161,7 +161,8 @@ Route::middleware('auth')->group(function () {
     // setting
     Route::prefix('setting')->group(function () {
         Route::get('/aboutus', [SettingAdminController::class, 'aboutus'])->name('aboutus')->middleware('permission:updateAboutUS');
-        Route::post('/aboutusstore', [SettingAdminController::class, 'aboutusupdate'])->name('aboutusstore')->middleware('permission:updateAboutUS');
+        Route::post('/aboutusstore', [SettingAdminController::class, 'aboutusstore'])->name('aboutusstore')->middleware('permission:updateAboutUS');
+        Route::post('/aboutusupdate', [SettingAdminController::class, 'aboutusupdate'])->name('aboutusupdate')->middleware('permission:updateAboutUS');
         // ContactUs
 
         Route::prefix('contactus')->group(function () {

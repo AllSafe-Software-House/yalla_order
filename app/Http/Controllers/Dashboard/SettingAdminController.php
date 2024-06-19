@@ -18,12 +18,31 @@ class SettingAdminController extends Controller
         return view('Setting.AboutUs' , compact('aboutus'));
     }
 
-    public function aboutusupdate(Request $request)  {
+    public function aboutusstore(Request $request)  {
         $aboutus = Setting::create([
-            'title' => $request->title ,
-            'text' => $request->text
+            'title' => [
+                "en" => $request->title,
+                "ar" => $request->title_ar,
+            ] ,
+            'text' => [
+                "en" => $request->text,
+                "ar" => $request->text_ar,
+            ]
         ]) ;
 
+        return redirect()->back()->with('done',"update data sucessful");
+    }
+    public function aboutusupdate(Request $request)  {
+        $aboutus = Setting::first();
+            $aboutus->title = [
+                "en" => $request->title,
+                "ar" => $request->title_ar,
+            ] ;
+            $aboutus->text = [
+                "en" => $request->text,
+                "ar" => $request->text_ar,
+            ];
+            $aboutus->save();
         return redirect()->back()->with('done',"update data sucessful");
     }
 }

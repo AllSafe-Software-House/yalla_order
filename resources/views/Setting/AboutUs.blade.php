@@ -38,23 +38,37 @@
         </div>
     @endif
     <div class="card-body">
+        @if ($aboutus === null)
         <form action="{{ route('aboutusstore') }}" class="d-grid" enctype="multipart/form-data" method="POST">
             @csrf
             <input type="hidden" id="size" class="form-control" name="title" value="About US">
-            @if ($aboutus === null)
+            <input type="hidden" id="size" class="form-control" name="title_ar" value="نبذه عن">
                 <div class="mb-3">
                     <label for="text" class="py-2">Text Show in About US:</label>
                     <textarea id="text" class="form-control" name="text" cols="5">not writte text show in about us yet</textarea>
                 </div>
-            @else
+                <div class="mb-3">
+                    <label for="text" class="py-2">نبذه عن الابليكشن :</label>
+                    <textarea id="text" class="form-control" name="text_ar" cols="5">not writte text show in about us yet</textarea>
+                </div>
+            <button type="submit"  class="btn btn-primary btn-sm col-12">Save</button>
+        </form>
+        @else
+        <form action="{{ route('aboutusupdate') }}" class="d-grid" enctype="multipart/form-data" method="POST">
+            @csrf
+            <input type="hidden" id="size" class="form-control" name="title" value="About US">
+            <input type="hidden" id="size" class="form-control" name="title_ar" value="نبذه عن">
                 <div class="mb-3">
                     <label for="text" class="py-2">Text Show in About US:</label>
                     <textarea id="text" class="form-control" name="text" cols="5">{{ $aboutus->text }}</textarea>
                 </div>
-            @endif
-
+                <div class="mb-3">
+                    <label for="text" class="py-2">نبذه عن الابليكشن :</label>
+                    <textarea id="text" class="form-control" name="text_ar" cols="5">{{ $aboutus->getTranslation('text','ar') }}</textarea>
+                </div>
             <button type="submit"  class="btn btn-primary btn-sm col-12">UPdate</button>
         </form>
+        @endif
     </div>
 </div>
 @endsection
