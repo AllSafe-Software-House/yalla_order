@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Doctores extends Model
 {
-    use HasFactory;
+    use HasFactory , HasTranslations;
     protected $fillable = [
         'name',
         'department',
@@ -23,8 +24,14 @@ class Doctores extends Model
         'wait'
     ];
 
+    public $translatable = [
+        'name',
+        'department',
+        'overview',
+    ];
+
     public function clinic()  {
-        return $this->belongsTo(Places::class);
+        return $this->belongsTo(Places::class , 'place_id');
     }
 
     public function review()

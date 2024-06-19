@@ -64,15 +64,24 @@ class DoctorController extends Controller
         $days = $request->days;
         $imagepath = $this->storelogo($request);
         $doctor = Doctores::create([
-            'name' => $request->name,
-            'department' => $request->department,
+            'name' => [
+                "en" => $request->name,
+                "ar" => $request->name_ar,
+            ],
+            'department' => [
+                "en" => $request->department,
+                "ar" => $request->department_ar,
+            ],
             'place_id' => $request->place_id,
             'starttime' => $request->starttime,
             'endtime' => $request->endtime,
             'dayes' => json_encode($days),
             'price_fees' => $request->price_fees,
             'time' => $request->time,
-            'overview' => $request->overview,
+            'overview' => [
+                "en" => $request->overview,
+                "ar" => $request->overview_ar,
+            ],
             'image' => $imagepath,
             'sale' =>$request->sale,
             'wait' => $request->wait
@@ -101,14 +110,23 @@ class DoctorController extends Controller
         }else{
             $doctor->dayes = $doctor->dayes;
         }
-        $doctor->name = $request->name;
-        $doctor->department = $request->department;
+        $doctor->name = [
+            "en" => $request->name,
+            "ar" => $request->name_ar,
+        ];
+        $doctor->department = [
+            "en" => $request->department,
+            "ar" => $request->department_ar,
+        ];
         $doctor->place_id = $request->place_id;
         $doctor->starttime = $request->starttime;
         $doctor->endtime = $request->endtime;
         $doctor->price_fees = $request->price_fees;
         $doctor->time = $request->time;
-        $doctor->overview = $request->overview;
+        $doctor->overview = [
+            "en" => $request->overview,
+            "ar" => $request->overview_ar,
+        ];
         $doctor->image = $imagepath;
         $doctor->sale = $request->sale;
         $doctor->wait = $request->wait;

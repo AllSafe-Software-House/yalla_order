@@ -64,10 +64,26 @@
                 <input type="file" id="logo" class="form-control" name="logo">
             </div>
         </div>
+        <div class="row">
+            <div class="mb-3 col-4">
+                <label for="name" class="py-2">اسم الدكتور:</label>
+                <input type="text" id="name" class="form-control" name="name_ar" placeholder="اسم الدكتور"
+                    value="{{ $doctors->getTranslation('name','ar') }}">
+            </div>
+            <div class="mb-3 col-4">
+                <label for="department" class="py-2">قسم الدكتور:</label>
+                <input type="text" id="department" class="form-control" name="department_ar"
+                    placeholder="قسم الدكتور" value="{{ $doctors->getTranslation('department','ar') }}">
+            </div>
+        </div>
 
         <div class="mb-3">
             <label for="overview" class="py-2">Doctor Overview:</label>
             <textarea type="text" id="overview" class="form-control" name="overview" placeholder="Doctor overview">{{ $doctors->overview }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="overview" class="py-2">نبذه مختصره عن الدكتور:</label>
+            <textarea type="text" id="overview" class="form-control" name="overview_ar" placeholder="Doctor overview">{{ $doctors->getTranslation('overview','ar') }}</textarea>
         </div>
         <div class="mb-3">
             <label for="days" class="py-2">Days:</label><span>{{ $doctors->dayes }}</span>
