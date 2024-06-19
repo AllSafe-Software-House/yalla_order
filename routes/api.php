@@ -45,7 +45,7 @@ Route::post('/forgetpassword', [AuthUserController::class, 'forgetpassword']);
 Route::post('/passwordreset', [EmailVerificationNotificationController::class, 'passwordreset']);
 
 
-Route::middleware('lang')->group(function () {
+// Route::middleware('lang')->group(function () {
     Route::middleware(['auth:sanctum'])->group(function () {
         // user
         Route::prefix('user')->group(function () {
@@ -144,6 +144,6 @@ Route::middleware('lang')->group(function () {
 
 
     });
-});
+// });
 
 
