@@ -30,6 +30,11 @@
                     {{ Session::get('done') }}
                 </div>
             @endif
+            @if (Session::has('fail'))
+                <div class="alert alert-danger" role="alert">
+                    {{ Session::get('fail') }}
+                </div>
+            @endif
             @if ($errors->any())
                 <div class="alert alert-primary">
                     <ul>
@@ -67,9 +72,17 @@
                                 <tr>
 
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->size }}</td>
+                                    <td>
+                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('size','ar') }}
+                                        <hr>
+                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('size','en') }}
+                                    </td>
                                     <td>{{ $data->price }}</td>
-                                    <td>{{ $data->place_name }}</td>
+                                    <td>
+                                        <span style="color:#9B4999">Arabic : </span>{{ $data->place->getTranslation('name','ar') }}
+                                        <hr>
+                                        <span style="color:#9B4999">English : </span>{{ $data->place->getTranslation('name','en') }}
+                                    </td>
                                     @can('editSize')
                                         <td>
                                             <a href="{{ route('sizeedit', $data->id) }}">

@@ -21,4 +21,8 @@ class Size extends Model
     {
         return $this->hasOne(Order::class);
     }
+
+    public function place(){
+        return $this->belongsTo(Places::class,'places_id');
+    }
 }

@@ -24,11 +24,12 @@ class SizeAdminController extends Controller
         if($user_place->place_id !== null){
             $condition[] = ["places.id",'=', $user_place->place_id];
         }
-        $size = DB::table('sizes')->join('places','sizes.places_id','places.id')
-        ->select('sizes.id as id','sizes.size as size',
-        'places.name as place_name','sizes.price as price')
-        ->where($condition)
-        ->get();;
+        // $size = DB::table('sizes')->join('places','sizes.places_id','places.id')
+        // ->select('sizes.id as id','sizes.size as size',
+        // 'places.name as place_name','sizes.price as price')
+        // ->where($condition)
+        // ->get();
+        $size = Size::with('place')->where($condition)->get() ;
         return view('Size.index', compact('size', 'admin'));
     }
 
@@ -43,7 +44,10 @@ class SizeAdminController extends Controller
     {
         $size = Size::create([
             'places_id' => $request->place_id,
-            'size' => $request->size,
+            'size' => [
+                "en" => $request->size,
+                "ar" => $request->size_ar,
+            ],
             'price' => $request->price,
         ]);
         return redirect()->route('sizelist')->with('done', 'add sucessful');
@@ -53,7 +57,7 @@ class SizeAdminController extends Controller
     public function edit($id)
     {
         $size = Size::find($id);
-        $resturant = Places::where('id',$size->places_id)->first();
+        $resturant = Places::where('type', 'restaurantes')->get();
         return view('Size.edit', compact('resturant','size'));
     }
 
@@ -62,7 +66,10 @@ class SizeAdminController extends Controller
     {
         $size = Size::find($id);
         $size->places_id = $request->place_id;
-        $size->size = $request->size;
+        $size->size = [
+            "en" => $request->size,
+            "ar" => $request->size_ar,
+        ];
         $size->price = $request->price;
         $size->save();
         return redirect()->route('sizelist')->with('done', "update sucessfully");

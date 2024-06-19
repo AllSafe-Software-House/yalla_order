@@ -13,7 +13,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Size</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/Size
+            <h4 class="content-title mb-0 my-auto"><a href="{{ route('sizelist') }}" style="color: #9B4999">Size</a></h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/Size
                 edit</span>
         </div>
     </div>
@@ -36,12 +36,22 @@
         <div class="mb-3">
             <label for="place_id" class="py-2">Resturant:</label>
             <select  id="place_id" class="form-control" name="place_id">
-                <option value="{{ $resturant->id }}">{{ $resturant->name }}</option>
+                @php
+                    $placename = \App\Models\Places::where('id',$size->places_id)->first();
+                @endphp
+                <option value="{{ $size->places_id }}"> {{ $placename->name }} (current resturant)</option>
+                @foreach ($resturant as $data )
+                        <option value="{{ $data->id }}">{{ $data->name }}</option>
+                @endforeach
             </select>
         </div>
         <div class="mb-3">
             <label for="size" class="py-2">Size Name:</label>
             <input type="text" id="size" class="form-control" name="size" placeholder="Size Name" value="{{ $size->size }}">
+        </div>
+        <div class="mb-3">
+            <label for="size" class="py-2">الحجم:</label>
+            <input type="text" id="size" class="form-control" name="size_ar" placeholder="الحجم" value="{{ $size->getTranslation('size','ar') }}">
         </div>
         <div class="mb-3">
             <label for="price" class="py-2">Price:</label>

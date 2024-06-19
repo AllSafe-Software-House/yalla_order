@@ -76,4 +76,7 @@ class Places extends Model
     public function addtion(){
         return $this->hasMany(Addons::class);
     }
+    public function size(){
+        return $this->hasMany(Size::class);
+    }
 }
