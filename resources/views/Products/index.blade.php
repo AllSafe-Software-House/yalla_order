@@ -30,6 +30,11 @@
                     {{ Session::get('done') }}
                 </div>
             @endif
+            @if (Session::has('fail'))
+                <div class="alert alert-danger" role="alert">
+                    {{ Session::get('fail') }}
+                </div>
+            @endif
             @if ($errors->any())
                 <div class="alert alert-primary">
                     <ul>
@@ -44,7 +49,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="col-lg-12 margin-tb">
                             <div class="pull-right col-12">
-                                <a class="btn btn-primary btn-sm" href="{{ route('productadd') }}">ADD</a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('productadd') }}">Add New Product</a>
                             </div>
                         </div>
                         <br>
@@ -72,18 +77,32 @@
                             @foreach ($products as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    @if ($data->logo)
-                                        <td><img width="50px" src="{{ asset("$data->logo") }}" alt=""></td>
+                                    @if ($data->image)
+                                        <td><img width="50px" src="{{ asset("$data->image") }}" alt=""></td>
                                     @else
                                         <th></th>
                                     @endif
-                                    <td>{{ $data->name }}</td>
-                                    <td>{{ $data->descrption }}</td>
+                                    <td>
+                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('name','ar') }}
+                                        <hr>
+                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('name','en') }}
+                                    </td>
+                                    <td>
+                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('descrption','ar') }}
+                                        <hr>
+                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('descrption','en') }}
+                                    </td>
                                     <td>{{ $data->price }}</td>
-                                    <td>{{ $data->category_name }}</td>
-                                    <td>{{ $data->place_name }}</td>
-
-
+                                    <td>
+                                        <span style="color:#9B4999">Arabic : </span>{{ $data->category->getTranslation('name','ar') }}
+                                        <hr>
+                                        <span style="color:#9B4999">English : </span>{{ $data->category->getTranslation('name','en') }}
+                                    </td>
+                                    <td>
+                                        <span style="color:#9B4999">Arabic : </span>{{ $data->places->getTranslation('name','ar') }}
+                                        <hr>
+                                        <span style="color:#9B4999">English : </span>{{ $data->places->getTranslation('name','en') }}
+                                    </td>
                                     <td><button class="btn btn-primary" style="border-radius: 50%">not</button></td>
                                     @can('editProduct')
                                         <td>

@@ -35,7 +35,7 @@ class Places extends Model
 
     public function product()
     {
-        return $this->belongsToMany(Products::class);
+        return $this->hasMany(Products::class);
     }
 
     public function favproduct()

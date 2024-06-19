@@ -36,14 +36,24 @@
         <div class="mb-3">
             <label for="place_id" class="py-2">Resturant Name:</label>
             <select  id="place_id" class="form-control" name="place_id">
-                <option value="{{ $resturant->id }}">{{ $resturant->name }}</option>
+                @php
+                    $placename = \App\Models\Places::where('id',$product->place_id)->first();
+                @endphp
+                <option value="{{ $product->place_id }}"> {{ $placename->name }} (current resturant)</option>
+                @foreach ($resturant as $data )
+                    <option value="{{ $data->id }}">{{ $data->name }}</option>
+                @endforeach
             </select>
         </div>
         <div class="mb-3">
             <label for="category_id" class="py-2">Category Name:</label>
             <select  id="category_id" class="form-control" name="category_id">
-                @foreach ($category as $data )
-                    <option value="{{ $data->id }}">{{ $data->name }}</option>
+                @php
+                    $categoryname = \App\Models\Category::where('id',$product->category_id)->first();
+                @endphp
+                <option value="{{ $product->category_id }}"> {{ $categoryname->name }} (current category)</option>
+                @foreach ($category as $datacategory )
+                    <option value="{{ $datacategory->id }}">{{ $datacategory->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -52,8 +62,16 @@
             <input type="text" id="name" class="form-control" name="name" placeholder="Product Name" value="{{ $product->name }}">
         </div>
         <div class="mb-3">
+            <label for="name" class="py-2">اسم المنتج:</label>
+            <input type="text" id="name" class="form-control" name="name_ar" placeholder="اسم المنتج" value="{{ $product->getTranslation('name','ar') }}">
+        </div>
+        <div class="mb-3">
             <label for="descrption" class="py-2">Product Descrption:</label>
-            <textarea type="text" id="descrption" class="form-control" name="descrption" cols="4" >{{ $product->descrption }}</textarea>
+            <textarea type="text" id="descrption" class="form-control" name="descrption" cols="4" rows="5" >{{ $product->descrption }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="descrption" class="py-2">وصف المنتج:</label>
+            <textarea type="text" id="descrption" class="form-control" name="descrption_ar" cols="4" rows="5" >{{ $product->getTranslation('descrption','ar') }}</textarea>
         </div>
         <div class="mb-3">
             <label for="price" class="py-2">Product Price:</label>

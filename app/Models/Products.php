@@ -19,6 +19,7 @@ class Products extends Model
         'price'
     ];
 
+
     public $translatable = [
         'name',
         'descrption',
@@ -27,7 +28,7 @@ class Products extends Model
 
     public function places()
     {
-        return $this->belongsToMany(places::class);
+        return $this->belongsTo(places::class , 'place_id');
     }
 
     public function menue()
@@ -39,5 +40,10 @@ class Products extends Model
     public function order()
     {
         return $this->hasOne(Order::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

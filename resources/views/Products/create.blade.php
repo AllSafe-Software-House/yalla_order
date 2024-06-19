@@ -61,12 +61,21 @@
                 <input type="text" id="name" class="form-control" name="name" placeholder="Product Name">
             </div>
             <div class="mb-3">
+                <label for="name" class="py-2">اسم المنتج:</label>
+                <input type="text" id="name" class="form-control" name="name_ar" placeholder="اسم المنتج">
+            </div>
+
+            <div class="mb-3">
                 <label for="price" class="py-2">Product Price:</label>
                 <input type="" id="price" class="form-control" name="price" placeholder="Product Price">
             </div>
             <div class="mb-3">
                 <label for="descrption" class="py-2">Product Descrption:</label>
                 <textarea type="text" id="descrption" class="form-control" name="descrption" cols="4"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="descrption" class="py-2">وصف المنتج:</label>
+                <textarea type="text" id="descrption" class="form-control" name="descrption_ar" cols="4" rows="5" ></textarea>
             </div>
             <div class="mb-3">
                 <label for="logo" class="py-2">Product logo:</label>
