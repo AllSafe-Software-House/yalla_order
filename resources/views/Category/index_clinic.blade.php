@@ -13,7 +13,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Category</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+            <h4 class="content-title mb-0 my-auto"><a href="{{ route('cliniclist') }}" style="color: #9B4999">Category of clinic</a></h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
                 List of Clinic</span>
         </div>
     </div>
@@ -44,7 +44,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="col-lg-12 margin-tb">
                             <div class="pull-right col-12">
-                                <a class="btn btn-primary btn-sm" href="{{ route('categoryclinicadd') }}">ADD</a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('categoryclinicadd') }}">Add New Category</a>
                             </div>
                         </div>
                         <br>
@@ -59,7 +59,6 @@
                                 <th>#</th>
                                 <th>logo</th>
                                 <th>name</th>
-                                {{-- <th>Clinic Name</th> --}}
                                 @can('editClinicCategory')
                                     <th>Update</th>
                                 @endcan
@@ -77,8 +76,11 @@
                                     @else
                                         <th></th>
                                     @endif
-                                    <td>{{ $data->name }}</td>
-                                    {{-- <td>{{ $data->place_name }}</td> --}}
+                                    <td>
+                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('name','ar') }}
+                                        <hr>
+                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('name','en') }}
+                                    </td>
 
                                     @can('editClinicCategory')
                                         <td>

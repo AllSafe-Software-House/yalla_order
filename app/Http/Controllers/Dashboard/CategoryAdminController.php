@@ -63,20 +63,13 @@ class CategoryAdminController extends Controller
         if($user_place->place_id !== null){
             $condition[] = ["places.id",'=', $user_place->place_id];
         }
-        // $category = DB::table('categories')->join('places','categories.place_id','places.id')
-        // ->select('categories.id as id','categories.name as name',
-        // 'places.name as place_name','categories.logo as logo')
-        // ->where('places.type','restaurantes')
-        // ->where($condition)
-        // ->get();
-        $category = DB::table('categories')->where('type','restaurantes')->get();
+        $category = Category::where('type','restaurantes')->get();
         return view('Category.index', compact('category', 'admin'));
     }
 
 
     public function create()
     {
-        // $resturant = Places::where('type', 'restaurantes')->get();,compact('resturant')
         return view('Category.create');
     }
 
@@ -89,20 +82,13 @@ class CategoryAdminController extends Controller
         if($user_place->place_id !== null){
             $condition[] = ["places.id",'=', $user_place->place_id];
         }
-        // $category = DB::table('categories')->join('places','categories.place_id','places.id')
-        // ->select('categories.id as id','categories.name as name',
-        // 'places.name as place_name','categories.logo as logo','places.type as type')
-        // ->where('places.type','clinic')
-        // ->where($condition)
-        // ->get();
-        $category = DB::table('categories')->where('type','clinic')->get();
+        $category = Category::where('type','clinic')->get();
         return view('Category.index_clinic', compact('category', 'admin'));
     }
 
 
     public function create_clinic()
     {
-        // $clinic = Places::where('type', 'clinic')->get();,compact('clinic')
         return view('Category.create_clinic');
     }
 
@@ -112,7 +98,10 @@ class CategoryAdminController extends Controller
         $place = $request->place;
         $resturant = Category::create([
             // 'place_id' => $request->place_id,
-            'name' => $request->name,
+            'name' => [
+                "en" => $request->name,
+                "ar" => $request->name_ar,
+            ],
             'logo' => $imagepath,
             'type'=> $place
         ]);
@@ -142,7 +131,10 @@ class CategoryAdminController extends Controller
         $place = $request->place;
         $imagepath = $this->updatelogo($request,$id) ;
         // $category->place_id = $request->place_id;
-        $category->name = $request->name;
+        $category->name = [
+            "en" => $request->name,
+            "ar" => $request->name_ar,
+        ];
         $category->logo = $imagepath;
         $category->type = $category->type;
         $category->save();

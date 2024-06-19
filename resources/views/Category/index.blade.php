@@ -30,6 +30,11 @@
                     {{ Session::get('done') }}
                 </div>
             @endif
+            @if (Session::has('fail'))
+                <div class="alert alert-danger" role="alert">
+                    {{ Session::get('fail') }}
+                </div>
+            @endif
             @if ($errors->any())
                 <div class="alert alert-primary">
                     <ul>
@@ -44,7 +49,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="col-lg-12 margin-tb">
                             <div class="pull-right col-12">
-                                <a class="btn btn-primary btn-sm" href="{{ route('categoryadd') }}">ADD</a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('categoryadd') }}">ADD New Category For Resturant</a>
                             </div>
                         </div>
                         <br>
@@ -59,7 +64,6 @@
                                 <th>#</th>
                                 <th>logo</th>
                                 <th>name</th>
-                                {{-- <th>Resturant Name</th> --}}
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
@@ -73,9 +77,11 @@
                                     @else
                                         <th></th>
                                     @endif
-                                    <td>{{ $data->name }}</td>
-                                    {{-- <td>{{ $data->place_name }}</td> --}}
-
+                                    <td>
+                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('name','ar') }}
+                                        <hr>
+                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('name','en') }}
+                                    </td>
                                     @can('editCategory')
                                         <td>
                                             <a href="{{ route('categoryedit', $data->id) }}">

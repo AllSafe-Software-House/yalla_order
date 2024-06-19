@@ -13,7 +13,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Category of Resturant</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/Category of Resturant
+            <h4 class="content-title mb-0 my-auto"><a href="{{ route('categorylist') }}">Category of Resturant</a></h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/Category of Resturant
                 edit</span>
         </div>
     </div>
@@ -38,6 +38,11 @@
             <label for="name" class="py-2">Category Name:</label>
             <input type="text" id="name" class="form-control" name="name" placeholder="Category Name"
                 value="{{ $category->name }}">
+        </div>
+        <div class="mb-3">
+            <label for="name" class="py-2">اسم التصنيف:</label>
+            <input type="text" id="name" class="form-control" name="name_ar" placeholder="اسم التصنيف"
+                value="{{ $category->getTranslation('name','ar') }}">
         </div>
         <div class="mb-3">
             <label for="logo" class="py-2">Category logo:</label>
