@@ -24,7 +24,7 @@ class PlacesAdminController extends Controller
                 $imagepath =  "uploads/Clinic/$image";
                 $request->logo->move(public_path('uploads/Clinic'), $image);
             } else {
-                $imagepath =  "uploads/Clinic/icons8-clinic-80.png";
+                $imagepath =  "uploads/Clinic/icons8-clinic-80.jpg";
             }
         } else {
             if ($request->logo) {
@@ -44,10 +44,9 @@ class PlacesAdminController extends Controller
         if (isset($request->logo)) {
             if (isset($resturant->logo) && file_exists($resturant->logo)) {
                 $oldimage = $resturant->logo;
-                // $pathimage = "uploads/resturants/$oldimage";
-                // Storage::disk('uploads')->delete($pathimage);
-                                    unlink($oldimage);
-
+                if($oldimage != 'uploads/Clinic/icons8-clinic-80.png' || $oldimage != 'uploads/resturants/icons8-resturant-6'){
+                    unlink($oldimage);
+                }
             }
             $image = time() . '.' . $request->logo->extension();
             if ($place == 'clinic') {
@@ -74,8 +73,8 @@ class PlacesAdminController extends Controller
         // }
         return view('Resturant.resturant_request', compact('resturant', 'admin'));
     }
-    
-    
+
+
     public function index()
     {
         $admin = Auth::user();
@@ -117,11 +116,20 @@ class PlacesAdminController extends Controller
         $imagepath = $this->storelogo($request);
         $place = $request->place;
         $resturant = Places::create([
-            'name' => $request->name,
-            'descrption' => $request->descrption,
+            'name' => [
+                "en" => $request->name,
+                "ar" => $request->name_ar,
+            ],
+            'descrption' => [
+                "en" => $request->descrption,
+                "ar" => $request->descrption_ar,
+            ],
             'starttime' => $request->starttime,
             'endtime' => $request->endtime,
-            'address' => $request->address,
+            'address' => [
+                "en" => $request->address,
+                "ar" => $request->address_ar,
+            ],
             'longitude' => $request->longitude,
             'latitude' => $request->latitude,
             'logo' => $imagepath,
@@ -147,21 +155,53 @@ class PlacesAdminController extends Controller
         }
     }
 
+    public function checklocationrequest($request,$id){
+        if(isset($request->longitude) && isset($request->latitude)){
+            $location =  [
+                'longitude' => $request->longitude,
+                'latitude' => $request->latitude
+            ];
+        }else{
+            $resturant = Places::find($id);
+            if($resturant->longitude === null || $resturant->latitude === null){
+                $location = 'error' ;
+            }else{
+                $location =  [
+                    'longitude' => $resturant->longitude,
+                    'latitude' => $resturant->latitude
+                ];
+            }
+        }
+        return $location;
+    }
 
     public function update(PlacesRequest $request, $id)
     {
         $resturant = Places::find($id);
+        $locationmap = $this->checklocationrequest($request,$id);
+        if($locationmap == 'error'){
+            return redirect()->back()->with('fail', "please add location to $resturant->name");
+        }
         $image = $this->updatelogo($request, $id);
         $place = $request->place;
-        $resturant->name = $request->name;
-        $resturant->descrption = $request->descrption;
+        $resturant->name = [
+                "en" => $request->name,
+                "ar" => $request->name_ar,
+        ];
+        $resturant->descrption = [
+            "en" => $request->descrption,
+            "ar" => $request->descrption_ar,
+        ];
         $resturant->starttime = $request->starttime;
         $resturant->endtime = $request->endtime;
         $resturant->logo = $image;
-        $resturant->address = $request->address;
+        $resturant->address = [
+                "en" => $request->address,
+                "ar" => $request->address_ar,
+        ];
         $resturant->type = $place;
-        $resturant->longitude = $request->longitude;
-        $resturant->latitude = $request->latitude;
+        $resturant->longitude = $locationmap['longitude'];
+        $resturant->latitude = $locationmap['latitude'];
         $resturant->delivery_fee = $request->delivery_fee;
         $resturant->save();
         if ($place == 'clinic') {
@@ -187,18 +227,18 @@ class PlacesAdminController extends Controller
             return redirect()->route('resturantlist')->with('done', "update sucessfully");
         }
     }
-    
-    
+
+
     // _destroy_resturant_request
-    
+
     public function destroy_resturant_request($id)
     {
         $product = ResturantRequest::where('id', $id)->first();
         $product->delete();
         return back()->with('done', "delete sucessfully");
     }
-    
-    
 
-    
+
+
+
 }

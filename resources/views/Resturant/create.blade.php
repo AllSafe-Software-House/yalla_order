@@ -12,7 +12,7 @@
             width: "100%";
             height: 400px;
         }
-            
+
     </style>
 @section('title')
     Add Resturant
@@ -24,7 +24,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Resturants</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ADD Resturant</span>
+            <h4 class="content-title mb-0 my-auto"><a href="{{ route('resturantlist') }}" style="color: #9B4999">Resturants</a></h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/Add New Resturant</span>
         </div>
     </div>
 </div>
@@ -55,8 +55,16 @@
                 <input type="text" id="name" class="form-control" name="name" placeholder="Resturant Name">
             </div>
             <div class="mb-3">
+                <label for="name" class="py-2">اسم المطعم:</label>
+                <input type="text" id="name" class="form-control" name="name_ar" placeholder="اسم المطعم">
+            </div>
+            <div class="mb-3">
                 <label for="descrption" class="py-2">Resturant Descrption:</label>
-                <textarea type="text" id="descrption" class="form-control" name="descrption" cols="3"></textarea>
+                <textarea type="text" id="descrption" class="form-control" name="descrption" cols="5"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="descrption" class="py-2">وصف للمطعم:</label>
+                <textarea type="text" id="descrption" class="form-control" name="descrption_ar" cols="5"></textarea>
             </div>
             <div class="mb-3">
                 <label for="start_time" class="py-2">Start Work Time:</label>
@@ -69,6 +77,10 @@
             <div class="mb-3">
                 <label for="address" class="py-2">The Address:</label>
                 <input type="text" id="address" class="form-control" name="address">
+            </div>
+            <div class="mb-3">
+                <label for="address" class="py-2">العنوان:</label>
+                <input type="text" id="address" class="form-control" name="address_ar">
             </div>
             <div class="mb-3">
                 <label for="delivery_fee" class="py-2">Delivery Fee:</label>
@@ -96,7 +108,7 @@
 </script>
     <script>
         let map, activeInfoWindow, markers = [];
-        
+
         // Example data
         const data = {
             title: "Example Marker"

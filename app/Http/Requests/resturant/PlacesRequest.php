@@ -30,8 +30,8 @@ class PlacesRequest extends FormRequest
             'endtime' => ["required"],
             'address' => ["required","string"],
             'logo' => ["nullable"],
-            'longitude' => ["required"],
-            'latitude' => ["required"],
+            'longitude' => ["nullable"],
+            'latitude' => ["nullable"],
         ];
     }
 }

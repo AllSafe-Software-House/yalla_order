@@ -30,6 +30,11 @@
                     {{ Session::get('done') }}
                 </div>
             @endif
+            @if (Session::has('fail'))
+                <div class="alert alert-danger" role="alert">
+                    {{ Session::get('fail') }}
+                </div>
+            @endif
             @if ($errors->any())
                 <div class="alert alert-primary">
                     <ul>
@@ -44,7 +49,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="col-lg-12 margin-tb">
                             <div class="pull-right col-12">
-                                <a class="btn btn-primary btn-sm" href="{{ route('clinicadd') }}">ADD</a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('clinicadd') }}">Add New Clinic</a>
                             </div>
                         </div>
                         <br>
@@ -85,11 +90,23 @@
                                     @else
                                         <th></th>
                                     @endif
-                                    <td>{{ $data->name }}</td>
-                                    <td>{{ $data->descrption }}</td>
+                                    <td>
+                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('name','ar') }}
+                                        <hr>
+                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('name','en') }}
+                                    </td>
+                                    <td>
+                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('descrption','ar') }}
+                                        <hr>
+                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('descrption','en') }}
+                                    </td>
                                     <td>{{ $data->starttime }}</td>
                                     <td>{{ $data->endtime }}</td>
-                                    <td>{{ $data->address }}</td>
+                                    <td>
+                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('address','ar') }}
+                                        <hr>
+                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('address','en') }}
+                                    </td>
                                     <td>{{ $data->delivery_fee }}</td>
 
                                     @can('showDoctor')

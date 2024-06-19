@@ -12,7 +12,7 @@
             width: "100%";
             height: 400px;
         }
-            
+
     </style>
 @section('title')
     edit Clinic
@@ -23,7 +23,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Clinic</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/Clinic
+            <h4 class="content-title mb-0 my-auto"><a href="{{ route('cliniclist') }}" style="color: #9B4999">Clinic</a></h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/Clinic
                 edit</span>
         </div>
     </div>
@@ -44,12 +44,20 @@
     <form action="{{ Route('update',$place->id) }}" class="d-grid" enctype="multipart/form-data" method="POST">
         @csrf
         <div class="mb-3">
-            <label for="name" class="py-2">Resturant Name:</label>
-            <input type="text" id="name" class="form-control" name="name" placeholder="Resturant Name" value="{{ $place->name }}">
+            <label for="name" class="py-2">Clinic Name:</label>
+            <input type="text" id="name" class="form-control" name="name" placeholder="Clinic Name" value="{{ $place->name }}">
         </div>
         <div class="mb-3">
-            <label for="descrption" class="py-2">Resturant Descrption:</label>
-            <textarea type="text" id="descrption" class="form-control" name="descrption" cols="3">{{ $place->descrption }}</textarea>
+            <label for="name" class="py-2">اسم العياده:</label>
+            <input type="text" id="name" class="form-control" name="name" placeholder="اسم العياده" value="{{ $place->getTranslation('name','ar') }}">
+        </div>
+        <div class="mb-3">
+            <label for="descrption" class="py-2">Clinic Descrption:</label>
+            <textarea type="text" id="descrption" class="form-control" name="descrption" cols="3" rows="5">{{ $place->descrption }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="descrption" class="py-2">وصف العياده:</label>
+            <textarea type="text" id="descrption" class="form-control" name="descrption_ar" cols="3" rows="5">{{ $place->getTranslation('descrption','ar') }}</textarea>
         </div>
         <div class="mb-3">
             <label for="start_time" class="py-2">Start Work Time:</label>
@@ -64,11 +72,15 @@
             <input type="text" id="address" class="form-control" name="address" value="{{ $place->address }}">
         </div>
         <div class="mb-3">
+            <label for="address" class="py-2">العنوان:</label>
+            <input type="text" id="address" class="form-control" name="address_ar" value="{{ $place->getTranslation('address','ar') }}">
+        </div>
+        <div class="mb-3">
             <label for="delivery_fee" class="py-2">Delivery Fee:</label>
             <input type="number" id="delivery_fee" class="form-control" name="delivery_fee" placeholder="10 LE" value="{{ $place->delivery_fee }}">
         </div>
         <div class="mb-3">
-            <label for="logo" class="py-2">Resturant logo:</label>
+            <label for="logo" class="py-2">Clinic logo:</label>
             <input type="file" id="logo" class="form-control" name="logo">
         </div>
                     <div id="map"></div>
@@ -86,7 +98,7 @@
 </script>
     <script>
         let map, activeInfoWindow, markers = [];
-        
+
         // Example data
         const data = {
             title: "Example Marker"
