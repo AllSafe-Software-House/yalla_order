@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Products extends Model
 {
-    use HasFactory;
+    use HasFactory , HasTranslations;
     protected $fillable = [
         'name',
         'descrption',
@@ -18,6 +19,10 @@ class Products extends Model
         'price'
     ];
 
+    public $translatable = [
+        'name',
+        'descrption',
+    ];
 
 
     public function places()

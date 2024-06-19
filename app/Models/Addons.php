@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Addons extends Model
 {
-    use HasFactory;
+    use HasFactory , HasTranslations;
     protected $table = 'addons';
     protected $fillable = [
         'name',
@@ -15,4 +16,6 @@ class Addons extends Model
         'type',
         'place_id'
     ];
+
+    public $translatable = ['name'];
 }

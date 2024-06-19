@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Places extends Model
 {
-    use HasFactory;
+    use HasFactory , HasTranslations;
     protected $fillable = [
         'name',
         'descrption',
@@ -19,6 +20,12 @@ class Places extends Model
         'delivery_fee',
         'longitude',
         'latitude'
+    ];
+
+    public $translatable = [
+        'name',
+        'descrption',
+        'address'
     ];
 
     public function categories()
