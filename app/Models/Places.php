@@ -72,4 +72,8 @@ class Places extends Model
     {
         return $this->hasMany(Reservationes::class);
     }
+
+    public function addtion(){
+        return $this->hasMany(Addons::class);
+    }
 }

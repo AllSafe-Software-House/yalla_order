@@ -21,14 +21,17 @@ class AddtionAdminController extends Controller
         $user_place = Admin::where('user_id',$admin->id)->first();
         $condition = [];
 
+
         if($user_place->place_id !== null){
             $condition[] = ["places.id",'=', $user_place->place_id];
         }
-        $addtion = DB::table('addons')->join('places','addons.place_id','places.id')
-        ->select('addons.id as id','places.name as place_name','addons.name as name',
-        'addons.type as type' , 'addons.price as price')
-        ->where($condition)
-        ->get();
+        // $addtion = DB::table('addons')->join('places','addons.place_id','places.id')
+        // ->select('addons.id as id','places.name as place_name','addons.name as name',
+        // 'addons.type as type' , 'addons.price as price')
+        // ->where($condition)
+        // ->get();
+
+        $addtion = Addons::with('place')->where($condition)->get() ;
         return view('Addition.index', compact('addtion', 'admin'));
     }
 
@@ -42,7 +45,10 @@ class AddtionAdminController extends Controller
     public function store(AddtionAdminRequest $request)
     {
         $addtion = Addons::create([
-            'name' => $request->name,
+            'name' => [
+                "en" => $request->name,
+                "ar" => $request->name_ar,
+            ],
             'price' => $request->price,
             'type' => $request->type,
             'place_id'=> $request->place_id,
@@ -54,7 +60,7 @@ class AddtionAdminController extends Controller
     public function edit($id)
     {
         $addtion = Addons::find($id);
-        $resturant = Places::where('id',$addtion->place_id)->first();
+        $resturant = Places::where('type','restaurantes')->get();
         return view('Addition.edit', compact('addtion', 'resturant'));
     }
 
@@ -63,7 +69,10 @@ class AddtionAdminController extends Controller
     {
         $addtion = Addons::find($id);
         $addtion->place_id = $request->place_id;
-        $addtion->name = $request->name;
+        $addtion->name = [
+            "en" => $request->name,
+            "ar" => $request->name_ar,
+        ];
         $addtion->price = $request->price;
         $addtion->type = $request->type;
         $addtion->save();

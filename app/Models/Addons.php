@@ -18,4 +18,8 @@ class Addons extends Model
     ];
 
     public $translatable = ['name'];
+
+    public function place(){
+        return $this->belongsTo(Places::class,'place_id');
+    }
 }

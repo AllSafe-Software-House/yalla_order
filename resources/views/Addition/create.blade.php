@@ -48,6 +48,7 @@
                     @endforeach
                 </select>
             </div>
+
             <div class="mb-3">
                 <label for="type" class="py-2">Type Addtion:</label>
                 <select  id="type" class="form-control" name="type">
@@ -58,6 +59,10 @@
             <div class="mb-3">
                 <label for="name" class="py-2">Addtion Name:</label>
                 <input type="text" id="name" class="form-control" name="name" placeholder="Addtion Name">
+            </div>
+            <div class="mb-3">
+                <label for="name" class="py-2">Addtion Name:</label>
+                <input type="text" id="name" class="form-control" name="name_ar" placeholder="Addtion Name">
             </div>
             <div class="mb-3">
                 <label for="price" class="py-2">Addtion Price:</label>

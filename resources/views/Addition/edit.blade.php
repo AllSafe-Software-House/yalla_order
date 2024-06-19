@@ -36,13 +36,20 @@
         @csrf
         <div class="mb-3">
             <label for="place_id" class="py-2">Resturant Name:</label>
-            <select id="place_id" class="form-control" name="place_id">
-                <option value="{{ $resturant->id }}">{{ $resturant->name }}</option>
+            <select  id="place_id" class="form-control" name="place_id">
+                @php
+                    $placename = \App\Models\Places::where('id',$addtion->place_id)->first();
+                @endphp
+                <option value="{{ $addtion->place_id }}">{{ $placename->name }} (current resturant)</option>
+                @foreach ($resturant as $data )
+                    <option value="{{ $data->id }}">{{ $data->name }}</option>
+                @endforeach
             </select>
         </div>
         <div class="mb-3">
-            <label for="type" class="py-2">Type Addtion:</label>{{ $addtion->type }}
+            <label for="type" class="py-2">Type Addtion:</label>
             <select id="type" class="form-control" name="type">
+                <option value="{{ $addtion->type }}">{{ $addtion->type }} (current type)</option>
                 <option value="item">Item</option>
                 <option value="sauci">Sauci</option>
             </select>
@@ -51,6 +58,11 @@
             <label for="name" class="py-2">Addtion Name:</label>
             <input type="text" id="name" class="form-control" name="name" placeholder="Addtion Name"
                 value="{{ $addtion->name }}">
+        </div>
+        <div class="mb-3">
+            <label for="name" class="py-2">اسم الاضافه:</label>
+            <input type="text" id="name" class="form-control" name="name_ar" placeholder="Addtion Name"
+                value="{{ $addtion->getTranslation('name','ar') }}">
         </div>
         <div class="mb-3">
             <label for="price" class="py-2">Addtion Price:</label>

@@ -69,10 +69,18 @@
                             @foreach ($addtion as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->name }}</td>
+                                    <td>
+                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('name','ar') }}
+                                        <hr>
+                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('name','en') }}
+                                    </td>
                                     <td>{{ $data->price }}</td>
                                     <td>{{ $data->type }}</td>
-                                    <td>{{ $data->place_name }}</td>
+                                    <td>
+                                        <span style="color:#9B4999">Arabic : </span>{{ $data->place->getTranslation('name','ar') }}
+                                        <hr>
+                                        <span style="color:#9B4999">English : </span>{{ $data->place->getTranslation('name','en') }}
+                                    </td>
                                     @can('editAddon')
                                         <td>
                                             <a href="{{ route('addtionedit', $data->id) }}">
