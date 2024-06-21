@@ -40,6 +40,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('register', [RegisteredUserController::class, 'store'])->name('registerstore');
 Route::get('/', [HomeController::class, 'landingPage'])->name('landingPage');
+Route::get('/doctors', [HomeController::class, 'doctorLandingPage'])->name('doctorLandingPage');
+Route::get('/become-partner', [HomeController::class, 'partenerForm'])->name('partenerForm');
+Route::get('/contact-us', [HomeController::class, 'contactUsForm'])->name('contactUsForm');
 Route::get('/CommenQuestion', [HomeController::class, 'CommenQuestionPage'])->name('CommenQuestionPage');
 Route::get('/Terms', [HomeController::class, 'TermsPage'])->name('TermsPage');
 
@@ -48,6 +51,7 @@ Route::post('/loginstore', [AuthenticatedSessionController::class, 'store'])->na
 
 // partner.store
 Route::post('/resturants-requests/store', [HomeController::class, 'store_resturants_requests'])->name('resturants-requests.store');
+Route::post('/contact-us/store', [HomeController::class, 'store_contact_us'])->name('contact-us.store');
 // routes dashboard
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

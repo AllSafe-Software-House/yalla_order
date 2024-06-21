@@ -18,12 +18,34 @@ use App\Models\ResturantRequest;
 
 class HomeController extends Controller
 {
-    
-    
+
+
     public function landingPage(){
 
-            return view('landing-page');
+        return view('front.index');
+            // return view('landing-page');
     }
+
+
+    public function doctorLandingPage(){
+
+        return view('front.doctors-landing');
+            // return view('landing-page');
+    }
+
+
+    public function partenerForm(){
+
+        return view('front.partener-form');
+            // return view('landing-page');
+    }
+
+
+    public function contactUsForm(){
+
+        return view('front.contact-us');
+    }
+
     public function CommenQuestionPage(){
 
             return view('commanquesion');
@@ -32,23 +54,54 @@ class HomeController extends Controller
 
             return view('terms');
     }
-    
+
     public function store_resturants_requests(Request $request)
     {
         // return $request->all();
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            // 'name' => 'required|string|max:255',
+            'f_name' => 'required|string|max:255',
+            'l_name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'mobile' => 'required|string|max:15',
             'business_type' => 'required|string'
         ]);
-    
+
         // Process the validated data
-        $resturant_request = ResturantRequest::create(['name'=>$request->name,
+
+        $f_name = $request->f_name;
+        $l_name = $request->l_name;
+        $full_name = $f_name . $l_name;
+        $resturant_request = ResturantRequest::create(['name'=>$full_name,
         'email'=>$request->email,
         'mobile'=>$request->mobile,
         'type'=>$request->business_type]);
-    
+
+        return response()->json(['success' => true]);
+    }
+
+
+    public function store_contact_us(Request $request){
+        // return $request->all();
+        $validated = $request->validate([
+            // 'name' => 'required|string|max:255',
+            'f_name' => 'required|string|max:255',
+            'l_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'mobile' => 'required|string|max:15',
+            'message' => 'required|string|min:5'
+        ]);
+
+        // Process the validated data
+
+        $f_name = $request->f_name;
+        $l_name = $request->l_name;
+        $full_name = $f_name . $l_name;
+        // $contact_us = ResturantRequest::create(['name'=>$full_name,
+        // 'email'=>$request->email,
+        // 'mobile'=>$request->mobile,
+        // 'message'=>$request->message]);
+
         return response()->json(['success' => true]);
     }
 

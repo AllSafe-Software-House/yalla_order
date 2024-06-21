@@ -15,34 +15,37 @@ use App\Helper\ApiResponse;
 use App\Models\Promo_Codes;
 use Illuminate\Http\Request;
 use App\Models\Reservationes;
+use App\Models\PaymentOperation;
+use App\Http\Resources\SizeResourse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use App\Http\Resources\OrderResource;
 use App\Http\Resources\placesResource;
+use App\Http\Resources\AddtionResourse;
 use App\Http\Resources\MyOrderResource;
 use App\Http\Requests\Order\OrderRequest;
 use App\Http\Requests\ConfirmOrderRequest;
+use App\Http\Resources\AddtionSauiResourse;
 use App\Http\Resources\ReservationcardResource;
 use App\Http\Resources\MyReservationcardResource;
-use App\Models\PaymentOperation;
 
 class OrderController extends Controller
 {
     public function showdetails($place_id, $product_id)
     {
         $resturant = Places::where('id', $place_id)->first();
-        $sizes = Size::where('places_id', $place_id)->get();
-        $additem = Addons::where('type', 'item')->where('place_id', $place_id)->get();
-        $addsaui = Addons::where('type', 'sauci')->where('place_id', $place_id)->get();
+        $sizes = Size::with('place')->where('places_id', $place_id)->get();
+        $additem = Addons::with('place')->where('type', 'item')->where('place_id', $place_id)->get();
+        $addsaui = Addons::with('place')->where('type', 'sauci')->where('place_id', $place_id)->get();
 
         return  response()->json([
             'status' => 200,
             'message' => "show restaurantes",
             'data' => [
                 'resturant' => new placesResource($resturant),
-                'sizes' => $sizes,
-                'additem' => $additem,
-                'addsaui' => $addsaui
+                'sizes' => SizeResourse::collection($sizes),
+                'additem' => AddtionResourse::collection($additem),
+                'addsaui' => AddtionSauiResourse::collection($addsaui)
             ]
         ], 200);
     }

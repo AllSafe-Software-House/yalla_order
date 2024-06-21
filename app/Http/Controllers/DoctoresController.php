@@ -17,8 +17,11 @@ class DoctoresController extends Controller
 {
     public function show($id){
         $user = Auth::user() ;
-        $doctor = DB::table('doctores')->join('places','doctores.place_id','places.id')
-        ->select('doctores.*','places.address as address')
+        // $doctor = DB::table('doctores')->join('places','doctores.place_id','places.id')
+        // ->select('doctores.*','places.address as address')
+        // ->where('doctores.id',$id)
+        // ->first();
+        $doctor = Doctores::with('clinic')
         ->where('doctores.id',$id)
         ->first();
         $review = Reviews::where('doctore_id',$doctor->id)->with('doctor','user')->get();

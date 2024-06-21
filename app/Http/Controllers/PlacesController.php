@@ -34,7 +34,7 @@ class PlacesController extends Controller
         // ->where('categories.id', $category_id)
         // ->where('places.type', 'clinic')
         // ->get();
-        $clinic = DB::table('places')->where('category_id', $category_id)->get();
+        $clinic = Places::where('category_id', $category_id)->get();
         if ($checkisset) {
             $category = Category::where('id', $category_id)->first();
             $place = Places::where('id', $category->place_id)->first();
@@ -112,7 +112,7 @@ class PlacesController extends Controller
             "Doctors" => DoctoreResource::collection($doctors)
         ]);
     }
-    
+
         // search location
     public function findPropertiesNearMe(Request $request) {
     $request->validate([

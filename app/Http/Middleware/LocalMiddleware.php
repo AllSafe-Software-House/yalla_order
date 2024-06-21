@@ -16,8 +16,10 @@ class LocalMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $checklang = $request->header('lang');
-        App::setLocale($checklang);
-        return $next($request);
+        $checklang = $request->header('lang') ?? 'en';
+        if($checklang){
+            App::setLocale($checklang);
+            return $next($request);
+        }
     }
 }

@@ -16,11 +16,11 @@ class ClinicallResoures extends JsonResource
     {
         return [
             "id" => $this->id,
-            "name" => $this->name,
+            "name" => $this->getTranslation('name' , app()->getLocale()),
             "descrption" => $this->descrption,
             "starttime" => $this->starttime,
             "endtime" => $this->endtime,
-            "address" => $this->address,
+            "address" => $this->getTranslation('address' , app()->getLocale()),
             "logo" => asset($this->logo),
             "type" => $this->type,
             "delivery_fee" => $this->delivery_fee,

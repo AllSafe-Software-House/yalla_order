@@ -45,17 +45,55 @@ class FavoritesController extends Controller
             $listfav = DB::table('favorites')
                 ->join('places', 'favorites.place_id', 'places.id')
                 ->join('doctores', 'favorites.doctore_id', 'doctores.id')
-                ->select('places.name as clinic Name', 'places.address as clinic Address', 'doctores.name as doctore Name')
+                ->select(
+                    // 'places.name as clinic_name',
+                DB::raw("JSON_UNQUOTE(JSON_EXTRACT(places.name, '$.".app()->getLocale()."')) as clinic_name"),
+                'places.id as clinic_id',
+                //  'places.address as clinic_address',
+                 DB::raw("JSON_UNQUOTE(JSON_EXTRACT(places.address, '$.".app()->getLocale()."')) as clinic_address"),
+                //   'doctores.name as doctor_name'
+                  DB::raw("JSON_UNQUOTE(JSON_EXTRACT(doctores.name, '$.".app()->getLocale()."')) as doctor_name")
+                  )
                 ->get()
-                ->groupBy('clinic Name');
+                // ->groupBy('clinic Name');
+                ->groupBy('clinic_name')
+                ->map(function ($items, $clinicName) {
+                    $clinicID = $items->first()->clinic_id;
+                    $clinicAddress = $items->first()->clinic_address;
+                    return [
+                        'clinic_id' => $clinicID,
+                        'clinic_name' => $clinicName,
+                        'clinic_address' => $clinicAddress,
+                        'items' => $items->toArray()
+                    ];
+                })->values();
         } elseif ($type == 'order') {
             $listfav = DB::table('favorites')
                 ->join('menues', 'favorites.menue_id', 'menues.id')
                 ->join('places', 'favorites.place_id', 'places.id')
                 ->join('products', 'menues.product_id', 'products.id')
-                ->select('menues.id as Menues id', 'places.name as Resturant Name', 'places.address as Resturant Address', 'products.name as product Name')
+                // ->select('menues.id as Menues id', 'places.name as Resturant Name', 'places.address as Resturant Address', 'products.name as product Name')
+                ->select('menues.id as Menues id',
+                //  'places.name as restaurant_name',
+                 DB::raw("JSON_UNQUOTE(JSON_EXTRACT(places.name, '$.".app()->getLocale()."')) as restaurant_name"),
+                  'places.id as restaurant_id',
+                //    'places.address as resturant_address',
+                   DB::raw("JSON_UNQUOTE(JSON_EXTRACT(places.address, '$.".app()->getLocale()."')) as resturant_address"),
+                   DB::raw("JSON_UNQUOTE(JSON_EXTRACT(products.name, '$.".app()->getLocale()."')) as product_name")
+                    // 'products.name as product_name'
+                    )
                 ->get()
-                ->groupBy('Resturant Name');
+                ->groupBy('restaurant_name')
+                ->map(function ($items, $restaurantName) {
+                    $restaurantID = $items->first()->restaurant_id;
+                    $restaurantAddress = $items->first()->resturant_address;
+                    return [
+                        'restaurant_id' => $restaurantID,
+                        'restaurant_name' => $restaurantName,
+                        'restaurant_address' => $restaurantAddress,
+                        'items' => $items->toArray()
+                    ];
+                })->values();
         } else {
             return ApiResponse::sendresponse(
                 200,

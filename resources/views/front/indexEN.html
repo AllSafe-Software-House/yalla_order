@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="CSS/all.min.css" />
+    <link rel="stylesheet" href="CSS/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="CSS/output.css" />
+    <title>Yalla Order</title>
+</head>
+
+<body>
+
+
+    <nav class="bg-white z-[99999] fixed top-0 w-full border-gray-200 dark:bg-gray-900">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="images/Meal Med.png" alt="logo">
+            </a>
+            <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                <button type="button"
+                    class="text-black bg-transparent border border-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
+                <button data-collapse-toggle="navbar-cta" type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    aria-controls="navbar-cta" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
+            </div>
+            <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
+                <ul
+                    class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li>
+                        <a href="indexEN.html"
+                            class="block py-2 px-3 md:p-0  bg-rose-700 rounded md:bg-transparent md:text-rose-700 md:dark:text-rose-500"
+                            aria-current="page">Home</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-rose-700 md:dark:hover:text-rose-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Restaurants</a>
+                    </li>
+                    <li>
+                        <a href="become a partnerEN.html"
+                            class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-rose-700 md:dark:hover:text-rose-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Become a partner</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-rose-700 md:dark:hover:text-rose-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header
+        class="min-h-[100vh] flex items-center justify-center bg-cover bg-[url('../images/snack-pastry-board-with-potatoes-water-black-background-top-view.png')]">
+        <div class="container">
+            <div class="flex flex-wrap items-center justify-start">
+                <div class="w-full md:w-1/2 px-4 my-4">
+                    <h1 class="font-main text-center text-white text-[50px] md:text-start my-8 md:text-[64px]">
+                        A unique<br />
+                        experience for food lovers
+                    </h1>
+                    <div class="input relative">
+                        <i class="fa-solid fa-location-dot absolute left-3 top-1/2 text-[#ddd] -translate-y-1/2"></i>
+                        <input type="text" placeholder="Find your Location.."
+                            class="w-full px-8 outline-none rounded-full py-4" />
+                        <button
+                            class="outline-none bg-main text-white rounded-full py-2 px-4 absolute right-2 top-1/2 -translate-y-1/2">
+                            Search
+                        </button>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 px-4 my-4">
+                    <img src="images/Group 1171276423.png" class="w-full" alt="food" />
+                </div>
+            </div>
+        </div>
+    </header>
+    <section dir="ltr">
+        <div class="container">
+            <div class="bg-white md:mt-[-100px] shadow-2xl rounded-2xl flex flex-wrap py-5 px-7">
+                <div class="w-1/2 lg:w-1/4 px-5 my-5">
+                    <div class="flex items-center justify-center">
+                        <img src="images/Group 1171276204.png" alt="fast" />
+                        <p class="font-bold mx-3 text-[18px]">
+                            Fastest <br />
+                            Delivery
+                        </p>
+                    </div>
+                </div>
+                <div class="w-1/2 lg:w-1/4 px-5 my-5">
+                    <div class="flex items-center justify-center">
+                        <img src="images/Component 8.png" alt="fast" />
+                        <p class="font-bold mx-3 text-[18px]">
+                            Daily <br />
+                            Discount
+                        </p>
+                    </div>
+                </div>
+                <div class="w-1/2 lg:w-1/4 px-5 my-5">
+                    <div class="flex items-center justify-center">
+                        <img src="images/Component 9.png" alt="fast" />
+                        <p class="font-bold mx-3 text-[18px]">
+                            100+ <br />
+                            Restaurants
+                        </p>
+                    </div>
+                </div>
+                <div class="w-1/2 lg:w-1/4 px-5 my-5">
+                    <div class="flex items-center justify-center">
+                        <img src="images/Component 10.png" alt="fast" />
+                        <p class="font-bold mx-3 text-[18px]">
+                            100+ <br />
+                            Cuisines
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-20">
+        <div class="container">
+            <div class="flex flex-wrap items-center">
+                <div class="md:w-1/2 w-full px-4 my-4">
+                    <div class="text-stone-900 text-[40px] md:text-5xl font-bold font-main">
+                        How We Work
+                    </div>
+                    <div class="">
+                        <span class="text-rose-400 text-[40px] font-medium font-['Roboto']">We Value</span>
+                        <span class="text-stone-900 text-[40px] font-bold font-['Roboto']">Our Clients & Customers</span>
+                    </div>
+                    <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
+                        Register or login in our portal
+                    </div>
+                    <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
+                        Search your location
+                    </div>
+                    <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
+                        Find your preferred restaurant
+                    </div>
+                    <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
+                        Choose your cuisine
+                    </div>
+                    <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
+                        Get your food delivered at your address
+                    </div>
+                </div>
+                <div class="md:w-1/2 w-full px-4 my-4">
+                    <img src="images/Group 1171276508.png" class="w-full" alt="burger" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24">
+        <div class="container">
+            <div class="slider rounded-2xl bg-[#1F1F1F] py-10 relative px-2">
+                <img src="images/Group 1171276175 2.png" class="absolute hidden md:block right-0 bottom-0"
+                    alt="frame" />
+                <h3 class="font-main text-center py-4 md:text-[45px] text-[30px] text-white">
+                    Customer Favorite Cuisines
+                </h3>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide border border-white text-center rounded-xl text-white bg-[#1F1F1F]">
+                            <img src="images/burger.png" class="mx-auto my-4" alt="burger" />
+                            <h4 class="text-[24px]">Burger</h4>
+                        </div>
+                        <div class="swiper-slide border border-white text-center rounded-xl text-white bg-[#1F1F1F]">
+                            <img src="images/fast food 1.png" class="mx-auto my-4" alt="burger" />
+                            <h4 class="text-[24px]">Pizza</h4>
+                        </div>
+                        <div class="swiper-slide border border-white text-center rounded-xl text-white bg-[#1F1F1F]">
+                            <img src="images/sushi.png" class="mx-auto my-4" alt="burger" />
+                            <h4 class="text-[24px]">Chinese</h4>
+                        </div>
+                        <div class="swiper-slide border border-white text-center rounded-xl text-white bg-[#1F1F1F]">
+                            <img src="images/Group.png" class="mx-auto my-4" alt="burger" />
+                            <h4 class="text-[24px]">Frais</h4>
+                        </div>
+                        <div class="swiper-slide border border-white text-center rounded-xl text-white bg-[#1F1F1F]">
+                            <img src="images/donut.png" class="mx-auto my-4" alt="burger" />
+                            <h4 class="text-[24px]">Dessert</h4>
+                        </div>
+                        <div class="swiper-slide border border-white text-center rounded-xl text-white bg-[#1F1F1F]">
+                            <img src="images/Hot Dog.png" class="mx-auto my-4" alt="burger" />
+                            <h4 class="text-[24px]">sandwich</h4>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24" dir="ltr">
+        <div class="flex flex-wrap items-center">
+            <div
+                class="w-full bg-cover xl:w-2/3 xl:rounded-r-[100px] py-6 bg-[url('../images/snack-pastry-board-with-potatoes-water-black-background-top-view.png')]">
+                <div class="mx-auto">
+                    <div class="text-white text-center text-[50px] md:text-[64px] font-bold font-main">
+                       BECOME ONE OF US?
+                    </div>
+                    <div class="text-center">
+                        <span class="text-rose-400 text-4xl font-bold font-['Roboto']">What
+                        </span>
+                        <span class="text-white text-4xl font-medium font-['Roboto']">are you waiting for?</span>
+                    </div>
+                </div>
+                <div class="my-20 text-center">
+                    <button class="bg-white text-slate-900 px-16 rounded-full py-2 text-[30px]">Login a partner</button>
+                </div>
+            </div>
+            <div class="xl:w-1/3 hidden xl:block">
+                <img src="images/Group 1171276286.png" class="w-100 ml-[-230px]" alt="pizza">
+            </div>
+        </div>
+    </section>
+    <section class="py-24 relative " dir="ltr">
+        <img src="images/Group 1171276175 1.png" class="absolute top-[-270px] z-[-1] left-0" alt="frame">
+        <div class="container">
+            <div class="flex flex-wrap">
+                <div class="w-full lg:w-1/2  overflow-hidden px-4 my-4">
+                    <div class="flex flex-wrap items-stretch">
+                        <div class="w-3/4 bg-[#1F1F1F] py-5 rounded-2xl relative px-7">
+                            <div class="text-rose-400 text-[25px] md:text-[32px] font-bold font-['Roboto']">are you hungry?
+                            </div>
+                            <div class="text-white text-[17px] md:text-xl font-bold py-4 font-['Roboto']">Our team is always ready to prepare your food at any time. Discover our restaurants now!
+                                We have delivery, offers and discounts.</div>
+                            <div class="text-rose-400 text-[17px] md:text-xl font-normal py-1 font-['Roboto']">Explore
+                            </div>
+                        </div>
+                        <div class="w-1/4 bg-cover rounded-r-2xl overflow-hidden ml-[-15px]">
+                            <img src="images/unsplash_LV2p9Utbkbw.png" class="object-cover h-full" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2  overflow-hidden px-4 my-4">
+                    <div class="flex flex-wrap items-stretch">
+                        <div dir="rtl" class="w-3/4 bg-[#1F1F1F] py-5 rounded-2xl relative px-7">
+                            <div class="text-blue-500 text-[25px] md:text-[32px] font-bold font-['Roboto']">Do you have a cold?</div>
+                            <div class="text-white text-[17px] md:text-xl font-bold py-4 font-['Roboto']">
+                                Don't worry, we are here to help you. Book your consultation quickly and easily.</div>
+                            <div class="text-blue-500 text-[17px] md:text-xl font-normal py-1 font-['Roboto']">Explore
+                            </div>
+                        </div>
+                        <div class="w-1/4 bg-cover rounded-r-2xl overflow-hidden ml-[-15px]">
+                            <img src="images/Medicine uniform healthcare medical workers day concept.png"
+                                class="object-cover h-full" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24">
+        <div class="container">
+            <div
+                class="bg-cover bg-[url('../images/snack-pastry-board-with-potatoes-water-black-background-top-view.png')] py-10 md:rounded-l-3xl px-8 flex flex-wrap">
+                <div class="w-full md:w-1/2 px-4 my-4">
+                    <div class="text-white lg:text-[64px] md:text-[40px] text-[30px] font-bold font-main">Download our
+                        <br>application now!
+                    </div>
+                    <div class="py-6">
+                        <span class="text-rose-400 text-4xl font-medium font-['Roboto']">Enjoy</span>
+                        <span class="text-white text-4xl font-medium font-['Roboto']"> the best meals</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="mx-3">
+                            <img src="images/apple.png" alt="app store" class="w-full cursor-pointer">
+                        </div>
+                        <div class="mx-3">
+                            <img src="images/logo_playstore.png" alt="google play" class="w-full cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 relative">
+                    <img src="images/OnePlus 10T.png"
+                        class="md:absolute lg:top-[-150px] xl:top-[-200px] md:top-[-130px]" alt="yallaOrder">
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <footer dir="ltr" class="py-7 bg-[#1F1F1F]">
+        <div class="container flex flex-wrap justify-between">
+            <div class="w-full md:w-1/2 my-2">
+                <img src="images/FOoDc.png" alt="logo">
+            </div>
+            <div class="w-full md:w-1/2 my-2">
+                <div class="flex items-center">
+                    <div class="text-white text-right cursor-pointer text-2xl font-normal font-['Roboto'] mx-2">Contact
+                        us</div>
+                    <div class="text-white text-right cursor-pointer text-2xl font-normal font-['Roboto'] mx-2">Follow
+                        Us</div>
+                    <div class="flex items-center mx-2">
+                        <i class="fa-brands cursor-pointer fa-facebook mx-2 text-white"></i>
+                        <i class="fa-brands cursor-pointer fa-instagram mx-2 text-white"></i>
+                    </div>
+                </div>
+                <div class="flex items-center my-6">
+                    <div class="mx-3">
+                        <img src="images/apple.png" alt="app store" class="w-full cursor-pointer">
+                    </div>
+                    <div class="mx-3">
+                        <img src="images/logo_playstore.png" alt="google play" class="w-full cursor-pointer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/swiper-bundle.min.js"></script>
+    <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
