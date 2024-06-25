@@ -28,13 +28,17 @@ class HomeController extends Controller
         $cardfood = Landingpage::where('name','CardFood')->first();
         $cardclinic = Landingpage::where('name','CardClinic')->first();
         return view('front.index',compact('partone','parttwo','cardfood','cardclinic'));
-            // return view('landing-page');
+        // return view('landing-page');
     }
 
 
     public function doctorLandingPage(){
 
-        return view('front.doctors-landing');
+        $partoneclinic = Landingpage::where('name','PartOneClinic')->first();
+        $parttwoclinic = Landingpage::where('name','PartTwoClinic')->first();
+        $cardfood = Landingpage::where('name','CardFood')->first();
+        $cardclinic = Landingpage::where('name','CardClinic')->first();
+        return view('front.doctors-landing',compact('partoneclinic','parttwoclinic','cardfood','cardclinic'));
             // return view('landing-page');
     }
 

@@ -11,9 +11,17 @@ class LandingPageController extends Controller
         $partone = Landingpage::where('name','PartOne')->first();
         return view('LandingPge.partone',compact('partone'));
     }
+    public function partoneclinic(){
+        $partoneclinic = Landingpage::where('name','PartOneClinic')->first();
+        return view('LandingPge.partoneclinic',compact('partoneclinic'));
+    }
     public function parttwo(){
         $parttwo = Landingpage::where('name','PartTwo')->first();
         return view('LandingPge.parttwo',compact('parttwo'));
+    }
+    public function parttwoclinic(){
+        $parttwoclinic = Landingpage::where('name','PartTwoClinic')->first();
+        return view('LandingPge.parttwoclinic',compact('parttwoclinic'));
     }
 
     public function cardfood(){

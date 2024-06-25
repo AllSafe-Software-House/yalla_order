@@ -5,7 +5,7 @@
     <!--Internal  treeview -->
     <link href="{{ URL::asset('assets/plugins/treeview/treeview-rtl.css') }}" rel="stylesheet" type="text/css" />
 @section('title')
-    Add Section Two
+    Add Section One
 @stop
 
 @endsection
@@ -14,7 +14,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">LandingPage Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/Part Two Food Page</span>
+            <h4 class="content-title mb-0 my-auto">LandingPage Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/Part One Clinic Page</span>
         </div>
     </div>
 </div>
@@ -38,10 +38,10 @@
         </div>
     @endif
     <div class="card-body">
-        @if ($parttwo === null)
+        @if ($partoneclinic === null)
         <form action="{{ route('partonestore') }}" class="d-grid" enctype="multipart/form-data" method="POST">
             @csrf
-            <input type="hidden" name="name" value="PartTwo">
+            <input type="hidden" name="name" value="PartOneClinic">
             <div class="mb-3">
                 <label for="text" class="py-2">Title:</label>
                 <input type="text" id="text" class="form-control" name="title">
@@ -50,36 +50,24 @@
                 <label for="text" class="py-2">العنوان:</label>
                 <input type="text" id="text" class="form-control" name="title_ar">
             </div>
-            <div class="mb-3">
-                <label for="text" class="py-2">Descrition:</label>
-                <textarea name="description"  class="form-control" id="" cols="30" rows="10"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="text" class="py-2">الوصف:</label>
-                <textarea name="description_ar"  class="form-control" id="" cols="30" rows="10"></textarea>
-            </div>
+            <input type="hidden" id="text" class="form-control" name="description" value="PartOneClinic">
+            <input type="hidden" id="text" class="form-control" name="description_ar" value="PartOneClinic">
             <button type="submit"  class="btn btn-primary btn-sm col-12">Add</button>
         </form>
         @else
         <form action="{{ route('partoneupdate') }}" class="d-grid" enctype="multipart/form-data" method="POST">
             @csrf
-            <input type="hidden" name="name" value="PartTwo">
+            <input type="hidden" name="name" value="PartOneClinic">
             <div class="mb-3">
                 <label for="text" class="py-2">Title:</label>
-                <input type="text" id="text" class="form-control" name="title" value="{{ $parttwo->title }}">
+                <input type="text" id="text" class="form-control" name="title" value="{{ $partoneclinic->title }}">
             </div>
             <div class="mb-3">
                 <label for="text" class="py-2">العنوان:</label>
-                <input type="text" id="text" class="form-control" name="title_ar" value="{{ $parttwo->getTranslation('title','ar') }}">
+                <input type="text" id="text" class="form-control" name="title_ar" value="{{ $partoneclinic->getTranslation('title','ar') }}">
             </div>
-            <div class="mb-3">
-                <label for="text" class="py-2">Descrition:</label>
-                <textarea name="description"  class="form-control" id="" cols="30" rows="10">{{ $parttwo->description }}</textarea>
-            </div>
-            <div class="mb-3">
-                <label for="text" class="py-2">الوصف:</label>
-                <textarea name="description_ar"  class="form-control" id="" cols="30" rows="10">{{ $parttwo->getTranslation('description','ar') }}</textarea>
-            </div>
+            <input type="hidden" id="text" class="form-control" name="description" value="PartOneClinic">
+            <input type="hidden" id="text" class="form-control" name="description_ar" value="PartOneClinic">
             <button type="submit"  class="btn btn-primary btn-sm col-12">UPdate</button>
         </form>
         @endif
