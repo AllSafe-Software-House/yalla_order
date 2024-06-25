@@ -23,7 +23,6 @@ class ContactusController extends Controller
     {
         $contactus = Content_US::where('type','clinic')->get();
         $admin = Auth::user();
-
         return view('ContactUs.ContactUs', compact('contactus','admin'));
     }
     public function destore($id)
