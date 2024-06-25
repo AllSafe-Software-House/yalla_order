@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use App\Models\GeneralInfo;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SettingAdminController extends Controller
 {
@@ -43,6 +44,49 @@ class SettingAdminController extends Controller
                 "ar" => $request->text_ar,
             ];
             $aboutus->save();
+        return redirect()->back()->with('done',"update data sucessful");
+    }
+
+
+    // general info
+    public function generalinfo(){
+        $generinfo = GeneralInfo::first();
+        return view('Setting.GeneralInfo',compact('generinfo'));
+    }
+
+    public function generalinfostore(Request $request){
+        $nameimage = $request->logo;
+        if (isset($nameimage)) {
+            $image = time() . '.' . $request->logo->extension();
+            $imagepath =  "uploads/Logo/$image";
+            $request->logo->move(public_path('uploads/Logo'), $image);
+        } else {
+            $imagepath = "uploads/Logo/defultfood.png";
+        }
+        GeneralInfo::create([
+            'name' => $request->name,
+            'logo' => $imagepath,
+            'linkAppStore' => $request->linkAppStore,
+            'linkPlayStore' => $request->linkPlayStore,
+        ]);
+        return redirect()->back()->with('done',"add data sucessful");
+    }
+
+    public function generalinfoupdate(Request $request){
+        $generinfo = GeneralInfo::first();
+        $nameimage = $request->logo;
+        if (isset($nameimage)) {
+            $image = time(). '.'. $request->logo->extension();
+            $imagepath =  "uploads/Logo/$image";
+            $request->logo->move(public_path('uploads/Logo'), $image);
+        } else {
+            $imagepath = $generinfo->logo;
+        }
+        $generinfo->name = $request->name;
+        $generinfo->logo = $imagepath;
+        $generinfo->linkAppStore = $request->linkAppStore;
+        $generinfo->linkPlayStore = $request->linkPlayStore;
+        $generinfo->save();
         return redirect()->back()->with('done',"update data sucessful");
     }
 }

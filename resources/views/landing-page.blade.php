@@ -12,7 +12,7 @@
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta name="author" content="FREEHTML5.CO" />
-	
+
 
 
 
@@ -29,10 +29,10 @@
 
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 	<link rel="shortcut icon" href="favicon.ico">
-<link rel="icon" href="{{URL::asset('assets/img/logoinsta.png')}}" type="image/x-icon"/>
+<link rel="icon" href="{{ asset($info->logo) }}" type="image/x-icon"/>
 
 	<link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,700italic|Merriweather:300,400italic,300italic,400,700italic' rel='stylesheet' type='text/css'>
-	
+
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="{{asset('front/css/animate.css')}}">
 	<!-- Icomoon Icon Fonts-->
@@ -68,8 +68,8 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
-        
+
+
         /* Overlay CSS */
         .overlay {
             position: fixed;
@@ -81,7 +81,7 @@
             z-index: 9999; /* Ensure it's above all other elements but below the loader */
             display: none; /* Hidden by default */
         }
-        
+
         .success-image {
             display: none;
             position: fixed;
@@ -90,7 +90,7 @@
             transform: translate(-50%, -50%);
             z-index: 10000; /* Ensure it's above all other elements */
         }
-        
+
     </style>
 
 	<!-- Modernizr JS -->
@@ -107,7 +107,7 @@
 		<div id="fh5co-home" class="js-fullheight" data-section="home">
 
 			<div class="flexslider">
-				
+
 				<div class="fh5co-overlay"></div>
 				<div class="fh5co-text">
 					<div class="container">
@@ -124,9 +124,9 @@
 			  	</ul>
 
 			</div>
-			
+
 		</div>
-		
+
 		<div class="js-sticky">
 			<div class="fh5co-main-nav">
 				<div class="container-fluid">
@@ -141,11 +141,11 @@
 						<a href="#" data-nav-section="about">نبذه عنا</a>
 				    </div>
 				</div>
-				
+
 			</div>
 		</div>
-		
-		
+
+
 		<div id="fh5co-contact" data-section="reservation">
 			<div class="container">
 				<div class="row text-center fh5co-heading row-padded">
@@ -169,14 +169,14 @@
 							<!--<li><i class="icon-globe"></i> <a href="https://www.allsafeeg.com/" target="_blank"></a></li>-->
 						</ul>
 					</div>
-					
+
 					<!-- Overlay Element -->
                     <div class="overlay" id="overlay"></div>
 					<!-- Loader Element -->
                     <div class="loader" id="loader"></div>
 					<div class="col-md-6 to-animate-2" >
 					    <!-- Success Image Element -->
-					    
+
 						<form id="partner-form">
 						<h3> أنضم إلينا كـ شريك</h3>
     						<div class="form-group ">
@@ -197,26 +197,26 @@
     							      <option value="">اختر نوع المشأه</option>
         							  <option value="restaurantes">مطعم</option>
         							  <option value="clinic">صيدليه</option>
-    
+
     							</select>
     						</div>
-    						
+
     						<div class="form-group ">
     							<button class="btn btn-primary" value="Send Message" id="submit-btn" type="submit">
     							    ارسال
     							    </button>
     						</div>
 						</form>
-						
+
 						<div class="form-group " id="success-message" style="display:none; top: 50%; left: 50%;">
                             <p style="text-align: center;">شكرا لك! لقد تم إرسال طلبك بنجاح.</p>
                             <div style="text-align: center;margin-top: 330px;">
                                 <img src="{{asset('front/images/send-successfully.png')}}" alt="Success" class="success-image" id="success-image">
                             </div>
                         </div>
-						
+
 					</div>
-					
+
 				</div>
 			</div>
 		</div>
@@ -236,7 +236,7 @@
 
 		<!--			<div class="flexslider">-->
 		<!--				<ul class="slides">-->
-							
+
 		<!--					<li>-->
 		<!--						<blockquote>-->
 		<!--							<p>&ldquo;Cooking is an art, but all art requires knowing something about the techniques and materials&rdquo;</p>-->
@@ -261,8 +261,8 @@
 		<!--							<p class="quote-author">&mdash; Josh Billings</p>-->
 		<!--						</blockquote>-->
 		<!--					</li>-->
-							
-							
+
+
 		<!--				</ul>-->
 		<!--			</div>-->
 
@@ -305,26 +305,26 @@
 
 
 
-		
 
-		
+
+
 	</div>
 
 	<div id="fh5co-footer">
 		<div class="container">
 			<div class="row row-padded">
 				<div class="col-md-6 text-center">
-					<a href="{{route('TermsPage')}}">الشروط والاحكام</a> 
+					<a href="{{route('TermsPage')}}">الشروط والاحكام</a>
                     <br>
                     <br>
-					<a href="{{route('CommenQuestionPage')}}">الاسئله الشائعه</a> 
+					<a href="{{route('CommenQuestionPage')}}">الاسئله الشائعه</a>
                     <br>
                     <br>
-					<a href="{{route('landingPage')}}">الرئيسيه</a> 
+					<a href="{{route('landingPage')}}">الرئيسيه</a>
 				</div>
-			    
+
 				<div class="col-md-6 text-center">
-					<p class="to-animate">&copy; Insta Order  <br> تم التصميم بواسطة <a href="https://www.allsafeeg.com/" target="_blank">All Safe</a> 
+					<p class="to-animate">&copy; Insta Order  <br> تم التصميم بواسطة <a href="https://www.allsafeeg.com/" target="_blank">All Safe</a>
 					</p>
 					<p class="text-center to-animate"><a href="#" class="js-gotop">انتقل إلى الأعلى</a></p>
 				</div>
@@ -342,10 +342,10 @@
 	</div>
 
 
-	
-	
-	
-	
+
+
+
+
 	<!-- jQuery -->
 	<script src="{{asset('front/js/jquery.min.js')}}"></script>
 	<!-- jQuery Easing -->
@@ -369,8 +369,8 @@
 	</script>
 	<!-- Main JS -->
 	<script src="{{asset('front/js/main.js')}}"></script>
-	
-	
+
+
 	<script>
         $(document).ready(function() {
             console.log('here we go');
@@ -379,7 +379,7 @@
                 e.preventDefault();
                 $('#overlay').show();
                 $('#loader').show();
-                
+
                 $.ajax({
                     url: "{{ route('resturants-requests.store') }}",  // Replace with your route
                     type: "POST",
@@ -420,7 +420,7 @@
             });
         });
     </script>
-	
+
 
 	</body>
 </html>

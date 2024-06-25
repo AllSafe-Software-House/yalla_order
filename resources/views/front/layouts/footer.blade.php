@@ -1,7 +1,7 @@
 <footer dir="ltr" class="py-7 bg-[#1F1F1F]">
     <div class="container flex flex-wrap justify-between">
         <div class="w-full my-2 md:w-1/2">
-            <img src="{{ asset('src/images/FOoDc.png') }}" alt="logo">
+            <img src="{{ asset($info->logo) }}" alt="logo">
         </div>
         <div class="w-full my-2 md:w-1/2">
             <div class="flex items-center">

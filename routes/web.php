@@ -169,8 +169,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/aboutus', [SettingAdminController::class, 'aboutus'])->name('aboutus')->middleware('permission:updateAboutUS');
         Route::post('/aboutusstore', [SettingAdminController::class, 'aboutusstore'])->name('aboutusstore')->middleware('permission:updateAboutUS');
         Route::post('/aboutusupdate', [SettingAdminController::class, 'aboutusupdate'])->name('aboutusupdate')->middleware('permission:updateAboutUS');
-        // ContactUs
 
+        // general info
+        Route::get('/generalinfo', [SettingAdminController::class, 'generalinfo'])->name('generalinfo');
+        Route::post('/generalinfostore', [SettingAdminController::class, 'generalinfostore'])->name('generalinfostore');
+        Route::post('/generalinfoupdate', [SettingAdminController::class, 'generalinfoupdate'])->name('generalinfoupdate');
+
+
+        // ContactUs
         Route::prefix('contactus')->group(function () {
             Route::get('/list', [ContactusController::class, 'index'])->name('listcontactus')->middleware('permission:showContactUS');
             Route::get('/list/clinic', [ContactusController::class, 'indexclinic'])->name('listcliniccontactus')->middleware('permission:showContactUS');
