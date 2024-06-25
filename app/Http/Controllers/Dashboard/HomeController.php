@@ -24,7 +24,8 @@ class HomeController extends Controller
     public function landingPage(){
 
         $partone = Landingpage::where('name','PartOne')->first();
-        return view('front.index',compact('partone'));
+        $parttwo = Landingpage::where('name','PartTwo')->first();
+        return view('front.index',compact('partone','parttwo'));
             // return view('landing-page');
     }
 

@@ -7,7 +7,7 @@
 <div class="w-full px-4 my-4 md:w-1/2">
     <h1 class="font-main text-center text-white text-[50px] md:text-start my-8 md:text-[64px]">
         @if ($partone)
-            {{ $partone->title }} 
+            {{ $partone->title }}
         @endif
     </h1>
     {{-- <div class="relative input">
@@ -72,14 +72,18 @@
     <div class="container">
         <div class="flex flex-wrap items-center">
             <div class="w-full px-4 my-4 md:w-1/2">
-                <div class="text-stone-900 text-[40px] md:text-5xl font-bold font-main">
-                    كيف نعمل
-                </div>
-                <div class="w-[356px]">
-                    <span class="text-rose-400 text-[40px] font-medium font-['Roboto']">نحن نقدّر</span>
-                    <span class="text-stone-900 text-[40px] font-bold font-['Roboto']">عملائنا وزبائننا</span>
+                <div class="text-rose-900 text-[40px] md:text-5xl font-bold font-main">
+                    @if ($parttwo)
+                        {{ $parttwo->title }}
+                    @endif
                 </div>
                 <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
+                    @if ($parttwo)
+                        {{ $parttwo->description }}
+                    @endif
+                    {{--  <span class="text-stone-900 text-[40px] font-bold font-['Roboto']">عملائنا وزبائننا</span>  --}}
+                </div>
+                {{--  <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
                     سجل أو قم بتسجيل الدخول في بوابتنا
                 </div>
                 <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
@@ -93,7 +97,7 @@
                 </div>
                 <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
                     احصل على طعامك موصل إلى عنوانك
-                </div>
+                </div>  --}}
             </div>
             <div class="w-full px-4 my-4 md:w-1/2">
                 <img src="{{ asset('/src/images/Group 1171276508.png') }}" class="w-full" alt="burger" />

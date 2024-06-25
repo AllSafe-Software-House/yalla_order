@@ -11,6 +11,10 @@ class LandingPageController extends Controller
         $partone = Landingpage::where('name','PartOne')->first();
         return view('LandingPge.partone',compact('partone'));
     }
+    public function parttwo(){
+        $parttwo = Landingpage::where('name','PartTwo')->first();
+        return view('LandingPge.parttwo',compact('parttwo'));
+    }
 
     public function partonestore(Request $request){
         Landingpage::create([
@@ -27,7 +31,7 @@ class LandingPageController extends Controller
         return back()->with('done', "add sucessfully");
     }
     public function partoneupdate(Request $request){
-        $partone = Landingpage::where('name','PartOne')->first();
+        $partone = Landingpage::where('name',$request->name)->first();
         $partone->title = [
             "en" => $request->title,
             "ar" => $request->title_ar,
