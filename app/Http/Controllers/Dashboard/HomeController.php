@@ -25,7 +25,9 @@ class HomeController extends Controller
 
         $partone = Landingpage::where('name','PartOne')->first();
         $parttwo = Landingpage::where('name','PartTwo')->first();
-        return view('front.index',compact('partone','parttwo'));
+        $cardfood = Landingpage::where('name','CardFood')->first();
+        $cardclinic = Landingpage::where('name','CardClinic')->first();
+        return view('front.index',compact('partone','parttwo','cardfood','cardclinic'));
             // return view('landing-page');
     }
 

@@ -229,6 +229,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('LandingPage')->group(function () {
         Route::get('/partone', [LandingPageController::class, 'partone'])->name('partone');
         Route::get('/parttwo', [LandingPageController::class, 'parttwo'])->name('parttwo');
+        Route::get('/cardfood', [LandingPageController::class, 'cardfood'])->name('cardfood');
+        Route::get('/cardclinic', [LandingPageController::class, 'cardclinic'])->name('cardclinic');
         Route::post('/partonestore', [LandingPageController::class, 'partonestore'])->name('partonestore');
         Route::post('/partoneupdate', [LandingPageController::class, 'partoneupdate'])->name('partoneupdate');
     });

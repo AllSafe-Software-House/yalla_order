@@ -16,6 +16,15 @@ class LandingPageController extends Controller
         return view('LandingPge.parttwo',compact('parttwo'));
     }
 
+    public function cardfood(){
+        $cardfood = Landingpage::where('name','CardFood')->first();
+        return view('LandingPge.cardfood',compact('cardfood'));
+    }
+    public function cardclinic(){
+        $cardclinic = Landingpage::where('name','CardClinic')->first();
+        return view('LandingPge.cardclinic',compact('cardclinic'));
+    }
+
     public function partonestore(Request $request){
         Landingpage::create([
             'name' => $request->name,

@@ -177,10 +177,16 @@
             <div class="w-full px-4 my-4 overflow-hidden lg:w-1/2">
                 <div class="flex flex-wrap items-stretch">
                     <div dir="rtl" class="w-3/4 bg-[#1F1F1F] py-5 rounded-2xl relative px-7">
-                        <div class="text-rose-400 text-[25px] md:text-[32px] font-bold font-['Roboto']">هل أنت جائع؟
+                        <div class="text-rose-400 text-[25px] md:text-[32px] font-bold font-['Roboto']">
+                            @if ($cardfood)
+                                {{ $cardfood->title }}
+                            @endif
                         </div>
-                        <div class="text-white text-[17px] md:text-xl font-bold py-4 font-['Roboto']">فريقنا دائمًا
-                            جاهز لتحضير طعامك في أي وقت. اكتشف مطاعمنا الآن!<br />لدينا توصيل، عروض وخصومات.</div>
+                        <div class="text-white text-[17px] md:text-xl font-bold py-4 font-['Roboto']">
+                            @if ($cardfood)
+                                {{ $cardfood->description }}
+                            @endif
+                        </div>
                         <a href="{{ url('/') }}" class="text-rose-400 text-[17px] md:text-xl font-normal py-1 font-['Roboto']">استكشف
                         </a>
                     </div>
@@ -192,11 +198,16 @@
             <div class="w-full px-4 my-4 overflow-hidden lg:w-1/2">
                 <div class="flex flex-wrap items-stretch">
                     <div dir="rtl" class="w-3/4 bg-[#1F1F1F] py-5 rounded-2xl relative px-7">
-                        <div class="text-blue-500 text-[25px] md:text-[32px] font-bold font-['Roboto']">هل انت مصاب
-                            بالبرد؟
+                        <div class="text-blue-500 text-[25px] md:text-[32px] font-bold font-['Roboto']">
+                            @if ($cardclinic)
+                                {{ $cardclinic->title }}
+                            @endif
                         </div>
                         <div class="text-white text-[17px] md:text-xl font-bold py-4 font-['Roboto']">
-                            لا تقلق ، نحن هنا لمساعدتك. احجز استشارتك بسرعة وسهولة.</div>
+                            @if ($cardclinic)
+                                {{$cardclinic->description}}
+                            @endif
+                        </div>
                         <a href="{{ url('/doctors') }}" class="text-blue-500 text-[17px] md:text-xl font-normal py-1 font-['Roboto']">استكشف
                         </a>
                     </div>

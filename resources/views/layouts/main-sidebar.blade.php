@@ -212,6 +212,8 @@
                             <li><a class="slide-item" href="{{ route('generalinfo') }}">General information</a></li>
                             <li><a class="slide-item" href="{{ route('partone') }}">Home Page Part One</a></li>
                             <li><a class="slide-item" href="{{ route('parttwo') }}">Home Page Part Two</a></li>
+                            <li><a class="slide-item" href="{{ route('cardfood') }}">Home Page Card Food</a></li>
+                            <li><a class="slide-item" href="{{ route('cardclinic') }}">Home Page Card Clinic</a></li>
                         @endcan
                     </ul>
                 </li>

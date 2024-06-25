@@ -5,7 +5,7 @@
     <!--Internal  treeview -->
     <link href="{{ URL::asset('assets/plugins/treeview/treeview-rtl.css') }}" rel="stylesheet" type="text/css" />
 @section('title')
-    Add Section One
+    Add Section Card Clinic
 @stop
 
 @endsection
@@ -14,7 +14,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">LandingPage Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/Part One</span>
+            <h4 class="content-title mb-0 my-auto">LandingPage Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/Card Clinic</span>
         </div>
     </div>
 </div>
@@ -38,10 +38,10 @@
         </div>
     @endif
     <div class="card-body">
-        @if ($partone === null)
+        @if ($cardclinic === null)
         <form action="{{ route('partonestore') }}" class="d-grid" enctype="multipart/form-data" method="POST">
             @csrf
-            <input type="hidden" name="name" value="PartOne">
+            <input type="hidden" name="name" value="CardClinic">
             <div class="mb-3">
                 <label for="text" class="py-2">Title:</label>
                 <input type="text" id="text" class="form-control" name="title">
@@ -50,24 +50,36 @@
                 <label for="text" class="py-2">العنوان:</label>
                 <input type="text" id="text" class="form-control" name="title_ar">
             </div>
-            <input type="hidden" id="text" class="form-control" name="description" value="partone">
-            <input type="hidden" id="text" class="form-control" name="description_ar" value="partone">
+            <div class="mb-3">
+                <label for="text" class="py-2">Descrition:</label>
+                <textarea name="description"  class="form-control" id="" cols="30" rows="10"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="text" class="py-2">الوصف:</label>
+                <textarea name="description_ar"  class="form-control" id="" cols="30" rows="10"></textarea>
+            </div>
             <button type="submit"  class="btn btn-primary btn-sm col-12">Add</button>
         </form>
         @else
         <form action="{{ route('partoneupdate') }}" class="d-grid" enctype="multipart/form-data" method="POST">
             @csrf
-            <input type="hidden" name="name" value="PartOne">
+            <input type="hidden" name="name" value="CardClinic">
             <div class="mb-3">
                 <label for="text" class="py-2">Title:</label>
-                <input type="text" id="text" class="form-control" name="title" value="{{ $partone->title }}">
+                <input type="text" id="text" class="form-control" name="title" value="{{ $cardclinic->title }}">
             </div>
             <div class="mb-3">
                 <label for="text" class="py-2">العنوان:</label>
-                <input type="text" id="text" class="form-control" name="title_ar" value="{{ $partone->getTranslation('title','ar') }}">
+                <input type="text" id="text" class="form-control" name="title_ar" value="{{ $cardclinic->getTranslation('title','ar') }}">
             </div>
-            <input type="hidden" id="text" class="form-control" name="description" value="partone">
-            <input type="hidden" id="text" class="form-control" name="description_ar" value="partone">
+            <div class="mb-3">
+                <label for="text" class="py-2">Descrition:</label>
+                <textarea name="description"  class="form-control" id="" cols="30" rows="10">{{ $cardclinic->description }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="text" class="py-2">الوصف:</label>
+                <textarea name="description_ar"  class="form-control" id="" cols="30" rows="10">{{ $cardclinic->getTranslation('description','ar') }}</textarea>
+            </div>
             <button type="submit"  class="btn btn-primary btn-sm col-12">UPdate</button>
         </form>
         @endif
