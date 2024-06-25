@@ -12,7 +12,7 @@ use App\Models\Order;
 
 class ChartorderController extends Controller
 {
-          protected $chartorder;
+    protected $chartorder;
 
     public function __construct(LarapexChart $chartorder)
     {
@@ -25,7 +25,6 @@ class ChartorderController extends Controller
         $placedata = Places::where('id',(int) $placeid)->first();
         $startOfWeek = Carbon::now()->startOfWeek();
         $endOfWeek = Carbon::now()->endOfWeek();
-        dd($placeid);
         if ($placedata->type == 'clinic') {
             $title = "Daily Clinic Subscriptions";
             $subscriptions = Reservationes::query()

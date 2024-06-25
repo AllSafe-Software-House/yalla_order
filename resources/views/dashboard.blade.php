@@ -6,13 +6,14 @@
     <link href="{{ URL::asset('assets/plugins/treeview/treeview-rtl.css') }}" rel="stylesheet" type="text/css" />
 @section('title')
     Home Dashboard
-
 @endsection
 @section('content')
     <div class = "mt-4">
         @php
             $checkrole = auth()->user();
-            $name = $checkrole->roles->pluck('name');
+            $adminrole = App\Models\Admin::where('user_id', $checkrole->id)->first();
+            $namerole = Spatie\Permission\Models\Role::where('id', $adminrole->role_id)->first();
+            $name = $namerole->name;
             $permission = $checkrole->getAllPermissions();
             $searchTerm = 'listTransaction';
             $found = false;
@@ -23,7 +24,7 @@
                 }
             }
         @endphp
-    @if($found == true && !$name->contains('SuperAdmin'))
+    @if($name != 'SuperAdmin')
         <div class="page-content">
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
                 @foreach(range(1, 4) as $index)
@@ -56,7 +57,7 @@
                 </div>
             </div>
         </div>
-    @elseif($name->contains('SuperAdmin'))
+    @elseif($name == 'SuperAdmin')
         <div class="page-content">
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
                 <div class="col">
@@ -160,10 +161,10 @@
 @endsection
 
 @section('js')
-    @if($found == true && !$name->contains('SuperAdmin'))
+    @if($name != 'SuperAdmin')
         <script src="{{ $chartorder->cdn() }}"></script>
         {{ $chartorder->script() }}
-    @elseif($name->contains('SuperAdmin'))
+    @elseif($name == 'SuperAdmin')
         <script src="{{ $chart->cdn() }}"></script>
         <script src="{{ $chartres->cdn() }}"></script>
         <script src="{{ $chartclinic->cdn() }}"></script>

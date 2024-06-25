@@ -1,7 +1,7 @@
 <!-- Footer opened -->
 	<div class="main-footer ht-40">
 		<div class="container-fluid pd-t-0-f ht-100p">
-			<span>Copyright © 2023 <a href="#">FooDC Dashboard</a>. Developer by
+			<span>Copyright © 2023 <a href="#">InstaOrder Dashboard</a>. Developer by
             <a href="#">all safe
 		</div>
 	</div>
