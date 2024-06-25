@@ -210,6 +210,7 @@
                     <ul class="slide-menu">
                         @can('updateAboutUS')
                             <li><a class="slide-item" href="{{ route('generalinfo') }}">General information</a></li>
+                            <li><a class="slide-item" href="{{ route('partone') }}">Home Page Part One</a></li>
                         @endcan
                     </ul>
                 </li>

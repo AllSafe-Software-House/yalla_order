@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Landingpage;
+use Illuminate\Http\Request;
+
+class LandingPageController extends Controller
+{
+    public function partone(){
+        $partone = Landingpage::where('name','PartOne')->first();
+        return view('LandingPge.partone',compact('partone'));
+    }
+
+    public function partonestore(Request $request){
+        Landingpage::create([
+            'name' => $request->name,
+            'title' => [
+                "en" => $request->title,
+                "ar" => $request->title_ar,
+            ],
+            'description' => [
+                "en" => $request->description,
+                "ar" => $request->description_ar,
+            ]
+        ]);
+        return back()->with('done', "add sucessfully");
+    }
+    public function partoneupdate(Request $request){
+        $partone = Landingpage::where('name','PartOne')->first();
+        $partone->title = [
+            "en" => $request->title,
+            "ar" => $request->title_ar,
+        ];
+        $partone->description = [
+            "en" => $request->description,
+            "ar" => $request->description_ar,
+        ];
+        $partone->save();
+        return back()->with('done', "update sucessfully");
+    }
+}

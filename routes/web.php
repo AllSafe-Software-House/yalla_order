@@ -18,6 +18,7 @@ use App\Http\Controllers\Dashboard\RolesController;
 use App\Http\Controllers\Dashboard\SettingAdminController;
 use App\Http\Controllers\Dashboard\SizeAdminController;
 use App\Http\Controllers\Dashboard\UsersController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\OrderTrakeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderController;
@@ -184,6 +185,7 @@ Route::middleware('auth')->group(function () {
         });
     });
 
+
     // add promo code
     Route::prefix('promocode')->group(function () {
         Route::get('/list/order', [PromoCodeControllerAdminController::class, 'index'])->name('promocodelist')->middleware('permission:showPromoCode');
@@ -219,6 +221,15 @@ Route::middleware('auth')->group(function () {
     Route::prefix('reservation')->group(function () {
         Route::get('list', [ReservationLidtController::class, 'index'])->name('reservation')->middleware('permission:listReservation');
         Route::get('delete/{id}', [ReservationLidtController::class, 'destory'])->name('reservationdestory')->middleware('permission:deleteReservation');
+    });
+
+
+
+    // landing page
+    Route::prefix('LandingPage')->group(function () {
+        Route::get('/partone', [LandingPageController::class, 'partone'])->name('partone');
+        Route::post('/partonestore', [LandingPageController::class, 'partonestore'])->name('partonestore');
+        Route::post('/partoneupdate', [LandingPageController::class, 'partoneupdate'])->name('partoneupdate');
     });
 });
 

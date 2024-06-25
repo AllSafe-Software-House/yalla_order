@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\ChartController;
-use App\Http\Controllers\ChartsubsribtionresturantController;
-use App\Http\Controllers\ChartsubsribtionclinicController;
-use App\Http\Controllers\ChartorderController;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Carbon\CarbonPeriod;
-use Illuminate\Support\Collection;
 use App\Models\User;
 use App\Models\Admin;
+use Carbon\CarbonPeriod;
+use App\Models\Landingpage;
+use Illuminate\Http\Request;
 use App\Models\ResturantRequest;
+use Illuminate\Support\Collection;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\ChartController;
+use App\Http\Controllers\ChartorderController;
+use App\Http\Controllers\ChartsubsribtionclinicController;
+use App\Http\Controllers\ChartsubsribtionresturantController;
 
 
 class HomeController extends Controller
@@ -22,7 +23,8 @@ class HomeController extends Controller
 
     public function landingPage(){
 
-        return view('front.index');
+        $partone = Landingpage::where('name','PartOne')->first();
+        return view('front.index',compact('partone'));
             // return view('landing-page');
     }
 
