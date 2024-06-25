@@ -64,7 +64,7 @@
                         </a>
                     </li>
                 @endcan
-                {{--  @can('showDoctor')  --}}
+                @can('ChangeStatus')
                     <li class="slide">
                         <a class="side-menu__item" href="{{ route('change_statuspage',$placeid) }}"><svg
                                 xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
@@ -75,7 +75,7 @@
                             </svg><span class="side-menu__label">Change Status The Place</span>
                         </a>
                     </li>
-                {{--  @endcan  --}}
+                @endcan
             @endif
             @can('showResturant')
                 <li class="side-item side-item-category">Resturants</li>
