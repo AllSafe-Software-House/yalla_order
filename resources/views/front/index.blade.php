@@ -6,7 +6,9 @@
 @section('header-content')
 <div class="w-full px-4 my-4 md:w-1/2">
     <h1 class="font-main text-center text-white text-[50px] md:text-start my-8 md:text-[64px]">
-        {{ $partone->title }} ?? defult text
+        @if ($partone)
+            {{ $partone->title }} 
+        @endif
     </h1>
     {{-- <div class="relative input">
         <i class="fa-solid fa-location-dot absolute right-3 top-1/2 text-[#ddd] -translate-y-1/2"></i>
