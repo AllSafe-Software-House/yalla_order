@@ -74,7 +74,10 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $data->user->name }}</td>
                                     <td>{{ $data->user->email }}</td>
-                                    <td>{{ $data->role }}</td>
+                                    @php
+                                    $role = \Spatie\Permission\Models\Role::where('id', $data->role_id)->first();
+                                    @endphp
+                                    <td>{{ $role->name }}</td>
                                     {{-- <td>{{ $data->user->phone }}</td>
                                     <td>{{ $data->user->address }}</td> --}}
                                     @can('deleteUser')

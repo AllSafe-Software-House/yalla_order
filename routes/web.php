@@ -83,6 +83,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/destory/{id}', [RolesController::class, 'destroy'])->name('roledestory')->middleware('permission:deleteRole');
     });
     Route::prefix('places')->group(function () {
+        Route::get('/change/status/page/{id}',[PlacesAdminController::class, 'changestatuspage'])->name('change_statuspage');
+        Route::post('/change/status',[PlacesAdminController::class, 'changestatus'])->name('change_status');
+        Route::post('/update/status',[PlacesAdminController::class, 'updatestatus'])->name('updatestatus');
         // resturant
         Route::prefix('resturant')->group(function () {
             Route::get('/', [PlacesAdminController::class, 'index'])->name('resturantlist')->middleware('permission:showResturant');

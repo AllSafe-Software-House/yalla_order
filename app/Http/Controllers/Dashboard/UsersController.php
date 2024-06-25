@@ -49,9 +49,10 @@ class UsersController extends Controller
             'password' => Hash::make($request->password),
             'role' => 'admin'
         ]);
+        $role = Role::where('name', $request->roles_name)->first();
         $admin = Admin::create([
             'user_id' => $user->id,
-            'role' => json_encode($request->roles_name),
+            'role_id' => $role->id,
             'place_id' => $request->place_id,
         ]);
         $user->assignRole($request->input('roles_name'));

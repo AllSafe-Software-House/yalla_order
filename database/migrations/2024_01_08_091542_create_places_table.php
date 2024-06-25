@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('logo')->nullable();
             $table->enum('type',['clinic','restaurantes']);
+            $table->enum('status',['open','closed'])->default('open');;
             $table->timestamps();
         });
     }
