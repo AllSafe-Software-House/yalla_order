@@ -19,7 +19,7 @@
     <div class="main-content app-content">
         <!-- Include main header -->
         @include('layouts.main-header')
-        
+
         <!-- Container -->
         <div class="container-fluid">
             <!-- Page header -->
@@ -27,21 +27,21 @@
 
             <!-- Content -->
             @yield('content')
-            
+
             <!-- Sidebar -->
             @include('layouts.sidebar')
-            
+
             <!-- Modals -->
             @include('layouts.models')
-            
+
             <!-- Footer scripts -->
             @include('layouts.footer-scripts')
-            
+
             <!-- Main footer -->
             <div class="main-footer ht-40">
                 <div class="container-fluid pd-t-0-f ht-100p">
                     <span>Copyright © 2023 <a href="#">Insta Order Dashboard</a>. Developed by
-                    <a href="#">all safe</a>.</span>
+                    <a href="https://www.allsafeeg.com/en">all safe</a>.</span>
                 </div>
             </div>
         </div> <!-- End container -->

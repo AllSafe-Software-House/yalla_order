@@ -65,7 +65,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Role</label>
-                    <select id="place_id" class="form-control " name="roles_name[]" multiple>
+                    <select id="role_id" class="form-control " name="roles_name">
                         @foreach ($roles as $role)
                             <option value="{{ $role->name }}">{{ $role->name }}</option>
                         @endforeach

@@ -108,10 +108,12 @@ class PermissionSeeder extends Seeder
             // reservation permission
             'listReservation',
             'deleteReservation',
-            
+
             // list transaction
             'listTransaction',
             'deleteTransaction',
+            // change status place
+            'ChangeStatus'
         ];
 
         foreach ($permission as $permission) {

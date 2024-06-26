@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="{{URL::asset('assets/img/logoinsta.png')}}" type="image/x-icon"/>
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
@@ -24,7 +25,7 @@
     <nav class="bg-white z-[99999] fixed top-0 w-full border-gray-200 dark:bg-gray-900">
         <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
             <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="{{ asset('src/images/Meal Med.png') }}" alt="logo">
+                <img src="{{ asset($info->logo) }}" alt="logo">
             </a>
             <div class="flex space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
                 {{-- <a href="ContactUsAR.html">
@@ -82,18 +83,11 @@
         <div class="container">
             <div class="flex flex-wrap items-center justify-start">
                 <div class="w-full px-4 my-4 md:w-1/2">
-                    <h1 class="font-main text-center text-white text-[50px] md:text-start my-8 md:text-[64px]">احجز الخاص بك
-                        الاستشارة الطبية الآن وتمتع بالراحة والأمان.
+                    <h1 class="font-main text-center text-white text-[50px] md:text-start my-8 md:text-[64px]">
+                        @if ($partoneclinic)
+                            {{ $partoneclinic->title }}
+                        @endif
                     </h1>
-                    {{-- <div class="relative input">
-                        <i class="fa-solid fa-location-dot absolute right-3 top-1/2 text-[#ddd] -translate-y-1/2"></i>
-                        <input type="text" placeholder="ابحث عن موقعك.."
-                            class="w-full px-8 py-4 rounded-full outline-none" />
-                        <button
-                            class="absolute px-4 py-2 text-white -translate-y-1/2 rounded-full outline-none bg-secondary left-2 top-1/2">
-                            ابحث
-                        </button>
-                    </div> --}}
                 </div>
                 <div class="w-full px-4 my-4 md:w-1/2">
                     <img src="{{ asset('src/images/Group 1171276400.png') }}" class="w-full" alt="food" />
@@ -147,17 +141,21 @@
         <div class="container">
             <div class="flex flex-wrap items-center">
                 <div class="w-full px-4 my-4 md:w-1/2">
-                    <div class="text-stone-900 text-[40px] md:text-5xl font-bold font-main">
-                        كيف نعمل
+                    <div class="text-blue-900 text-[40px] md:text-5xl font-bold font-main">
+                        @if ($parttwoclinic)
+                            {{ $parttwoclinic->title }}
+                        @endif
                     </div>
-                    <div class="w-[356px]">
+                    {{--  <div class="w-[356px]">
                         <span class="text-blue-400 text-[40px] font-medium font-['Roboto']">نحن نقدّر</span>
                         <span class="text-stone-900 text-[40px] font-bold font-['Roboto']">عملائنا وزبائننا</span>
-                    </div>
+                    </div>  --}}
                     <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
-                        سجل أو قم بتسجيل الدخول في بوابتنا
+                        @if ($parttwoclinic)
+                            {{ $parttwoclinic->description }}
+                        @endif
                     </div>
-                    <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
+                    {{--  <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
                         ابحث عن موقعك
                     </div>
                     <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
@@ -168,7 +166,7 @@
                     </div>
                     <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
                         احصل على طعامك موصل إلى عنوانك
-                    </div>
+                    </div>  --}}
                 </div>
                 <div class="w-full px-4 my-4 md:w-1/2">
                     <img src="{{ asset('src/images/Group 1171276413.png') }}" class="w-full" alt="burger" />
@@ -248,10 +246,16 @@
                 <div class="w-full px-4 my-4 overflow-hidden lg:w-1/2">
                     <div class="flex flex-wrap items-stretch">
                         <div dir="rtl" class="w-3/4 bg-[#1F1F1F] py-5 rounded-2xl relative px-7">
-                            <div class="text-rose-400 text-[25px] md:text-[32px] font-bold font-['Roboto']">هل أنت جائع؟
+                            <div class="text-rose-400 text-[25px] md:text-[32px] font-bold font-['Roboto']">
+                                @if ($cardfood)
+                                    {{ $cardfood->title }}
+                                @endif
                             </div>
-                            <div class="text-white text-[17px] md:text-xl font-bold py-4 font-['Roboto']">فريقنا دائمًا
-                                جاهز لتحضير طعامك في أي وقت. اكتشف مطاعمنا الآن!<br />لدينا توصيل، عروض وخصومات.</div>
+                            <div class="text-white text-[17px] md:text-xl font-bold py-4 font-['Roboto']">
+                                @if ($cardfood)
+                                    {{ $cardfood->description }}
+                                @endif
+                            </div>
                             <a href="{{ url('/') }}" class="text-blue-400 text-[17px] md:text-xl font-normal py-1 font-['Roboto']">استكشف
                             </a>
                         </div>
@@ -260,14 +264,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full px-4 my-4 overflow-hidden lg:w-1/2">{{ url('/') }}
+                <div class="w-full px-4 my-4 overflow-hidden lg:w-1/2">
                     <div class="flex flex-wrap items-stretch">
                         <div dir="rtl" class="w-3/4 bg-[#1F1F1F] py-5 rounded-2xl relative px-7">
-                            <div class="text-blue-500 text-[25px] md:text-[32px] font-bold font-['Roboto']">هل انت مصاب
-                                بالبرد؟
+                            <div class="text-blue-500 text-[25px] md:text-[32px] font-bold font-['Roboto']">
+                                @if ($cardclinic)
+                                    {{ $cardclinic->title }}
+                                @endif
                             </div>
                             <div class="text-white text-[17px] md:text-xl font-bold py-4 font-['Roboto']">
-                                لا تقلق ، نحن هنا لمساعدتك. احجز استشارتك بسرعة وسهولة.</div>
+                                @if ($cardclinic)
+                                    {{$cardclinic->description}}
+                                @endif
+                            </div>
                             <a href="{{ url('/doctors') }}" class="text-blue-500 text-[17px] md:text-xl font-normal py-1 font-['Roboto']">استكشف
                             </a>
                         </div>
@@ -312,7 +321,7 @@
     <footer dir="ltr" class="py-7 bg-[#1F1F1F]">
         <div class="container flex flex-wrap justify-between">
             <div class="w-full my-2 md:w-1/2">
-                <img src="{{ asset('src/images/FOoDc.png') }}" alt="logo">
+                <img src="{{ asset($info->logo) }}" alt="logo">
             </div>
             <div class="w-full my-2 md:w-1/2">
                 <div class="flex items-center">
@@ -329,10 +338,10 @@
                 </div>
                 <div class="flex items-center my-6">
                     <div class="mx-3">
-                        <img src="{{ asset('src/images/apple.png') }}" alt="app store" class="w-full cursor-pointer">
+                        <a href="{{ $info->linkAppStore }}"><img src="{{ asset('src/images/apple.png') }}" alt="app store" class="w-full cursor-pointer"></a>
                     </div>
                     <div class="mx-3">
-                        <img src="{{ asset('src/images/logo_playstore.png') }}" alt="google play" class="w-full cursor-pointer">
+                        <a href="{{ $info->linkPlayStore }}"><img src="{{ asset('src/images/logo_playstore.png') }}" alt="google play" class="w-full cursor-pointer"></a>
                     </div>
                 </div>
             </div>

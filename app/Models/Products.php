@@ -28,7 +28,7 @@ class Products extends Model
 
     public function places()
     {
-        return $this->belongsTo(places::class , 'place_id');
+        return $this->belongsTo(Places::class , 'place_id');
     }
 
     public function menue()

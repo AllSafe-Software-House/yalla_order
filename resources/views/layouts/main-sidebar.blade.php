@@ -20,8 +20,8 @@
                         </div>
                     </div>
                 </div>
-                
-                
+
+
             </div>
         </div>
         <ul class="side-menu">
@@ -34,6 +34,49 @@
                             d="M3 13h8V3H3v10zm2-8h4v6H5V5zm8 16h8V11h-8v10zm2-8h4v6h-4v-6zM13 3v6h8V3h-8zm6 4h-4V5h4v2zM3 21h8v-6H3v6zm2-4h4v2H5v-2z" />
                     </svg><span class="side-menu__label">Dashbord Home</span></a>
             </li>
+            @php
+                $user = Auth::user();
+                $admin = \App\Models\Admin::where('user_id', $user->id)->first();
+                $placeid = $admin->place_id;
+            @endphp
+            @if ($placeid != null)
+                @can('showMenu')
+                    <li class="slide">
+                        <a class="side-menu__item" href="{{ route('menulist',$placeid) }}"><svg
+                                xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                                <path d="M0 0h24v24H0V0z" fill="none" />
+                                <path d="M5 5h4v6H5zm10 8h4v6h-4zM5 17h4v2H5zM15 5h4v2h-4z" opacity=".3" />
+                                <path
+                                    d="M3 13h8V3H3v10zm2-8h4v6H5V5zm8 16h8V11h-8v10zm2-8h4v6h-4v-6zM13 3v6h8V3h-8zm6 4h-4V5h4v2zM3 21h8v-6H3v6zm2-4h4v2H5v-2z" />
+                            </svg><span class="side-menu__label">Show Menu</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('showDoctor')
+                    <li class="slide">
+                        <a class="side-menu__item" href="{{ route('doctorlist',$placeid) }}"><svg
+                                xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                                <path d="M0 0h24v24H0V0z" fill="none" />
+                                <path d="M5 5h4v6H5zm10 8h4v6h-4zM5 17h4v2H5zM15 5h4v2h-4z" opacity=".3" />
+                                <path
+                                    d="M3 13h8V3H3v10zm2-8h4v6H5V5zm8 16h8V11h-8v10zm2-8h4v6h-4v-6zM13 3v6h8V3h-8zm6 4h-4V5h4v2zM3 21h8v-6H3v6zm2-4h4v2H5v-2z" />
+                            </svg><span class="side-menu__label">Show Doctores</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('ChangeStatus')
+                    <li class="slide">
+                        <a class="side-menu__item" href="{{ route('change_statuspage',$placeid) }}"><svg
+                                xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                                <path d="M0 0h24v24H0V0z" fill="none" />
+                                <path d="M5 5h4v6H5zm10 8h4v6h-4zM5 17h4v2H5zM15 5h4v2h-4z" opacity=".3" />
+                                <path
+                                    d="M3 13h8V3H3v10zm2-8h4v6H5V5zm8 16h8V11h-8v10zm2-8h4v6h-4v-6zM13 3v6h8V3h-8zm6 4h-4V5h4v2zM3 21h8v-6H3v6zm2-4h4v2H5v-2z" />
+                            </svg><span class="side-menu__label">Change Status The Place</span>
+                        </a>
+                    </li>
+                @endcan
+            @endif
             @can('showResturant')
                 <li class="side-item side-item-category">Resturants</li>
                 <li class="slide">
@@ -104,8 +147,8 @@
                     </ul>
                 </li>
             @endcan
-            @can('showContactUS') || @can('updateAboutUS')
-                                <li class="side-item side-item-category">Setting</li>
+            @can('updateAboutUS')
+                <li class="side-item side-item-category">Content LandingPge && App Aboutus</li>
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href=""><svg xmlns="http://www.w3.org/2000/svg"
                             enable-background="new 0 0 24 24" class="side-menu__icon" viewBox="0 0 24 24">
@@ -130,23 +173,56 @@
                                         d="M17.5,15.83c0.88,0,1.73,0.09,2.5,0.26v-1.52c-0.79-0.15-1.64-0.24-2.5-0.24c-1.28,0-2.46,0.16-3.5,0.47v1.57 C14.99,16.02,16.18,15.83,17.5,15.83z" />
                                 </g>
                             </g>
-                        </svg><span class="side-menu__label">Setting</span>
+                        </svg><span class="side-menu__label">Content About US Page</span>
                     </a>
                     <ul class="slide-menu">
                         @can('updateAboutUS')
                             <li><a class="slide-item" href="{{ route('aboutus') }}">About US</a></li>
                         @endcan
-                        @can('showContactUS')
-                            <li><a class="slide-item" href="{{ route('listcontactus') }}">Contact US for Resturant</a></li>
-                        @endcan
-                        @can('showContactUS')
-                            <li><a class="slide-item" href="{{ route('listcliniccontactus') }}">Contact US for Clinic</a></li>
+                    </ul>
+                </li>
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href=""><svg xmlns="http://www.w3.org/2000/svg"
+                            enable-background="new 0 0 24 24" class="side-menu__icon" viewBox="0 0 24 24">
+                            <g>
+                                <rect fill="none" />
+                            </g>
+                            <g>
+                                <g />
+                                <g>
+                                    <path
+                                        d="M21,5c-1.11-0.35-2.33-0.5-3.5-0.5c-1.95,0-4.05,0.4-5.5,1.5c-1.45-1.1-3.55-1.5-5.5-1.5S2.45,4.9,1,6v14.65 c0,0.25,0.25,0.5,0.5,0.5c0.1,0,0.15-0.05,0.25-0.05C3.1,20.45,5.05,20,6.5,20c1.95,0,4.05,0.4,5.5,1.5c1.35-0.85,3.8-1.5,5.5-1.5 c1.65,0,3.35,0.3,4.75,1.05c0.1,0.05,0.15,0.05,0.25,0.05c0.25,0,0.5-0.25,0.5-0.5V6C22.4,5.55,21.75,5.25,21,5z M3,18.5V7 c1.1-0.35,2.3-0.5,3.5-0.5c1.34,0,3.13,0.41,4.5,0.99v11.5C9.63,18.41,7.84,18,6.5,18C5.3,18,4.1,18.15,3,18.5z M21,18.5 c-1.1-0.35-2.3-0.5-3.5-0.5c-1.34,0-3.13,0.41-4.5,0.99V7.49c1.37-0.59,3.16-0.99,4.5-0.99c1.2,0,2.4,0.15,3.5,0.5V18.5z" />
+                                    <path
+                                        d="M11,7.49C9.63,6.91,7.84,6.5,6.5,6.5C5.3,6.5,4.1,6.65,3,7v11.5C4.1,18.15,5.3,18,6.5,18 c1.34,0,3.13,0.41,4.5,0.99V7.49z"
+                                        opacity=".3" />
+                                    <g>
+                                        <path
+                                            d="M17.5,10.5c0.88,0,1.73,0.09,2.5,0.26V9.24C19.21,9.09,18.36,9,17.5,9c-1.28,0-2.46,0.16-3.5,0.47v1.57 C14.99,10.69,16.18,10.5,17.5,10.5z" />
+                                        <path
+                                            d="M17.5,13.16c0.88,0,1.73,0.09,2.5,0.26V11.9c-0.79-0.15-1.64-0.24-2.5-0.24c-1.28,0-2.46,0.16-3.5,0.47v1.57 C14.99,13.36,16.18,13.16,17.5,13.16z" />
+                                    </g>
+                                    <path
+                                        d="M17.5,15.83c0.88,0,1.73,0.09,2.5,0.26v-1.52c-0.79-0.15-1.64-0.24-2.5-0.24c-1.28,0-2.46,0.16-3.5,0.47v1.57 C14.99,16.02,16.18,15.83,17.5,15.83z" />
+                                </g>
+                            </g>
+                        </svg><span class="side-menu__label">Landing Page</span>
+                    </a>
+                    <ul class="slide-menu">
+                        @can('updateAboutUS')
+                            <li><a class="slide-item" href="{{ route('generalinfo') }}">General information</a></li>
+                            <li><a class="slide-item" href="{{ route('partone') }}">Home Food Page Part One</a></li>
+                            <li><a class="slide-item" href="{{ route('partoneclinic') }}">Home Clinic Page Part One</a></li>
+                            <li><a class="slide-item" href="{{ route('parttwo') }}">Home Food Page Part Two</a></li>
+                            <li><a class="slide-item" href="{{ route('parttwoclinic') }}">Home Clinic Page Part Two</a></li>
+                            <li><a class="slide-item" href="{{ route('cardfood') }}">Home Page Card Food</a></li>
+                            <li><a class="slide-item" href="{{ route('cardclinic') }}">Home Page Card Clinic</a></li>
                         @endcan
                     </ul>
                 </li>
-                @endcan
             @endcan
             @can('showPromoCode')
+            <li class="side-item side-item-category">Promo Code</li>
+                <li class="slide">
                 <li class="slide">
                     <a class="side-menu__item" href="{{ route('promocodelist') }}"><svg
                             xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
@@ -226,8 +302,7 @@
             @can('showUser')
                 <li class="side-item side-item-category">Users</li>
             @endcan
-            @can('showUser')
-                || @can('showRole')
+            @can('showUser')|| @can('showRole')
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg
                                 xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
@@ -248,7 +323,44 @@
                     </li>
                 @endcan
             @endcan
-
+            @can('showContactUS')
+                <li class="side-item side-item-category">ContactUs</li>
+                <li class="slide">
+                <a class="side-menu__item" data-toggle="slide" href=""><svg xmlns="http://www.w3.org/2000/svg"
+                        enable-background="new 0 0 24 24" class="side-menu__icon" viewBox="0 0 24 24">
+                        <g>
+                            <rect fill="none" />
+                        </g>
+                        <g>
+                            <g />
+                            <g>
+                                <path
+                                    d="M21,5c-1.11-0.35-2.33-0.5-3.5-0.5c-1.95,0-4.05,0.4-5.5,1.5c-1.45-1.1-3.55-1.5-5.5-1.5S2.45,4.9,1,6v14.65 c0,0.25,0.25,0.5,0.5,0.5c0.1,0,0.15-0.05,0.25-0.05C3.1,20.45,5.05,20,6.5,20c1.95,0,4.05,0.4,5.5,1.5c1.35-0.85,3.8-1.5,5.5-1.5 c1.65,0,3.35,0.3,4.75,1.05c0.1,0.05,0.15,0.05,0.25,0.05c0.25,0,0.5-0.25,0.5-0.5V6C22.4,5.55,21.75,5.25,21,5z M3,18.5V7 c1.1-0.35,2.3-0.5,3.5-0.5c1.34,0,3.13,0.41,4.5,0.99v11.5C9.63,18.41,7.84,18,6.5,18C5.3,18,4.1,18.15,3,18.5z M21,18.5 c-1.1-0.35-2.3-0.5-3.5-0.5c-1.34,0-3.13,0.41-4.5,0.99V7.49c1.37-0.59,3.16-0.99,4.5-0.99c1.2,0,2.4,0.15,3.5,0.5V18.5z" />
+                                <path
+                                    d="M11,7.49C9.63,6.91,7.84,6.5,6.5,6.5C5.3,6.5,4.1,6.65,3,7v11.5C4.1,18.15,5.3,18,6.5,18 c1.34,0,3.13,0.41,4.5,0.99V7.49z"
+                                    opacity=".3" />
+                                <g>
+                                    <path
+                                        d="M17.5,10.5c0.88,0,1.73,0.09,2.5,0.26V9.24C19.21,9.09,18.36,9,17.5,9c-1.28,0-2.46,0.16-3.5,0.47v1.57 C14.99,10.69,16.18,10.5,17.5,10.5z" />
+                                    <path
+                                        d="M17.5,13.16c0.88,0,1.73,0.09,2.5,0.26V11.9c-0.79-0.15-1.64-0.24-2.5-0.24c-1.28,0-2.46,0.16-3.5,0.47v1.57 C14.99,13.36,16.18,13.16,17.5,13.16z" />
+                                </g>
+                                <path
+                                    d="M17.5,15.83c0.88,0,1.73,0.09,2.5,0.26v-1.52c-0.79-0.15-1.64-0.24-2.5-0.24c-1.28,0-2.46,0.16-3.5,0.47v1.57 C14.99,16.02,16.18,15.83,17.5,15.83z" />
+                            </g>
+                        </g>
+                    </svg><span class="side-menu__label">ContactUs</span>
+                </a>
+                <ul class="slide-menu">
+                    @can('showContactUS')
+                        <li><a class="slide-item" href="{{ route('listcontactus') }}">Contact US for Resturant</a></li>
+                    @endcan
+                    @can('showContactUS')
+                        <li><a class="slide-item" href="{{ route('listcliniccontactus') }}">Contact US for Clinic</a></li>
+                    @endcan
+                </ul>
+                </li>
+            @endcan
 
 
             <li class="side-item side-item-category">Setting profile</li>

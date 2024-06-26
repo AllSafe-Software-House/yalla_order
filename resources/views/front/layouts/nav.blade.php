@@ -1,7 +1,7 @@
 <nav class="bg-white z-[99999] fixed top-0 w-full border-gray-200 dark:bg-gray-900">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
         <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="{{ asset('src/images/Meal Med.png') }}" alt="logo">
+            <img src="{{ asset($info->logo) }}" alt="logo">
         </a>
         <div class="flex space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
             {{-- <button type="button"

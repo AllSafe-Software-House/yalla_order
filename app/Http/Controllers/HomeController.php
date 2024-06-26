@@ -17,15 +17,14 @@ use App\Models\Admin;
 
 class HomeController extends Controller
 {
-
-
     public function index(ChartController $chart,ChartsubsribtionresturantController $chartres,ChartsubsribtionclinicController $chartclinic  ,ChartorderController $chartorder){
         $check = auth()->user();
         $admin = Admin::where('user_id',$check->id)->first();
-        if($admin->role == "SuperAdmin"){
+        if($admin->place_id == null){
             return view('dashboard',['chart' => $chart->build(),'chartres' => $chartres->build(),'chartclinic' => $chartclinic->build()]);
         }else{
             return view('dashboard',['chartorder' => $chartorder->build($admin)]);
         }
     }
+
 }

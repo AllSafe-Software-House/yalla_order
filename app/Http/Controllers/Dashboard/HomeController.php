@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\ChartController;
-use App\Http\Controllers\ChartsubsribtionresturantController;
-use App\Http\Controllers\ChartsubsribtionclinicController;
-use App\Http\Controllers\ChartorderController;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Carbon\CarbonPeriod;
-use Illuminate\Support\Collection;
 use App\Models\User;
 use App\Models\Admin;
+use Carbon\CarbonPeriod;
+use App\Models\Landingpage;
+use Illuminate\Http\Request;
 use App\Models\ResturantRequest;
+use Illuminate\Support\Collection;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\ChartController;
+use App\Http\Controllers\ChartorderController;
+use App\Http\Controllers\ChartsubsribtionclinicController;
+use App\Http\Controllers\ChartsubsribtionresturantController;
 
 
 class HomeController extends Controller
@@ -22,14 +23,22 @@ class HomeController extends Controller
 
     public function landingPage(){
 
-        return view('front.index');
-            // return view('landing-page');
+        $partone = Landingpage::where('name','PartOne')->first();
+        $parttwo = Landingpage::where('name','PartTwo')->first();
+        $cardfood = Landingpage::where('name','CardFood')->first();
+        $cardclinic = Landingpage::where('name','CardClinic')->first();
+        return view('front.index',compact('partone','parttwo','cardfood','cardclinic'));
+        // return view('landing-page');
     }
 
 
     public function doctorLandingPage(){
 
-        return view('front.doctors-landing');
+        $partoneclinic = Landingpage::where('name','PartOneClinic')->first();
+        $parttwoclinic = Landingpage::where('name','PartTwoClinic')->first();
+        $cardfood = Landingpage::where('name','CardFood')->first();
+        $cardclinic = Landingpage::where('name','CardClinic')->first();
+        return view('front.doctors-landing',compact('partoneclinic','parttwoclinic','cardfood','cardclinic'));
             // return view('landing-page');
     }
 
@@ -108,7 +117,7 @@ class HomeController extends Controller
     public function index(ChartController $chart,ChartsubsribtionresturantController $chartres,ChartsubsribtionclinicController $chartclinic  ,ChartorderController $chartorder){
         $check = auth()->user();
         $admin = Admin::where('user_id',$check->id)->first();
-        if($admin->role == "SuperAdmin"){
+        if($admin->place_id == null){
             return view('dashboard',['chart' => $chart->build(),'chartres' => $chartres->build(),'chartclinic' => $chartclinic->build()]);
         }else{
             return view('dashboard',['chartorder' => $chartorder->build($admin)]);

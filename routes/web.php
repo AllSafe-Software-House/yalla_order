@@ -18,6 +18,7 @@ use App\Http\Controllers\Dashboard\RolesController;
 use App\Http\Controllers\Dashboard\SettingAdminController;
 use App\Http\Controllers\Dashboard\SizeAdminController;
 use App\Http\Controllers\Dashboard\UsersController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\OrderTrakeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderController;
@@ -83,6 +84,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/destory/{id}', [RolesController::class, 'destroy'])->name('roledestory')->middleware('permission:deleteRole');
     });
     Route::prefix('places')->group(function () {
+        Route::get('/change/status/page/{id}',[PlacesAdminController::class, 'changestatuspage'])->name('change_statuspage')->middleware('permission:ChangeStatus');
+        Route::post('/change/status',[PlacesAdminController::class, 'changestatus'])->name('change_status')->middleware('permission:ChangeStatus');
         // resturant
         Route::prefix('resturant')->group(function () {
             Route::get('/', [PlacesAdminController::class, 'index'])->name('resturantlist')->middleware('permission:showResturant');
@@ -167,14 +170,21 @@ Route::middleware('auth')->group(function () {
         Route::get('/aboutus', [SettingAdminController::class, 'aboutus'])->name('aboutus')->middleware('permission:updateAboutUS');
         Route::post('/aboutusstore', [SettingAdminController::class, 'aboutusstore'])->name('aboutusstore')->middleware('permission:updateAboutUS');
         Route::post('/aboutusupdate', [SettingAdminController::class, 'aboutusupdate'])->name('aboutusupdate')->middleware('permission:updateAboutUS');
-        // ContactUs
 
+        // general info
+        Route::get('/generalinfo', [SettingAdminController::class, 'generalinfo'])->name('generalinfo');
+        Route::post('/generalinfostore', [SettingAdminController::class, 'generalinfostore'])->name('generalinfostore');
+        Route::post('/generalinfoupdate', [SettingAdminController::class, 'generalinfoupdate'])->name('generalinfoupdate');
+
+
+        // ContactUs
         Route::prefix('contactus')->group(function () {
             Route::get('/list', [ContactusController::class, 'index'])->name('listcontactus')->middleware('permission:showContactUS');
             Route::get('/list/clinic', [ContactusController::class, 'indexclinic'])->name('listcliniccontactus')->middleware('permission:showContactUS');
             Route::get('/destore/{id}', [ContactUsController::class, 'destore'])->name('destorecontactus')->middleware('permission:deleteContactUS');
         });
     });
+
 
     // add promo code
     Route::prefix('promocode')->group(function () {
@@ -211,6 +221,20 @@ Route::middleware('auth')->group(function () {
     Route::prefix('reservation')->group(function () {
         Route::get('list', [ReservationLidtController::class, 'index'])->name('reservation')->middleware('permission:listReservation');
         Route::get('delete/{id}', [ReservationLidtController::class, 'destory'])->name('reservationdestory')->middleware('permission:deleteReservation');
+    });
+
+
+
+    // landing page
+    Route::prefix('LandingPage')->group(function () {
+        Route::get('/partone', [LandingPageController::class, 'partone'])->name('partone');
+        Route::get('/partone/clinic', [LandingPageController::class, 'partoneclinic'])->name('partoneclinic');
+        Route::get('/parttwo', [LandingPageController::class, 'parttwo'])->name('parttwo');
+        Route::get('/parttwo/clinic', [LandingPageController::class, 'parttwoclinic'])->name('parttwoclinic');
+        Route::get('/cardfood', [LandingPageController::class, 'cardfood'])->name('cardfood');
+        Route::get('/cardclinic', [LandingPageController::class, 'cardclinic'])->name('cardclinic');
+        Route::post('/partonestore', [LandingPageController::class, 'partonestore'])->name('partonestore');
+        Route::post('/partoneupdate', [LandingPageController::class, 'partoneupdate'])->name('partoneupdate');
     });
 });
 

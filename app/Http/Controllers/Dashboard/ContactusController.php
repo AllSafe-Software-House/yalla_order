@@ -15,15 +15,15 @@ class ContactusController extends Controller
         $contactus = Content_US::where('type','order')->get();
         $admin = Auth::user();
 
-        return view('contactus.contactus', compact('contactus','admin'));
+        return view('ContactUs.ContactUs', compact('contactus','admin'));
+
     }
 
     public function indexclinic()
     {
         $contactus = Content_US::where('type','clinic')->get();
         $admin = Auth::user();
-
-        return view('contactus.contactus', compact('contactus','admin'));
+        return view('ContactUs.ContactUs', compact('contactus','admin'));
     }
     public function destore($id)
     {

@@ -13,16 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('places', function (Blueprint $table) {
+        Schema::create('general_infos', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('descrption');
-            $table->time('starttime')->nullable();
-            $table->time('endtime')->nullable();
-            $table->string('address');
-            $table->string('logo')->nullable();
-            $table->enum('type',['clinic','restaurantes']);
-            $table->enum('status',['open','closed'])->default('open');;
+            $table->string('logo');
+            $table->text('linkAppStore')->nullable();
+            $table->text('linkPlayStore')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('places');
+        Schema::dropIfExists('general_infos');
     }
 };

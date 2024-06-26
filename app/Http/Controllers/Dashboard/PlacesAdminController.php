@@ -239,6 +239,26 @@ class PlacesAdminController extends Controller
     }
 
 
+    //change status place by admin
+    public function changestatuspage($id){
+        $place = places::where('id', $id)->first();
+        return view('changestatusplace',compact('place'));
+    }
+    public function changestatus(Request $request){
+        $place = places::where('id', $request->id)->first();
+        $place->status = $request->status;
+        $place->save();
+        return back()->with('done', "update status sucessfully");
+    }
 
+    // update status place automatically after 12 hours
+    public function updatestatus($id){
+        $place = places::where('id', $id)->first();
+        $placestatrt = strtotime($place->created_at);
+        dd($placestatrt);
+        $place->status = 1;
+        $place->save();
+        return back()->with('done', "update status sucessfully");
+    }
 
 }

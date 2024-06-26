@@ -6,8 +6,9 @@
 @section('header-content')
 <div class="w-full px-4 my-4 md:w-1/2">
     <h1 class="font-main text-center text-white text-[50px] md:text-start my-8 md:text-[64px]">
-        تجربة فريدة<br />
-        لمحبي الطعام
+        @if ($partone)
+            {{ $partone->title }}
+        @endif
     </h1>
     {{-- <div class="relative input">
         <i class="fa-solid fa-location-dot absolute right-3 top-1/2 text-[#ddd] -translate-y-1/2"></i>
@@ -71,14 +72,18 @@
     <div class="container">
         <div class="flex flex-wrap items-center">
             <div class="w-full px-4 my-4 md:w-1/2">
-                <div class="text-stone-900 text-[40px] md:text-5xl font-bold font-main">
-                    كيف نعمل
-                </div>
-                <div class="w-[356px]">
-                    <span class="text-rose-400 text-[40px] font-medium font-['Roboto']">نحن نقدّر</span>
-                    <span class="text-stone-900 text-[40px] font-bold font-['Roboto']">عملائنا وزبائننا</span>
+                <div class="text-rose-900 text-[40px] md:text-5xl font-bold font-main">
+                    @if ($parttwo)
+                        {{ $parttwo->title }}
+                    @endif
                 </div>
                 <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
+                    @if ($parttwo)
+                        {{ $parttwo->description }}
+                    @endif
+                    {{--  <span class="text-stone-900 text-[40px] font-bold font-['Roboto']">عملائنا وزبائننا</span>  --}}
+                </div>
+                {{--  <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
                     سجل أو قم بتسجيل الدخول في بوابتنا
                 </div>
                 <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
@@ -92,7 +97,7 @@
                 </div>
                 <div class="text-stone-900 text-[30px] md:text-[32px] font-bold font-['Roboto']">
                     احصل على طعامك موصل إلى عنوانك
-                </div>
+                </div>  --}}
             </div>
             <div class="w-full px-4 my-4 md:w-1/2">
                 <img src="{{ asset('/src/images/Group 1171276508.png') }}" class="w-full" alt="burger" />
@@ -172,10 +177,16 @@
             <div class="w-full px-4 my-4 overflow-hidden lg:w-1/2">
                 <div class="flex flex-wrap items-stretch">
                     <div dir="rtl" class="w-3/4 bg-[#1F1F1F] py-5 rounded-2xl relative px-7">
-                        <div class="text-rose-400 text-[25px] md:text-[32px] font-bold font-['Roboto']">هل أنت جائع؟
+                        <div class="text-rose-400 text-[25px] md:text-[32px] font-bold font-['Roboto']">
+                            @if ($cardfood)
+                                {{ $cardfood->title }}
+                            @endif
                         </div>
-                        <div class="text-white text-[17px] md:text-xl font-bold py-4 font-['Roboto']">فريقنا دائمًا
-                            جاهز لتحضير طعامك في أي وقت. اكتشف مطاعمنا الآن!<br />لدينا توصيل، عروض وخصومات.</div>
+                        <div class="text-white text-[17px] md:text-xl font-bold py-4 font-['Roboto']">
+                            @if ($cardfood)
+                                {{ $cardfood->description }}
+                            @endif
+                        </div>
                         <a href="{{ url('/') }}" class="text-rose-400 text-[17px] md:text-xl font-normal py-1 font-['Roboto']">استكشف
                         </a>
                     </div>
@@ -187,11 +198,16 @@
             <div class="w-full px-4 my-4 overflow-hidden lg:w-1/2">
                 <div class="flex flex-wrap items-stretch">
                     <div dir="rtl" class="w-3/4 bg-[#1F1F1F] py-5 rounded-2xl relative px-7">
-                        <div class="text-blue-500 text-[25px] md:text-[32px] font-bold font-['Roboto']">هل انت مصاب
-                            بالبرد؟
+                        <div class="text-blue-500 text-[25px] md:text-[32px] font-bold font-['Roboto']">
+                            @if ($cardclinic)
+                                {{ $cardclinic->title }}
+                            @endif
                         </div>
                         <div class="text-white text-[17px] md:text-xl font-bold py-4 font-['Roboto']">
-                            لا تقلق ، نحن هنا لمساعدتك. احجز استشارتك بسرعة وسهولة.</div>
+                            @if ($cardclinic)
+                                {{$cardclinic->description}}
+                            @endif
+                        </div>
                         <a href="{{ url('/doctors') }}" class="text-blue-500 text-[17px] md:text-xl font-normal py-1 font-['Roboto']">استكشف
                         </a>
                     </div>
