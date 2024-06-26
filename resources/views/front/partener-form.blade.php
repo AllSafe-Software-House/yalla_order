@@ -45,7 +45,9 @@
         transform: translate(-50%, -50%);
         z-index: 10000; /* Ensure it's above all other elements */
     }
-
+    .padding-fix{
+        padding-top: 100px
+    }
 </style>
 
 @endsection
@@ -54,20 +56,19 @@
 
 {{-- @include('front.layouts.header') --}}
 @section('header-content')
-<div class="w-full px-4 my-4 xl:w-1/2">
+<div class="w-full padding-fix px-4 my-4 xl:w-1/2">
 
-    <h1>
-        <span class="text-rose-400 text-[35px] md:text-5xl font-bold font-main">نمِّ عملك التجاري
+    <h1 class="">
+        <span class="text-rose-400 text-[35px] md:text-5xl font-bold font-main ">نمِّ عملك التجاري
             <br />عبر الإنترنت مع Insta</span><span
             class="text-blue-500 text-[35px] md:text-5xl font-bold font-['Cabin Condensed']">Order</span><span
             class="text-rose-400 text-[35px] md:text-5xl font-bold font-main">!
         </span>
     </h1>
-    <div class="text-white text-[20px] md:text-[32px] font-normal font-['Roboto']">تعاون معنا للوصول إلى
-        المزيد
-        من العملاء،
-        <br />اكسب المزيد من المال ونمِّ عملك التجاري
-        <br />عبر الإنترنت - تبدأ قصة نجاحك هنا
+    <div class="text-white text-[20px] md:text-[32px] font-normal font-['Roboto']">
+        @if ($partenerpartone)
+            {{ $partenerpartone->title }}
+        @endif
     </div>
     <!-- Overlay Element -->
     <div class="overlay" id="overlay"></div>
@@ -120,50 +121,21 @@
             <img src="{{ asset('/src/images/Group 1171276175 2.png') }}" class="absolute hidden z-[-1] md:block right-0 bottom-0"
                 alt="frame" />
             <div class="flex flex-wrap">
-                <div class="w-full px-4 my-4 md:w-1/3">
-                    <div class="text-center">
-                        <img src="{{ asset('/src/images/Group 1171276251.png') }}" alt="magnet" class="mx-auto my-4 text-center">
-                        <h4
-                            class="text-center text-rose-400 text-[20px] md:text-[32px] font-medium font-['Roboto']">
-                            الوصول إلى المزيد من
-                            العملاء</h4>
-                        <p
-                            class="text-center text-white my-2 text-[20px] md:text-[25px] font-normal font-['Roboto']">
-                            لدينا آلاف العملاء الجائعين في منطقتك ينتظرون الطلب منك وسنساعدك على توصيل طعامهم بشكل
-                            أسرع. </p>
-                        <p
-                            class="text-center text-white my-2 text-[20px] md:text-[25px] font-normal font-['Roboto']">
-                            هناك أيضًا العديد من الأشخاص الذين يرغبون في حجز استشارة طبية بسرعة وسهولة وأمان. نحن
-                            نوفر هذه الخدمة للأطباء.</p>
-                    </div>
-                </div>
-                <div class="w-full px-4 my-4 md:w-1/3">
-                    <div class="text-center">
-                        <img src="{{ asset('/src/images/19949473_6155814.png') }}" alt="magnet" class="mx-auto my-4 text-center">
-                        <h4
-                            class="text-center text-blue-500 text-[20px] md:text-[32px] font-medium font-['Roboto']">
-                            كسب المزيد من المال</h4>
-                        <p
-                            class="text-center text-white my-2 text-[20px] md:text-[25px] font-normal font-['Roboto']">
-                            سنساعدك على خدمة المزيد من العملاء الجائعين دون إضافة المزيد من الكراسي إلى مطعمك. </p>
-                        <p
-                            class="text-center text-white my-2 text-[20px] md:text-[25px] font-normal font-['Roboto']">
-                            وسنقوم أيضًا بخدمة الأطباء لعدد أكبر من العملاء بطريقة أكثر تنظيمًا دون تضارب في الجداول
-                            وسنتأكد من حصولك على أموالك بسرعة.</p>
-                    </div>
-                </div>
-                <div class="w-full px-4 my-4 md:w-1/3">
-                    <div class="text-center">
-                        <img src="{{ asset('/src/images/Group 1171276253.png') }}" alt="magnet" class="mx-auto my-4 text-center">
-                        <h4
-                            class="text-center text-rose-400 text-[20px] md:text-[32px] font-medium font-['Roboto']">
-                            تنمية عملك</h4>
-                        <p
-                            class="text-center text-white my-2 text-[20px] md:text-[25px] font-normal font-['Roboto']">
-                            زيادة المبيعات، الوصول إلى المزيد من العملاء أو تسويق عملك بشكل أفضل. نحن نوفر طرقًا
-                            لتنمية عملك لأن نجاحك هو نجاحنا أيضًا. </p>
-                    </div>
-                </div>
+                @if ($resones)
+                    @foreach ($resones as $data)
+                        <div class="w-full px-4 my-4 md:w-1/3">
+                            <div class="text-center">
+                                <img src="{{ asset($data->image) }}" alt="magnet" class="mx-auto my-4 text-center">
+                                <h4 class="text-center text-rose-400 text-[20px] md:text-[32px] font-medium font-['Roboto']">
+                                    {{ $data->title }}
+                                </h4>
+                                <p class="text-center text-white my-2 text-[20px] md:text-[25px] font-normal font-['Roboto']">
+                                    {{ $data->description }}
+                                </p>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

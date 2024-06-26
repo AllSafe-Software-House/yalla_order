@@ -15,7 +15,7 @@ use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ChartorderController;
 use App\Http\Controllers\ChartsubsribtionclinicController;
 use App\Http\Controllers\ChartsubsribtionresturantController;
-
+use App\Models\Resones;
 
 class HomeController extends Controller
 {
@@ -44,8 +44,9 @@ class HomeController extends Controller
 
 
     public function partenerForm(){
-
-        return view('front.partener-form');
+        $partenerpartone = Landingpage::where('name','partenerpartone')->first();
+        $resones = Resones::where('name','Resoncooperate')->get();
+        return view('front.partener-form',compact('partenerpartone','resones'));
             // return view('landing-page');
     }
 

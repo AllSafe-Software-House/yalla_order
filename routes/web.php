@@ -235,6 +235,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/cardclinic', [LandingPageController::class, 'cardclinic'])->name('cardclinic');
         Route::post('/partonestore', [LandingPageController::class, 'partonestore'])->name('partonestore');
         Route::post('/partoneupdate', [LandingPageController::class, 'partoneupdate'])->name('partoneupdate');
+        Route::get('/partenerpartone', [LandingPageController::class, 'partenerpartone'])->name('partenerpartone');
+        Route::prefix('resons')->group(function () {
+            Route::get('/', [LandingPageController::class, 'index'])->name('resonlist');
+            Route::get('/add', [LandingPageController::class, 'create'])->name('resonadd');
+            Route::post('/store', [LandingPageController::class, 'storereson'])->name('resonstore');
+            Route::get('/edit/{id}', [LandingPageController::class, 'edit'])->name('resonedit');
+            Route::post('/update/{id}', [LandingPageController::class, 'updatereson'])->name('resonupdate');
+            Route::get('/destory/{id}', [LandingPageController::class, 'destroy'])->name('resondestory');
+        });
     });
 });
 
