@@ -1,4 +1,4 @@
-<?php
+I'm<?php
 
 namespace App\Http\Controllers\Dashboard;
 
@@ -151,9 +151,11 @@ class CategoryAdminController extends Controller
     public function destroy($id)
     {
         $category = Category::where('id', $id)->first();
-        if ($category->logo == "uploads/category/icons8-clinic-80.jpg" || $category->logo == "uploads/category/defultfood.png") {
+        if ($category->logo == "uploads/category/icons8-clinic-80.jpg" )
             $category->delete();
-        } else {
+        }elseif($category->logo == "uploads/category/defultfood.png") {
+    $category->delete()
+        }else {
             unlink($category->logo);
             $category->delete();
         }
