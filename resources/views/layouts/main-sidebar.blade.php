@@ -218,7 +218,7 @@
                             <li><a class="slide-item" href="{{ route('cardclinic') }}">Home Page Card Clinic</a></li>
                             <li><a class="slide-item" href="{{ route('partenerpartone') }}">Partener Us Page Partone</a></li>
                             <li><a class="slide-item" href="{{ route('resonlist') }}">Why cooperate with us ?</a></li>
-                            <li><a class="slide-item" href="{{ route('resonlist') }}">How work together ?</a></li>
+                            <li><a class="slide-item" href="{{ route('resonsteplist') }}">How work together ?</a></li>
                         @endcan
                     </ul>
                 </li>

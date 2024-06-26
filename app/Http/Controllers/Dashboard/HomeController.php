@@ -46,7 +46,8 @@ class HomeController extends Controller
     public function partenerForm(){
         $partenerpartone = Landingpage::where('name','partenerpartone')->first();
         $resones = Resones::where('name','Resoncooperate')->get();
-        return view('front.partener-form',compact('partenerpartone','resones'));
+        $step = Resones::where('name','ResonWorkTogether')->get();
+        return view('front.partener-form',compact('partenerpartone','resones','step'));
             // return view('landing-page');
     }
 

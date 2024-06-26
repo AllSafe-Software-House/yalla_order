@@ -244,6 +244,14 @@ Route::middleware('auth')->group(function () {
             Route::post('/update/{id}', [LandingPageController::class, 'updatereson'])->name('resonupdate');
             Route::get('/destory/{id}', [LandingPageController::class, 'destroy'])->name('resondestory');
         });
+        Route::prefix('resons/work/together')->group(function () {
+            Route::get('/', [LandingPageController::class, 'indexsteps'])->name('resonsteplist');
+            Route::get('/add', [LandingPageController::class, 'createstep'])->name('resonstepadd');
+            Route::post('/store', [LandingPageController::class, 'storereson'])->name('resonstore');
+            Route::get('/edit/{id}', [LandingPageController::class, 'edit'])->name('resonedit');
+            Route::post('/update/{id}', [LandingPageController::class, 'updatereson'])->name('resonupdate');
+            Route::get('/destory/{id}', [LandingPageController::class, 'destroy'])->name('resondestory');
+        });
     });
 });
 

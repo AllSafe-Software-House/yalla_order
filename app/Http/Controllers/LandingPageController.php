@@ -71,8 +71,15 @@ class LandingPageController extends Controller
         $resones = Resones::where('name','Resoncooperate')->get();
         return view('LandingPge.resones',compact('resones'));
     }
+    public function indexsteps(){
+        $resones = Resones::where('name','ResonWorkTogether')->get();
+        return view('LandingPge.resonesworktogether',compact('resones'));
+    }
     public function create(){
         return view('LandingPge.resonesadd');
+    }
+    public function createstep(){
+        return view('LandingPge.resonesworkadd');
     }
     public function edit($id){
         $reson = Resones::where('id',$id)->first();
@@ -82,42 +89,61 @@ class LandingPageController extends Controller
         $reson = Resones::where('id',$id)->first();
         $reson->delete();
         return back()->with('done', "delete sucessfully");
-
     }
     public function storereson(Request $request){
         $resones = Resones::where('name','Resoncooperate')->count();
-        if($resones < 3){
-            if (isset($nameimage)) {
-                $image = time() . '.' . $request->logo->extension();
-                $imagepath =  "uploads/Resones/$image";
-                $request->logo->move(public_path('uploads/Resones'), $image);
-            } else {
-                $imagepath = "uploads/Resones/defultfood.png";
+        if (isset($request->logo)) {
+            $image = time() . '.' . $request->logo->extension();
+            $imagepath =  "uploads/Resones/$image";
+            $request->logo->move(public_path('uploads/Resones'), $image);
+        } else {
+            $imagepath = "uploads/Resones/defultfood.png";
+        }
+        if($request->name == 'ResonWorkTogether'){
+            if($resones < 4){
+                Resones::create([
+                    'name' => $request->name,
+                    'title' => [
+                        "en" => $request->title,
+                        "ar" => $request->title_ar,
+                    ],
+                    'description' => [
+                        "en" => $request->description,
+                        "ar" => $request->description_ar,
+                    ],
+                    'image' => $imagepath,
+                ]);
+                return back()->with('done', "add sucessfully");
+
+            }else{
+                return back()->with('done', "You Cannot Add more than 4 Resones");
             }
-            Resones::create([
-                'name' => $request->name,
-                'title' => [
-                    "en" => $request->title,
-                    "ar" => $request->title_ar,
-                ],
-                'description' => [
-                    "en" => $request->description,
-                    "ar" => $request->description_ar,
-                ],
-                'image' => $imagepath,
-            ]);
-            return back()->with('done', "add sucessfully");
         }else{
-            return back()->with('done', "You Cannot Add more than 3 Resones");
+            if($resones < 3){
+                Resones::create([
+                    'name' => $request->name,
+                    'title' => [
+                        "en" => $request->title,
+                        "ar" => $request->title_ar,
+                    ],
+                    'description' => [
+                        "en" => $request->description,
+                        "ar" => $request->description_ar,
+                    ],
+                    'image' => $imagepath,
+                ]);
+                return back()->with('done', "add sucessfully");
+            }else{
+                return back()->with('done', "You Cannot Add more than 3 Resones");
+            }
         }
 
     }
 
     public function updatereson(Request $request,$id){
         $reson = Resones::where('id',$id)->first();
-        $place = $reson->type;
         if (isset($request->logo)) {
-            if (isset($reson->logo) && file_exists($reson->logo)) {
+            if (isset($reson->image) && file_exists($reson->image)) {
                 $oldimage = $reson->image;
                 if($oldimage != 'uploads/Resones/defultfood.png'){
                     unlink($oldimage);
@@ -128,7 +154,7 @@ class LandingPageController extends Controller
             $request->logo->move(public_path('uploads/Resones'), $image);
 
         } else {
-            $imagepath = $reson->logo;
+            $imagepath = $reson->image;
         }
         $reson->title = [
             "en" => $request->title,

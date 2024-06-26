@@ -152,54 +152,24 @@
     <div class="container">
 
         <div class="flex flex-wrap">
-            <div class="w-full px-4 my-4 md:w-1/2">
-                <div>
-                    <img src="{{ asset('/src/images/amico.png') }}" alt="app" class="mx-auto my-5">
-                    <h4 class="text-center">
-                        <span class="text-rose-400 text-[25px] md:text-3xl font-normal font-['Roboto']">طلبات
-                            العملاء
-                            <br /></span>
-                        <span class="text-stone-900 text-[18px] md:text-2xl font-normal font-['Roboto']">يقوم العميل
-                            بتقديم طلب أو حجز استشارة عبر التطبيق.</span>
-                    </h4>
-                </div>
-            </div>
-            <div class="w-full px-4 my-4 md:w-1/2">
-                <div>
-                    <img src="{{ asset('/src/images/Pizza maker-rafiki 1.png') }}" alt="app" class="mx-auto my-5">
-                    <h4 class="text-center">
-                        <span class="text-rose-400 text-[25px] md:text-3xl font-normal font-['Roboto']">أنت تحضر
-                            <br /></span>
-                        <span class="text-stone-900 text-[18px] md:text-2xl font-normal font-['Roboto']">ستتلقى
-                            إشعارًا لبدء تحضير طلبك أو الاستشارة.</span>
-                    </h4>
-                </div>
-            </div>
-            <div class="w-full px-4 my-4 md:w-1/2">
-                <div>
-                    <img src="{{ asset('/src/images/delivery.png') }}" alt="app" class="mx-auto my-5">
-                    <h4 class="text-center">
-                        <span class="text-blue-500 text-[25px] md:text-3xl font-normal font-['Roboto']">نحن نوصل
-                            <br /></span>
-                        <span class="text-stone-900 text-[18px] md:text-2xl font-normal font-['Roboto']">سوف يأتي
-                            السائق قريبًا لاستلام الطلب وتوصيله إلى العميل &<br />الوصول في الوقت المناسب لاستشارتك
-                            الطبية.</span>
-                    </h4>
-                </div>
-            </div>
-            <div class="w-full px-4 my-4 md:w-1/2">
-                <div>
-                    <img src="{{ asset('/src/images/bussnis.png') }}" alt="app" class="mx-auto my-5">
-                    <h4 class="text-center">
-                        <span class="text-blue-500 text-[25px] md:text-3xl font-normal font-['Roboto']">شاهد نمو
-                            عملك
-                            <br /></span>
-                        <span class="text-stone-900 text-[18px] md:text-2xl font-normal font-['Roboto']">تتبع
-                            مبيعاتك، راقب الطلبات، حجوزات العيادة، جداول المواعيد، استثمر في التسويق والمزيد في
-                            بوابة مطعمك وعيادتك الشخصية.</span>
-                    </h4>
-                </div>
-            </div>
+            @if ($step)
+                @foreach ($step as $dataitem)
+                    <div class="w-full px-4 my-4 md:w-1/2">
+                        <div>
+                            <img src="{{ asset($dataitem->image) }}" alt="app" class="mx-auto my-5">
+                            <h4 class="text-center">
+                                <span class="text-rose-400 text-[25px] md:text-3xl font-normal font-['Roboto']">
+                                        {{ $dataitem->title }}
+                                    <br /></span>
+                                <span class="text-stone-900 text-[18px] md:text-2xl font-normal font-['Roboto']">
+                                    {{ $dataitem->description }}
+                                </span>
+                            </h4>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+
         </div>
     </div>
 </section>
