@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactUSRequest;
+use App\Models\Content_US;
 use App\Models\Landingpage;
 use App\Models\Resones;
 use Illuminate\Http\Request;
@@ -167,5 +169,17 @@ class LandingPageController extends Controller
         $reson->image = $imagepath;
         $reson->save();
         return back()->with('done', "update sucessfully");
+    }
+
+
+    public function contactus(ContactUSRequest $request)  {
+        $contact = Content_US::create([
+            "fname" => $request->fname,
+            "lname"  => $request->lname,
+            "email"  => $request->email,
+            "phone"  => $request->phone,
+            "message"  => $request->message
+        ]);
+        return back()->with('done', "will contact you");
     }
 }

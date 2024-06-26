@@ -53,11 +53,26 @@
 
 @section('header-content')
 <div class="container">
+
     <div class="flex flex-wrap items-center justify-center">
         <div class="w-full px-4 my-4 xl:w-1/2" style="margin-top: 6rem;">
             <div class="p-6 text-center bg-white shadow-xl rounded-2xl">
                 <h4 class="text-stone-900 text-[30px] my-2 md:text-[40px] font-bold font-['Roboto']">تواصل معنا
                 </h4>
+                @if (Session::has('done'))
+                <div class="alert alert-success" role="alert">
+                    {{ Session::get('done') }}
+                </div>
+            @endif
+                @if ($errors->any())
+                    <div class="alert alert-primary">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li> {{ $error }} </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <!-- Overlay Element -->
                 <div class="overlay" id="overlay"></div>
                 <!-- Loader Element -->
@@ -65,17 +80,18 @@
                 <div id="form_text"  ><span class="text-rose-400 text-2xl font-normal font-['Roboto']">هل تحتاج</span><span
                         class="text-blue-500 text-2xl font-normal font-['Roboto']"> لمساعدة؟</span></div>
 
-                <form class="py-5" id="partner-form">
-                    <input type="text" placeholder="الاسم الاول" id="f_name"
+                <form class="py-5" id="partner-form" method="POST" action="{{ route('contactus') }}">
+                    @csrf
+                    <input type="text" placeholder="الاسم الاول" id="f_name" name="fname"
                         class="w-full px-8 py-4 my-5 border rounded-full outline-none border-slate-500 focus:ring-main focus:border-main focus:outline-none">
-                    <input type="text" placeholder="الاسم الاخر" id="l_name"
+                    <input type="text" placeholder="الاسم الاخر" id="l_name" name="lname"
                         class="w-full px-8 py-4 my-5 border rounded-full outline-none border-slate-500 focus:ring-main focus:border-main focus:outline-none">
-                    <input type="email" placeholder="البريد الالكتروني للعمل" id="email"
+                    <input type="email" placeholder="البريد الالكتروني للعمل" id="email" name="email"
                         class="w-full px-8 py-4 my-5 border rounded-full outline-none border-slate-500 focus:ring-main focus:border-main focus:outline-none">
-                    <input type="number" placeholder="رقم الهاتف" id="mobile"
+                    <input type="number" placeholder="رقم الهاتف" id="mobile" name="phone"
                         class="w-full px-8 py-4 my-5 border rounded-full outline-none border-slate-500 focus:ring-main focus:border-main focus:outline-none">
-                        <textarea id="message" placeholder="رساله" rows="4" class="w-full px-8 py-4 my-5 border outline-none rounded-xl border-slate-500 focus:ring-main focus:border-main focus:outline-none"></textarea>
-                    <button id="submit-btn"
+                        <textarea id="message" name="message" placeholder="رساله" rows="4" class="w-full px-8 py-4 my-5 border outline-none rounded-xl border-slate-500 focus:ring-main focus:border-main focus:outline-none"></textarea>
+                    <button  type="submit"
                         class="w-full bg-main text-white py-3 rounded-full font-bold text-[30px] font-['Roboto']"> تواصل معنا
                         </button>
                 </form>

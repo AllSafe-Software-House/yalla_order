@@ -47,6 +47,8 @@ Route::get('/contact-us', [HomeController::class, 'contactUsForm'])->name('conta
 Route::get('/CommenQuestion', [HomeController::class, 'CommenQuestionPage'])->name('CommenQuestionPage');
 Route::get('/Terms', [HomeController::class, 'TermsPage'])->name('TermsPage');
 
+Route::post('/contactus', [LandingPageController::class, 'contactus'])->name('contactus');
+
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 Route::post('/loginstore', [AuthenticatedSessionController::class, 'store'])->name('loginstore');
 
