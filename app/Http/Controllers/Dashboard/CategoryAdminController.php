@@ -45,9 +45,6 @@ class CategoryAdminController extends Controller
                         unlink($oldimage);
                     }
                 }
-                if($oldimage != "uploads/Clinic/icons8-clinic-80.jpg"){
-                        unlink($oldimage);
-                }
             }
             $image = time() . '.' . $request->logo->extension();
             $imagepath =  "uploads/category/$image";
