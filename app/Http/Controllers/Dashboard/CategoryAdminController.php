@@ -40,8 +40,13 @@ class CategoryAdminController extends Controller
             if (isset($category->logo)) {
                 $oldimage = $category->logo;
                 $pathimage = "uploads/category/$oldimage";
-                if($oldimage != "uploads/category/defultfood.png" || $oldimage != "uploads/Clinic/icons8-clinic-80.jpg" ){
-                    unlink($oldimage);
+                if($oldimage != "uploads/category/defultfood.png"){
+                    if($oldimage != "uploads/Clinic/icons8-clinic-80.jpg"){
+                        unlink($oldimage);
+                    }
+                }
+                if($oldimage != "uploads/Clinic/icons8-clinic-80.jpg"){
+                        unlink($oldimage);
                 }
             }
             $image = time() . '.' . $request->logo->extension();
