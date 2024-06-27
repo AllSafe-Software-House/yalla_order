@@ -43,7 +43,7 @@ class CategoryAdminController extends Controller
                 if($oldimage != "uploads/category/defultfood.png"){
                     if($oldimage != "uploads/Clinic/icons8-clinic-80.jpg"){
                         if(isset($oldimage) && file_exists($oldimage){
-                            unlink($oldimage);
+                            unlink($oldimage)
                         }
                     }
                 }
