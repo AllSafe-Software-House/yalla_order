@@ -40,8 +40,12 @@ class CategoryAdminController extends Controller
             if (isset($category->logo)) {
                 $oldimage = $category->logo;
                 $pathimage = "uploads/category/$oldimage";
-                if($oldimage != "uploads/category/defultfood.png" || $oldimage != "uploads/Clinic/icons8-clinic-80.jpg" ){
-                    unlink($oldimage);
+                if($oldimage != "uploads/category/defultfood.png"){
+                    if($oldimage != "uploads/Clinic/icons8-clinic-80.jpg"){
+                        if(isset($oldimage) && file_exists($oldimage)){
+                            unlink($oldimage);
+                        }
+                    }
                 }
             }
             $image = time() . '.' . $request->logo->extension();
@@ -149,12 +153,9 @@ class CategoryAdminController extends Controller
     public function destroy($id)
     {
         $category = Category::where('id', $id)->first();
-        if ($category->logo == "uploads/category/icons8-clinic-80.jpg" || $category->logo == "uploads/category/defultfood.png") {
+        
             $category->delete();
-        } else {
-            unlink($category->logo);
-            $category->delete();
-        }
+        
         return redirect()->back()->with('done', "delete sucessfully");
     }
 
