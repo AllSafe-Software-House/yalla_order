@@ -187,38 +187,38 @@
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-center" id="exampleModalLabel" style="color:#9B4999">Order Reset</h5>
+                <h5 class="modal-title text-center" id="exampleModalLabel" style="color:#FD7E7E">Order Reset</h5>
             </div>
             <div class="modal-body pos-module" id="printarea">
                 <div class="text-center">
                     <h3 id="placeName"></h3>
-                    <span style="color:#9B4999">#No:</span><b id="invoiceNumber"></b>
+                    <span style="color:#FD7E7E">#No:</span><b id="invoiceNumber"></b>
                 </div>
                 <br>
                 <div class="text-left">
-                    <span style="color:#9B4999">Client Name : </span><span id="username"></span><br>
-                    <span style="color:#9B4999">Client Email : </span><span id="email"></span><br>
-                    <span style="color:#9B4999">Client Address : </span><span id="address"></span><br>
-                    <span style="color:#9B4999">Client Phone : </span><span id="phone"></span><br>
-                    <span style="color:#9B4999">Date: </span><span id="date"></span><br>
+                    <span style="color:#FD7E7E">Client Name : </span><span id="username"></span><br>
+                    <span style="color:#FD7E7E">Client Email : </span><span id="email"></span><br>
+                    <span style="color:#FD7E7E">Client Address : </span><span id="address"></span><br>
+                    <span style="color:#FD7E7E">Client Phone : </span><span id="phone"></span><br>
+                    <span style="color:#FD7E7E">Date: </span><span id="date"></span><br>
                 </div>
                 <div class="invoice-to mt-2 product-border"></div>
                 <br>
                 <!-- Add more fields as needed -->
-                <div class="text-black text-left fs-5 mt-0 mb-0" style="color:#9B4999">Items</div>
+                <div class="text-black text-left fs-5 mt-0 mb-0" style="color:#FD7E7E">Items</div>
                 <div class="text-left">
-                    <span style="color:#9B4999">Product Name : </span><span id="prodactname"></span><br>
-                    <span style="color:#9B4999">Product price : </span><span id="prodactprice"></span><br>
-                    <span style="color:#9B4999">Product Size : </span><span id="prodactsize"></span><br>
-                    <span style="color:#9B4999">Product addtions : </span><span id="addtions"></span><br>
-                    <span style="color:#9B4999">Qty : </span><span id="Qty"></span><br>
+                    <span style="color:#FD7E7E">Product Name : </span><span id="prodactname"></span><br>
+                    <span style="color:#FD7E7E">Product price : </span><span id="prodactprice"></span><br>
+                    <span style="color:#FD7E7E">Product Size : </span><span id="prodactsize"></span><br>
+                    <span style="color:#FD7E7E">Product addtions : </span><span id="addtions"></span><br>
+                    <span style="color:#FD7E7E">Qty : </span><span id="Qty"></span><br>
                 </div>
                 <div class="invoice-to mt-2 product-border"></div>
                 <br>
-                <div class="text-black text-left fs-5 mt-0 mb-0" style="color:#9B4999">Summary</div>
+                <div class="text-black text-left fs-5 mt-0 mb-0" style="color:#FD7E7E">Summary</div>
                 <div class="text-left">
-                    <span style="color:#9B4999">Fees : </span><span id="delivery_fee"></span><br>
-                    <span style="color:#9B4999">Total Price : </span><span id="totalprice"></span><br>
+                    <span style="color:#FD7E7E">Fees : </span><span id="delivery_fee"></span><br>
+                    <span style="color:#FD7E7E">Total Price : </span><span id="totalprice"></span><br>
                 </div>
                 <!-- Items details go here -->
                 <div class="justify-content-center pt-2 modal-footer">

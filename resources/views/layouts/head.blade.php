@@ -28,7 +28,7 @@
                 position: absolute;
 
                 cursor: pointer;
-                color:#9B4999;
+                color:#FD7E7E;
             }
         </style>
 

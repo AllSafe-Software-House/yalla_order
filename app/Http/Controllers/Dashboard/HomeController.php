@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Dashboard;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Resones;
 use Carbon\CarbonPeriod;
+use App\Models\Commision;
 use App\Models\Landingpage;
 use Illuminate\Http\Request;
 use App\Models\ResturantRequest;
@@ -15,7 +17,7 @@ use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ChartorderController;
 use App\Http\Controllers\ChartsubsribtionclinicController;
 use App\Http\Controllers\ChartsubsribtionresturantController;
-use App\Models\Resones;
+use App\Models\BestLandingPage;
 
 class HomeController extends Controller
 {
@@ -38,7 +40,8 @@ class HomeController extends Controller
         $parttwoclinic = Landingpage::where('name','PartTwoClinic')->first();
         $cardfood = Landingpage::where('name','CardFood')->first();
         $cardclinic = Landingpage::where('name','CardClinic')->first();
-        return view('front.doctors-landing',compact('partoneclinic','parttwoclinic','cardfood','cardclinic'));
+        $best = BestLandingPage::all();
+        return view('front.doctors-landing',compact('partoneclinic','parttwoclinic','cardfood','cardclinic','best'));
             // return view('landing-page');
     }
 
@@ -47,7 +50,8 @@ class HomeController extends Controller
         $partenerpartone = Landingpage::where('name','partenerpartone')->first();
         $resones = Resones::where('name','Resoncooperate')->get();
         $step = Resones::where('name','ResonWorkTogether')->get();
-        return view('front.partener-form',compact('partenerpartone','resones','step'));
+        $commision = Commision::first();
+        return view('front.partener-form',compact('partenerpartone','resones','step','commision'));
             // return view('landing-page');
     }
 

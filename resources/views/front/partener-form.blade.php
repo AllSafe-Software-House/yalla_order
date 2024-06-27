@@ -59,8 +59,8 @@
 <div class="w-full padding-fix px-4 my-4 xl:w-1/2">
 
     <h1 class="">
-        <span class="text-rose-400 text-[35px] md:text-5xl font-bold font-main ">نمِّ عملك التجاري
-            <br />عبر الإنترنت مع Insta</span><span
+        <span class="text-rose-400 text-[35px] md:text-5xl font-bold font-main ">@lang('message.نمِّ عملك التجاري')
+            <br/>@lang('message.عبر الإنترنت مع') Insta</span><span
             class="text-blue-500 text-[35px] md:text-5xl font-bold font-['Cabin Condensed']">Order</span><span
             class="text-rose-400 text-[35px] md:text-5xl font-bold font-main">!
         </span>
@@ -75,9 +75,11 @@
     <!-- Loader Element -->
     <div class="loader" id="loader"></div>
     <div class="p-6 text-center bg-white shadow-xl rounded-2xl">
-        <h4 id="form_text" class="text-stone-900 text-[25px] my-2 md:text-[32px] font-normal font-['Roboto']">عمولة 20%
-            لمدة 60 يومًا!
-        </h4>
+        @if ($commision)
+            <h4 id="form_text" class="text-stone-900 text-[25px] my-2 md:text-[32px] font-normal font-['Roboto']">@lang('message.عمولة ') {{ $commision->commision }}%
+                @lang('message.لمدة ') {{ $commision->day_num }} @lang('message.يومًا')!
+            </h4>
+        @endif
         <form class="py-5" id="partner-form">
             <input type="text" placeholder="الاسم الاول" id="f_name"
                 class="w-full px-8 py-4 my-5 border rounded-full outline-none border-slate-500 focus:ring-main focus:border-main focus:outline-none">
@@ -98,8 +100,9 @@
 
             {{-- <input type="hidden" id="business_type" value="restaurantes"> --}}
             <button id="submit-btn" type="button"
-                class="w-full bg-main text-white py-3 rounded-full font-bold text-[30px] font-['Roboto']">انشاء
-                حساب</button>
+                class="w-full bg-main text-white py-3 rounded-full font-bold text-[30px] font-['Roboto']">
+                @lang('message.انشاء حساب')
+            </button>
         </form>
     </div>
 </div>
@@ -112,8 +115,8 @@
 <section class="py-20">
     <div class="py-5 section-text">
         <h2 class="text-center">
-            <span class="text-3xl font-bold text-stone-900 md:text-5xl font-main">لماذا يجب عليك</span>
-            <span class="text-3xl font-bold text-rose-400 md:text-5xl font-main">التعاون معنا</span>
+            <span class="text-3xl font-bold text-stone-900 md:text-5xl font-main">@lang('message.لماذا يجب عليك')</span>
+            <span class="text-3xl font-bold text-rose-400 md:text-5xl font-main">@lang('message.التعاون معنا')</span>
         </h2>
     </div>
     <div class="container">
@@ -144,9 +147,9 @@
     <img src="{{ asset('/src/images/Group 1171276403.png') }}" alt="frame" class="absolute bottom-0 z-[-1] left-0">
     <div class="py-5 section-text">
         <h2 class="text-center">
-            <span class="text-5xl font-bold text-stone-900 font-main">كيف سنعمل </span><span
-                class="text-5xl font-bold text-rose-400 font-main">معًا </span><span
-                class="text-5xl font-bold text-blue-500 font-main">سويًا</span>
+            <span class="text-5xl font-bold text-stone-900 font-main"> @lang('message.كيف سنعمل') </span><span
+                class="text-5xl font-bold text-rose-400 font-main">@lang('message.معًا') </span><span
+                class="text-5xl font-bold text-blue-500 font-main">@lang('message.سويًا')</span>
         </h2>
     </div>
     <div class="container">

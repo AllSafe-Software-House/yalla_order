@@ -83,25 +83,25 @@
                                         <th></th>
                                     @endif
                                     <td>
-                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('name','ar') }}
+                                        <span style="color:#FD7E7E">Arabic : </span>{{ $data->getTranslation('name','ar') }}
                                         <hr>
-                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('name','en') }}
+                                        <span style="color:#FD7E7E">English : </span>{{ $data->getTranslation('name','en') }}
                                     </td>
                                     <td>
-                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('descrption','ar') }}
+                                        <span style="color:#FD7E7E">Arabic : </span>{{ $data->getTranslation('descrption','ar') }}
                                         <hr>
-                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('descrption','en') }}
+                                        <span style="color:#FD7E7E">English : </span>{{ $data->getTranslation('descrption','en') }}
                                     </td>
                                     <td>{{ $data->price }}</td>
                                     <td>
-                                        <span style="color:#9B4999">Arabic : </span>{{ $data->category->getTranslation('name','ar') }}
+                                        <span style="color:#FD7E7E">Arabic : </span>{{ $data->category->getTranslation('name','ar') }}
                                         <hr>
-                                        <span style="color:#9B4999">English : </span>{{ $data->category->getTranslation('name','en') }}
+                                        <span style="color:#FD7E7E">English : </span>{{ $data->category->getTranslation('name','en') }}
                                     </td>
                                     <td>
-                                        <span style="color:#9B4999">Arabic : </span>{{ $data->places->getTranslation('name','ar') }}
+                                        <span style="color:#FD7E7E">Arabic : </span>{{ $data->places->getTranslation('name','ar') }}
                                         <hr>
-                                        <span style="color:#9B4999">English : </span>{{ $data->places->getTranslation('name','en') }}
+                                        <span style="color:#FD7E7E">English : </span>{{ $data->places->getTranslation('name','en') }}
                                     </td>
                                     <td><button class="btn btn-primary" style="border-radius: 50%">not</button></td>
                                     @can('editProduct')

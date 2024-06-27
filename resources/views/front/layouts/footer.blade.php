@@ -12,8 +12,12 @@
                 <div class="text-white text-right cursor-pointer text-2xl font-normal font-['Roboto'] mx-2">Follow
                     Us on </div>
                 <div class="flex items-center mx-2">
-                    <i class="mx-2 text-white cursor-pointer fa-brands fa-facebook"></i>
-                    <i class="mx-2 text-white cursor-pointer fa-brands fa-instagram"></i>
+                    @foreach ($icon as $item)
+                        <a href="{{ $item->link }}">
+                            <i class="mx-2 text-white cursor-pointer fa-brands {{ $item->classname }}"></i>
+                        </a>
+                    @endforeach
+                    {{--  <i class="mx-2 text-white cursor-pointer fa-brands fa-instagram"></i>  --}}
                 </div>
             </div>
             <div class="flex items-center my-6">

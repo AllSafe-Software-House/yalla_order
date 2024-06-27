@@ -19,9 +19,14 @@
     <title>Insta Order</title>
 </head>
 
-<body dir="rtl">
-
-
+@php
+    $locale = App::getLocale();
+@endphp
+@if ($locale == 'ar')
+    <body dir="rtl">
+@else
+    <body dir="ltr">
+@endif
     <nav class="bg-white z-[99999] fixed top-0 w-full border-gray-200 dark:bg-gray-900">
         <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
             <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -51,7 +56,7 @@
                             @if (!Request::is('/'))
                                 style="color: black"
                             @endif
-                            aria-current="page">الرئيسيه</a>
+                            aria-current="page">@lang('message.الرئيسيه')</a>
                     </li>
                     {{-- <li>
                         <a href="#"
@@ -63,7 +68,7 @@
                             @if (Request::is('become-partner'))
                                 style="color: #be143e"
                             @endif
-                            >اصبح شريك</a>
+                            >@lang('message.اصبح شريك')</a>
                     </li>
                     <li>
                         <a href="{{ url('/contact-us') }}"
@@ -71,8 +76,19 @@
                             @if (Request::is('contact-us'))
                                 style="color: #be143e"
                             @endif
-                            > تواصل معنا </a>
+                            > @lang('message.تواصل معنا') </a>
                     </li>
+                </ul>
+            </div>
+            <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
+                <ul>
+                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        <li>
+                            <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                {{ $properties['native'] }}
+                            </a>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
@@ -102,8 +118,8 @@
                     <div class="flex items-center justify-center">
                         <img src="{{ asset('src/images/Group 1171276474.png') }}" alt="fast" />
                         <p class="font-bold mx-3 text-[18px]">
-                            حجز <br />
-                            سهل
+                            @lang('message.حجز') <br />
+                            @lang('message.سهل')
                         </p>
                     </div>
                 </div>
@@ -111,8 +127,8 @@
                     <div class="flex items-center justify-center">
                         <img src="{{ asset('src/images/Component 82.png') }}" alt="fast" />
                         <p class="font-bold mx-3 text-[18px]">
-                            خصم <br />
-                            يومي
+                            @lang('message.خصم') <br />
+                            @lang('message.يومي')
                         </p>
                     </div>
                 </div>
@@ -121,7 +137,7 @@
                         <img src="{{ asset('src/images/Group 1171276474.png') }}" alt="fast" />
                         <p class="font-bold mx-3 text-[18px]">
                             100+ <br />
-                            عيادات
+                            @lang('message.عيادات')
                         </p>
                     </div>
                 </div>
@@ -130,7 +146,7 @@
                         <img src="{{ asset('src/images/Component 82.png') }}" alt="fast" />
                         <p class="font-bold mx-3 text-[18px]">
                             100+ <br />
-                            اطباء
+                            @lang('message.اطباء')
                         </p>
                     </div>
                 </div>
@@ -180,35 +196,21 @@
                 <img src="{{ asset('src/images/Group 1171276404.png') }}" class="absolute bottom-0 right-0 hidden md:block"
                     alt="frame" />
                 <h3 class="font-main text-center py-4 md:text-[45px] text-[30px] text-white">
-                    أفضل الأطباء تقييما
+                    @lang('message.أفضل الأطباء تقييما')
                 </h3>
                 <div class="swiper mySwiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide border border-white text-center rounded-xl text-white bg-[#1F1F1F]">
-                            <img src="{{ asset('src/images/Ellipse 36.png') }}" class="mx-auto my-4" alt="burger" />
-                            <h4 class="text-[24px]">طب الاسنان</h4>
+                    @if ($best)
+                        <div class="swiper-wrapper">
+                            @foreach ($best as $doctoritem)
+                                <div class="swiper-slide border border-white text-center rounded-xl text-white bg-[#1F1F1F]">
+                                    <img src="{{ asset($doctoritem->doctore->image) }}" class="mx-auto my-4" alt="burger" />
+                                    {{--  <h4 class="text-[24px]">@lang('message.طب الاسنان')</h4>  --}}
+                                    <h4 class="text-[24px]">{{ $doctoritem->doctore->department }}</h4>
+
+                                </div>
+                            @endforeach
                         </div>
-                        <div class="swiper-slide border border-white text-center rounded-xl text-white bg-[#1F1F1F]">
-                            <img src="{{ asset('src/images/Ellipse 37.png') }}" class="mx-auto my-4" alt="burger" />
-                            <h4 class="text-[24px]">الاطفال</h4>
-                        </div>
-                        <div class="swiper-slide border border-white text-center rounded-xl text-white bg-[#1F1F1F]">
-                            <img src="{{ asset('src/images/Ellipse 38.png') }}" class="mx-auto my-4" alt="burger" />
-                            <h4 class="text-[24px]">عيون</h4>
-                        </div>
-                        <div class="swiper-slide border border-white text-center rounded-xl text-white bg-[#1F1F1F]">
-                            <img src="{{ asset('src/images/Ellipse 39.png') }}" class="mx-auto my-4" alt="burger" />
-                            <h4 class="text-[24px]">علم الأعصاب</h4>
-                        </div>
-                        <div class="swiper-slide border border-white text-center rounded-xl text-white bg-[#1F1F1F]">
-                            <img src="{{ asset('src/images/Ellipse 40.png') }}" class="mx-auto my-4" alt="burger" />
-                            <h4 class="text-[24px]">الأمراض الجلدية</h4>
-                        </div>
-                        <div class="swiper-slide border border-white text-center rounded-xl text-white bg-[#1F1F1F]">
-                            <img src="{{ asset('src/images/Ellipse 41.png') }}" class="mx-auto my-4" alt="burger" />
-                            <h4 class="text-[24px]">نفسية</h4>
-                        </div>
-                    </div>
+                    @endif
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                 </div>
@@ -221,17 +223,18 @@
                 class="w-full bg-cover xl:w-2/3 xl:rounded-r-[100px] py-6 bg-[url('../images/snack-pastry-board-with-potatoes-water-black-background-top-view.png')]">
                 <div class="mx-auto">
                     <div class="text-white text-center text-[50px] md:text-[64px] font-bold font-main">
-                        اصبح واحد منا؟
+                        @lang('message.اصبح واحد منا؟')
                     </div>
                     <div class="text-center">
-                        <span class="text-blue-400 text-4xl font-bold font-['Roboto']">ماذا
+                        <span class="text-blue-400 text-4xl font-bold font-['Roboto']">@lang('message.ماذا')
                         </span>
-                        <span class="text-white text-4xl font-medium font-['Roboto']">تنتظر ؟</span>
+                        <span class="text-white text-4xl font-medium font-['Roboto']">@lang('message.ماذا تنتظر ؟')</span>
                     </div>
                 </div>
                 <div class="my-20 text-center">
-                    <a href="{{ url('/become-partner') }}" class="bg-white text-slate-900 px-16 rounded-full py-2 text-[30px]">تسجيل الدخول
-                       كـ شريك</a>
+                    <a href="{{ url('/become-partner') }}" class="bg-white text-slate-900 px-16 rounded-full py-2 text-[30px]">
+                        @lang('message.تسجيل الدخول كـ شريك')
+                    </a>
                 </div>
             </div>
             <div class="hidden xl:w-1/3 xl:block">
@@ -294,12 +297,12 @@
             <div
                 class="bg-cover bg-[url('../images/snack-pastry-board-with-potatoes-water-black-background-top-view.png')] py-10 md:rounded-l-3xl px-8 flex flex-wrap">
                 <div class="w-full px-4 my-4 md:w-1/2">
-                    <div class="text-white lg:text-[64px] md:text-[40px] text-[30px] font-bold font-main">حمل تطبيقنا
-                        <br>الآن!
+                    <div class="text-white lg:text-[64px] md:text-[40px] text-[30px] font-bold font-main">@lang('message.حمل تطبيقنا')
+                        <br>@lang('message.الآن!')
                     </div>
                     <div class="py-6">
-                        <span class="text-blue-400 text-4xl font-medium font-['Roboto']">استمتع</span>
-                        <span class="text-white text-4xl font-medium font-['Roboto']"> بأفضل الوجبات</span>
+                        <span class="text-blue-400 text-4xl font-medium font-['Roboto']">@lang('message.استمتع')</span>
+                        <span class="text-white text-4xl font-medium font-['Roboto']">@lang('message.بافضل الدكاتره')</span>
                     </div>
                     <div class="flex items-center">
                         <div class="mx-3">
@@ -328,12 +331,16 @@
                     <div class="text-white text-right cursor-pointer text-2xl font-normal font-['Roboto'] mx-2">
                         <a href="{{ url('/contact-us') }}" >
                             Contact us </a>
-                     </div>
+                    </div>
                     <div class="text-white text-right cursor-pointer text-2xl font-normal font-['Roboto'] mx-2">Follow
                         Us on </div>
                     <div class="flex items-center mx-2">
-                        <i class="mx-2 text-white cursor-pointer fa-brands fa-facebook"></i>
-                        <i class="mx-2 text-white cursor-pointer fa-brands fa-instagram"></i>
+                        @foreach ($icon as $item)
+                            <a href="{{ $item->link }}">
+                                <i class="mx-2 text-white cursor-pointer fa-brands {{ $item->classname }}"></i>
+                            </a>
+                        @endforeach
+                        {{--  <i class="mx-2 text-white cursor-pointer fa-brands fa-instagram"></i>  --}}
                     </div>
                 </div>
                 <div class="flex items-center my-6">

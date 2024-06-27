@@ -80,14 +80,14 @@
                                         <th></th>
                                     @endif
                                     <td>
-                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('title','ar') }}
+                                        <span style="color:#FD7E7E">Arabic : </span>{{ $data->getTranslation('title','ar') }}
                                         <hr>
-                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('title','en') }}
+                                        <span style="color:#FD7E7E">English : </span>{{ $data->getTranslation('title','en') }}
                                     </td>
                                     <td>
-                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('description','ar') }}
+                                        <span style="color:#FD7E7E">Arabic : </span>{{ $data->getTranslation('description','ar') }}
                                         <hr>
-                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('description','en') }}
+                                        <span style="color:#FD7E7E">English : </span>{{ $data->getTranslation('description','en') }}
                                     </td>
                                     <td>
                                         <a href="{{ route('resonedit', $data->id) }}">

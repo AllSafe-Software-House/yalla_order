@@ -532,7 +532,7 @@ slide is-expanded side-menu__item {
 }
 
 .side-menu .slide.active .side-menu__label, .side-menu .slide.active .side-menu__icon {
-  color: #9B4999;
+  color: #FD7E7E;
 }
 
 .side-menu__item {
@@ -553,23 +553,23 @@ slide is-expanded side-menu__item {
 
 .side-menu__item.active, .side-menu__item:hover, .side-menu__item:focus {
   text-decoration: none;
-  color: #9B4999;
+  color: #FD7E7E;
 }
 
 .side-menu__item.active .side-menu__label {
-  color: #9B4999;
+  color: #FD7E7E;
 }
 
 .side-menu__item.active .angle {
-  color: #9B4999;
+  color: #FD7E7E;
 }
 
 .side-menu__item.active .side-menu__icon {
-  fill: #9B4999;
+  fill: #FD7E7E;
 }
 
 .side-menu__item.active .side-menu__icon, .side-menu__item:hover .side-menu__icon, .side-menu__item:focus .side-menu__icon {
-  color: #9B4999;
+  color: #FD7E7E;
 }
 
 @media (min-width: 768px) {
@@ -595,12 +595,12 @@ slide is-expanded side-menu__item {
 }
 
 .slide:hover .side-menu__label, .slide:hover .angle, .slide:hover .side-menu__icon {
-  color: #9B4999 !important;
-  fill: #9B4999 !important;
+  color: #FD7E7E !important;
+  fill: #FD7E7E !important;
 }
 
 .slide.is-expanded .side-menu__label, .slide.is-expanded .side-menu__icon, .slide.is-expanded .angle {
-  color: #9B4999 !important;
+  color: #FD7E7E !important;
 }
 
 .slide-item.active, .slide-item:hover, .slide-item:focus {
@@ -610,7 +610,7 @@ slide is-expanded side-menu__item {
 
 .slide-item.active, .slide-item:hover, .slide-item:focus {
   text-decoration: none;
-  color: #9B4999 !important;
+  color: #FD7E7E !important;
 }
 
 .slide-menu .sub-slide {
@@ -833,7 +833,7 @@ slide is-expanded side-menu__item {
     line-height: 1;
     opacity: 0;
     background: #fff;
-    color: #9B4999;
+    color: #FD7E7E;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
     -webkit-box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.2);
@@ -1025,7 +1025,8 @@ slide is-expanded side-menu__item {
 }
 
 .app-sidebar .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar, .app-sidebar .mCSB_scrollTools .mCSB_draggerRail {
-  background: rgba(255, 255, 255, 0.2);
+  /* background: rgba(255, 255, 255, 0.2); */
+  background: #FD7E7E;
 }
 
 .sidenav-toggled .main-wrapper .side-menu .side-menu__item .nav-badge {
@@ -1217,7 +1218,7 @@ slide is-expanded side-menu__item {
 }
 
 .sub-slide.is-expanded .sub-side-menu__item {
-  color: #9B4999;
+  color: #FD7E7E;
 }
 
 .slide-menu .sub-slide.is-expanded {
@@ -1242,15 +1243,15 @@ slide is-expanded side-menu__item {
 }
 
 .app-sidebar .slide.active .side-menu__icon, .app-sidebar .slide.is-expanded .side-menu__icon {
-  fill: #9B4999  !important;
+  fill: #FD7E7E  !important;
 }
 
 .app-sidebar .slide.active .side-menu__icon {
-  fill: #9B4999  !important;
+  fill: #FD7E7E  !important;
 }
 
 .app-sidebar .slide.active .side-menu__item {
-  color: #9B4999  !important;
+  color: #FD7E7E  !important;
 }
 
 .app-sidebar .slide-menu .sub-slide-menu a:before {
@@ -1314,7 +1315,7 @@ slide is-expanded side-menu__item {
 }
 
 .app-sidebar .slide-menu a.active:before {
-  color: #9B4999;
+  color: #FD7E7E;
 }
 
 @media (min-width: 768px) {

@@ -37,6 +37,6 @@ class ChartController extends Controller
             ->setTitle('Monthly User Subscriptions')
             ->addLine('Subscriptions', array_values($monthlySubscriptions))
             ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
-            ->setColors(['#9B4999']);
+            ->setColors(['#FD7E7E']);
             }
     }

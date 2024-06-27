@@ -249,7 +249,7 @@
 @media only screen and (max-width: 991px) {
   .horizontal-gradient {
     .horizontalMenu > .horizontalMenu-list {
-      background:linear-gradient(to left, #9B4999 0%, #9B4999 100%);
+      background:linear-gradient(to left, #FD7E7E 0%, #FD7E7E 100%);
 
       > li > {
         ul.sub-menu {
@@ -550,7 +550,7 @@ body.dark-theme.body-style1 {
 
   &.horizontal-gradient {
     .horizontal-main.hor-menu {
-      background:linear-gradient(to left, #9B4999 0%, #9B4999 100%);
+      background:linear-gradient(to left, #FD7E7E 0%, #FD7E7E 100%);
       box-shadow: none;
       border-top: 1px solid$white-1;
     }

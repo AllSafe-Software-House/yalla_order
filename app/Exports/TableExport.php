@@ -62,7 +62,7 @@ class TableExport implements FromCollection, WithHeadings ,WithStyles , WithColu
     public function styles(Worksheet $sheet)
     {
         return [
-            1 => ['font' => ['bold' => true, 'color' => ['argb' => '9B4999']]],
+            1 => ['font' => ['bold' => true, 'color' => ['argb' => 'FD7E7E']]],
         ];
     }
     

@@ -42,4 +42,9 @@ class Doctores extends Model
     public function reservation()  {
         return $this->hasOne(Reservationes::class);
     }
+
+
+    public function bestdoctore(){
+        return $this->hasMany(BestLandingPage::class);
+    }
 }

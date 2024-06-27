@@ -24,5 +24,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->share("info",\App\Models\GeneralInfo::first());
+        view()->share("icon",\App\Models\IconsLinks::all());
     }
 }

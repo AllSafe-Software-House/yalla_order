@@ -73,15 +73,15 @@
 
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('size','ar') }}
+                                        <span style="color:#FD7E7E">Arabic : </span>{{ $data->getTranslation('size','ar') }}
                                         <hr>
-                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('size','en') }}
+                                        <span style="color:#FD7E7E">English : </span>{{ $data->getTranslation('size','en') }}
                                     </td>
                                     <td>{{ $data->price }}</td>
                                     <td>
-                                        <span style="color:#9B4999">Arabic : </span>{{ $data->place->getTranslation('name','ar') }}
+                                        <span style="color:#FD7E7E">Arabic : </span>{{ $data->place->getTranslation('name','ar') }}
                                         <hr>
-                                        <span style="color:#9B4999">English : </span>{{ $data->place->getTranslation('name','en') }}
+                                        <span style="color:#FD7E7E">English : </span>{{ $data->place->getTranslation('name','en') }}
                                     </td>
                                     @can('editSize')
                                         <td>

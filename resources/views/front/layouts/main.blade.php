@@ -19,7 +19,14 @@
     <title>Insta Order</title>
 </head>
 
-<body dir="rtl">
+@php
+    $locale = App::getLocale();
+@endphp
+@if ($locale == 'ar')
+    <body dir="rtl">
+@else
+    <body dir="ltr">
+@endif
 @include('front.layouts.nav')
 
 @include('front.layouts.header')

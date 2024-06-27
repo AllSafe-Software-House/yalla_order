@@ -45,8 +45,8 @@ a.btn.disabled, fieldset:disabled a.btn {
 
   &:hover {
     color: $white;
-    background-color: #9B4999;
-    border-color: #9B4999;
+    background-color: #FD7E7E;
+    border-color: #FD7E7E;
   }
 
   &:focus, &.focus {
@@ -1555,7 +1555,7 @@ input {
 
 .btn-primary-gradient{
 	color: $white;
-	background:linear-gradient(to left, #9B4999 0%, #9B4999 100%);
+	background:linear-gradient(to left, #FD7E7E 0%, #FD7E7E 100%);
 	border:1px solid #0db2de;
 
 	&:hover {

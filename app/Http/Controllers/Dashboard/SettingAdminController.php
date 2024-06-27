@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Setting;
+use App\Models\Commision;
 use App\Models\GeneralInfo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\commisionRequest;
 
 class SettingAdminController extends Controller
 {
@@ -87,6 +89,33 @@ class SettingAdminController extends Controller
         $generinfo->linkAppStore = $request->linkAppStore;
         $generinfo->linkPlayStore = $request->linkPlayStore;
         $generinfo->save();
+        return redirect()->back()->with('done',"update data sucessful");
+    }
+
+
+
+    // Commission Percentage
+
+    public function selectcommission()
+    {
+        $commision = Commision::first();
+        return view('Commission',compact('commision'));
+    }
+
+    public function commisionstore(commisionRequest $request)
+    {
+        commision::create([
+            'commision' => $request->commision,
+            'day_num' => $request->day_num,
+        ]);
+        return redirect()->back()->with('done',"add data sucessful");
+    }
+    public function commisionupdate(commisionRequest $request)
+    {
+        $commision = Commision::first();
+        $commision->commision = $request->commision;
+        $commision->day_num = $request->day_num;
+        $commision->save();
         return redirect()->back()->with('done',"update data sucessful");
     }
 }

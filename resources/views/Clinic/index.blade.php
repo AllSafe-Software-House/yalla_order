@@ -91,21 +91,21 @@
                                         <th></th>
                                     @endif
                                     <td>
-                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('name','ar') }}
+                                        <span style="color:#FD7E7E">Arabic : </span>{{ $data->getTranslation('name','ar') }}
                                         <hr>
-                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('name','en') }}
+                                        <span style="color:#FD7E7E">English : </span>{{ $data->getTranslation('name','en') }}
                                     </td>
                                     <td>
-                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('descrption','ar') }}
+                                        <span style="color:#FD7E7E">Arabic : </span>{{ $data->getTranslation('descrption','ar') }}
                                         <hr>
-                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('descrption','en') }}
+                                        <span style="color:#FD7E7E">English : </span>{{ $data->getTranslation('descrption','en') }}
                                     </td>
                                     <td>{{ $data->starttime }}</td>
                                     <td>{{ $data->endtime }}</td>
                                     <td>
-                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('address','ar') }}
+                                        <span style="color:#FD7E7E">Arabic : </span>{{ $data->getTranslation('address','ar') }}
                                         <hr>
-                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('address','en') }}
+                                        <span style="color:#FD7E7E">English : </span>{{ $data->getTranslation('address','en') }}
                                     </td>
                                     <td>{{ $data->delivery_fee }}</td>
 

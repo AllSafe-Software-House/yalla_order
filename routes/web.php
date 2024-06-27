@@ -1,28 +1,31 @@
 <?php
 
-use App\Http\Controllers\AddonsController;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\Dashboard\AddtionAdminController;
-use App\Http\Controllers\Dashboard\CategoryAdminController;
-use App\Http\Controllers\Dashboard\ContactusController;
-use App\Http\Controllers\Dashboard\DoctorController;
-use App\Http\Controllers\Dashboard\HomeController;
-use App\Http\Controllers\Dashboard\MenusAdminController;
-use App\Http\Controllers\Dashboard\OrderListController;
-use App\Http\Controllers\Dashboard\PlacesAdminController;
-use App\Http\Controllers\Dashboard\ProductAdminController;
-use App\Http\Controllers\Dashboard\PromoCodeControllerAdminController;
-use App\Http\Controllers\Dashboard\ReservationLidtController;
-use App\Http\Controllers\Dashboard\RolesController;
-use App\Http\Controllers\Dashboard\SettingAdminController;
-use App\Http\Controllers\Dashboard\SizeAdminController;
-use App\Http\Controllers\Dashboard\UsersController;
-use App\Http\Controllers\LandingPageController;
-use App\Http\Controllers\OrderTrakeController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AddonsController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\OrderTrakeController;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\Auth\AuthAdminController;
+use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\RolesController;
+use App\Http\Controllers\Dashboard\UsersController;
+use App\Http\Controllers\Dashboard\DoctorController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Dashboard\ContactusController;
+use App\Http\Controllers\Dashboard\OrderListController;
+use App\Http\Controllers\Dashboard\SizeAdminController;
+use App\Http\Controllers\Dashboard\MenusAdminController;
+use App\Http\Controllers\Dashboard\PlacesAdminController;
+use App\Http\Controllers\Dashboard\AddtionAdminController;
+use App\Http\Controllers\Dashboard\ProductAdminController;
+use App\Http\Controllers\Dashboard\SettingAdminController;
+use App\Http\Controllers\Dashboard\CategoryAdminController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Dashboard\IconsLinksAdminController;
+use App\Http\Controllers\Dashboard\ReservationLidtController;
+use App\Http\Controllers\Dashboard\PromoCodeControllerAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,17 +40,26 @@ use Illuminate\Support\Facades\Route;
 
 
 // Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+
+// landing page
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
+        Route::get('/', [HomeController::class, 'landingPage'])->name('landingPage');
+        Route::get('/doctors', [HomeController::class, 'doctorLandingPage'])->name('doctorLandingPage');
+        Route::get('/become-partner', [HomeController::class, 'partenerForm'])->name('partenerForm');
+        Route::get('/contact-us', [HomeController::class, 'contactUsForm'])->name('contactUsForm');
+        Route::get('/CommenQuestion', [HomeController::class, 'CommenQuestionPage'])->name('CommenQuestionPage');
+        Route::get('/Terms', [HomeController::class, 'TermsPage'])->name('TermsPage');
+        Route::post('/contactus', [LandingPageController::class, 'contactus'])->name('contactus');
+    });
+
 // auth
 Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('register', [RegisteredUserController::class, 'store'])->name('registerstore');
-Route::get('/', [HomeController::class, 'landingPage'])->name('landingPage');
-Route::get('/doctors', [HomeController::class, 'doctorLandingPage'])->name('doctorLandingPage');
-Route::get('/become-partner', [HomeController::class, 'partenerForm'])->name('partenerForm');
-Route::get('/contact-us', [HomeController::class, 'contactUsForm'])->name('contactUsForm');
-Route::get('/CommenQuestion', [HomeController::class, 'CommenQuestionPage'])->name('CommenQuestionPage');
-Route::get('/Terms', [HomeController::class, 'TermsPage'])->name('TermsPage');
 
-Route::post('/contactus', [LandingPageController::class, 'contactus'])->name('contactus');
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 Route::post('/loginstore', [AuthenticatedSessionController::class, 'store'])->name('loginstore');
@@ -57,13 +69,18 @@ Route::post('/resturants-requests/store', [HomeController::class, 'store_restura
 Route::post('/contact-us/store', [HomeController::class, 'store_contact_us'])->name('contact-us.store');
 // routes dashboard
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     //logout
     Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+    // change password
+    Route::get('change/password', [AuthAdminController::class, 'changepage'])->name('pagechangepassword');
+    Route::post('save/change/password', [AuthAdminController::class, 'changepassword'])->name('changepasswordstore');
+    // select Commission Percentage
+    Route::get('select/commission', [SettingAdminController::class, 'selectcommission'])->name('selectcommission');
+    Route::post('change/password/store', [SettingAdminController::class, 'commisionstore'])->name('commisionstore');
+    Route::post('change/password/update', [SettingAdminController::class, 'commisionupdate'])->name('commisionupdate');
 
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+
 
     // users
     Route::prefix('users')->group(function () {
@@ -225,9 +242,6 @@ Route::middleware('auth')->group(function () {
         Route::get('delete/{id}', [ReservationLidtController::class, 'destory'])->name('reservationdestory')->middleware('permission:deleteReservation');
     });
 
-
-
-    // landing page
     Route::prefix('LandingPage')->group(function () {
         Route::get('/partone', [LandingPageController::class, 'partone'])->name('partone');
         Route::get('/partone/clinic', [LandingPageController::class, 'partoneclinic'])->name('partoneclinic');
@@ -246,6 +260,14 @@ Route::middleware('auth')->group(function () {
             Route::post('/update/{id}', [LandingPageController::class, 'updatereson'])->name('resonupdate');
             Route::get('/destory/{id}', [LandingPageController::class, 'destroy'])->name('resondestory');
         });
+        Route::prefix('bestdoctor')->group(function () {
+            Route::get('/', [LandingPageController::class, 'bestdoctore'])->name('bestdoctorlist');
+            Route::get('/add', [LandingPageController::class, 'bestdoctoradd'])->name('bestdoctoradd');
+            Route::post('/store', [LandingPageController::class, 'bestdoctorestore'])->name('bestdoctorestore');
+            Route::get('/edit/{id}', [LandingPageController::class, 'bestdoctoredit'])->name('bestdoctoredit');
+            Route::post('/update/{id}', [LandingPageController::class, 'bestdoctorupdate'])->name('bestdoctorupdate');
+            Route::get('/destory/{id}', [LandingPageController::class, 'bestdoctordestory'])->name('bestdoctordestory');
+        });
         Route::prefix('resons/work/together')->group(function () {
             Route::get('/', [LandingPageController::class, 'indexsteps'])->name('resonsteplist');
             Route::get('/add', [LandingPageController::class, 'createstep'])->name('resonstepadd');
@@ -255,6 +277,19 @@ Route::middleware('auth')->group(function () {
             Route::get('/destory/{id}', [LandingPageController::class, 'destroy'])->name('resondestory');
         });
     });
+
+    // icons media
+    Route::prefix('IconMedia')->group(function () {
+        Route::get('/', [IconsLinksAdminController::class, 'index'])->name('iconmedialist');
+        Route::get('/add', [IconsLinksAdminController::class, 'create'])->name('iconmediaadd');
+        Route::post('/store', [IconsLinksAdminController::class, 'store'])->name('iconmediastore');
+        Route::get('/edit/{id}', [IconsLinksAdminController::class, 'edit'])->name('iconmediaedit');
+        Route::post('/update/{id}', [IconsLinksAdminController::class, 'update'])->name('iconmediaupdate');
+        Route::get('/destory/{id}', [IconsLinksAdminController::class, 'destroy'])->name('iconmediadestory');
+    });
+
+
+
 });
 
 

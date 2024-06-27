@@ -88,21 +88,21 @@
                                         <th></th>
                                     @endif
                                     <td>
-                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('name','ar') }}
+                                        <span style="color:#FD7E7E">Arabic : </span>{{ $data->getTranslation('name','ar') }}
                                         <hr>
-                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('name','en') }}
+                                        <span style="color:#FD7E7E">English : </span>{{ $data->getTranslation('name','en') }}
                                     </td>
                                     <td>
-                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('department','ar') }}
+                                        <span style="color:#FD7E7E">Arabic : </span>{{ $data->getTranslation('department','ar') }}
                                         <hr>
-                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('department','en') }}
+                                        <span style="color:#FD7E7E">English : </span>{{ $data->getTranslation('department','en') }}
                                     </td>
                                     <td>From :  {{ $data->starttime }} - To : {{ $data->endtime }}</td>
                                     <td>{{ $data->dayes }}</td>
                                     <td>
-                                        <span style="color:#9B4999">Arabic : </span>{{ $data->getTranslation('overview','ar') }}
+                                        <span style="color:#FD7E7E">Arabic : </span>{{ $data->getTranslation('overview','ar') }}
                                         <hr>
-                                        <span style="color:#9B4999">English : </span>{{ $data->getTranslation('overview','en') }}
+                                        <span style="color:#FD7E7E">English : </span>{{ $data->getTranslation('overview','en') }}
                                     </td>
                                     <td>{{ $data->time }} min</td>
                                     <td>{{ $data->wait }} min</td>

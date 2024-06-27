@@ -24,7 +24,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto"><a href="{{ route('cliniclist') }}" style="color: #9B4999">Clinic</a></h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ADD
+            <h4 class="content-title mb-0 my-auto"><a href="{{ route('cliniclist') }}" style="color: #FD7E7E">Clinic</a></h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ADD
                 Clinic</span>
         </div>
     </div>

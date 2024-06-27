@@ -26,7 +26,7 @@
                         @if (!Request::is('/'))
                             style="color: black"
                         @endif
-                        aria-current="page">الرئيسيه</a>
+                        aria-current="page">@lang('message.الرئيسيه')</a>
                 </li>
                 {{-- <li>
                     <a href="#"
@@ -38,7 +38,7 @@
                         @if (Request::is('become-partner'))
                             style="color: #be143e"
                         @endif
-                        >اصبح شريك</a>
+                        >@lang('message.اصبح شريك')</a>
                 </li>
                 <li>
                     <a href="{{ url('/contact-us') }}"
@@ -46,8 +46,20 @@
                         @if (Request::is('contact-us'))
                             style="color: #be143e"
                         @endif
-                        > تواصل معنا </a>
+                        > @lang('message.تواصل معنا')</a>
                 </li>
+            </ul>
+        </div>
+
+        <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
+            <ul>
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                    <li>
+                        <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                            {{ $properties['native'] }}
+                        </a>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </div>

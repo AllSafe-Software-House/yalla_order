@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactUSRequest;
+use App\Models\BestLandingPage;
 use App\Models\Content_US;
+use App\Models\Doctores;
 use App\Models\Landingpage;
 use App\Models\Resones;
 use Illuminate\Http\Request;
@@ -172,6 +174,7 @@ class LandingPageController extends Controller
     }
 
 
+    // contact us in landing page
     public function contactus(ContactUSRequest $request)  {
         $contact = Content_US::create([
             "fname" => $request->fname,
@@ -181,5 +184,43 @@ class LandingPageController extends Controller
             "message"  => $request->message
         ]);
         return back()->with('done', "will contact you");
+    }
+
+
+
+    // bestdoctore in landingpage
+    public function bestdoctore(){
+        $bestdoctore = BestLandingPage::all();
+        return view('LandingPge.bestdoctore.bestdoctor',compact('bestdoctore'));
+    }
+
+    public function bestdoctoradd(){
+        $doctor = Doctores::all();
+        return view('LandingPge.bestdoctore.bestdoctoradd',compact('doctor'));
+    }
+    public function bestdoctoredit($id){
+        $doctor = BestLandingPage::find($id);
+        $doctoresitem = Doctores::all();
+        return view('LandingPge.bestdoctore.bestdoctoredit',compact('doctor','doctoresitem'));
+    }
+
+    public function bestdoctorestore(Request $request){
+        bestLandingPage::create([
+            'doctore_id' => $request->doctore_id,
+        ]);
+        return back()->with('done', "add sucessfully");
+    }
+
+    public function bestdoctorupdate(Request $request,$id){
+        $bestdoctore = BestLandingPage::find($id);
+        $bestdoctore->doctore_id = $request->doctore_id;
+        $bestdoctore->save();
+        return back()->with('done', "update sucessfully");
+    }
+
+    public function bestdoctordestory($id){
+        $bestdoctore = BestLandingPage::find($id);
+        $bestdoctore->delete();
+        return back()->with('done', "delete sucessfully");
     }
 }
