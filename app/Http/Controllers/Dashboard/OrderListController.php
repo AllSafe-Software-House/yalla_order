@@ -24,6 +24,7 @@ class OrderListController extends Controller
     public function listall(){
         $admin = Auth::user();
         $user_place = Admin::where('user_id',$admin->id)->first();
+        $placeid = $user_place->place_id;
         if($user_place->place_id !== null){
             $transction = Order::where('place_id',$placeid)->paginate(10);
 

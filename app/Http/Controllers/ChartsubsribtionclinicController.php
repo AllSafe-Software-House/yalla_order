@@ -36,6 +36,6 @@ class ChartsubsribtionclinicController extends Controller
             ->setTitle('Monthly Clinic Subscriptions')
             ->addLine('Subscriptions', array_values($monthlySubscriptions))
             ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
-            ->setColors(['#d580d3']);
+            ->setColors(['#FD7E7E']);
             }
 }

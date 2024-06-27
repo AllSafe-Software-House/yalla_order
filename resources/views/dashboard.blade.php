@@ -26,27 +26,55 @@
         @endphp
         @if($found == true && $name != 'SuperAdmin')
             <div class="page-content">
-                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
-                    @foreach(range(1, 4) as $index)
-                        <div class="col">
-                            <div class="card radius-10">
-                                <div class="card-body" style="background-color:#FD7E7E">
-                                    <div class="d-flex align-items-center">
-                                        <h5 class="mb-0 text-white"></h5>
-                                        <div class="ms-auto">
-                                            <i class='bx bx-cart fs-3 text-white'></i>
-                                        </div>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-2">
+                    <div class="col">
+                        <div class="card radius-10">
+                            <div class="card-body" style="background-color:#FD7E7E">
+                                <div class="d-flex align-items-center">
+                                    <div class="ms-auto">
+                                        @php
+                                            $order = App\Models\Order::where('place_id',$adminrole->place_id)->count();
+                                        @endphp
+                                        @if ($order > 0)
+                                            <h4 class="mb-0 text-white">{{ $order }}</h4>
+                                        @else
+                                            <h4 class="mb-0 text-white">0</h4>
+                                        @endif
                                     </div>
-                                    <div class="progress my-3 bg-light-transparent" style="height:3px;">
-                                        <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div class="d-flex align-items-center text-white">
-                                        <p class="mb-0">Total Services</p>
-                                    </div>
+                                </div>
+                                <div class="progress my-3 bg-light-transparent" style="height:3px;">
+                                    <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="d-flex align-items-center text-white">
+                                    <p class="mb-0">Total Orders</p>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    </div>
+                    <div class="col">
+                        <div class="card radius-10">
+                            <div class="card-body" style="background-color:#FD7E7E">
+                                <div class="d-flex align-items-center">
+                                    <div class="ms-auto">
+                                        @php
+                                            $menu = App\Models\Menues::where('place_id',$adminrole->place_id)->count();
+                                        @endphp
+                                        @if ($menu > 0)
+                                            <h4 class="mb-0 text-white">{{ $menu }}</h4>
+                                        @else
+                                            <h4 class="mb-0 text-white">0</h4>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="progress my-3 bg-light-transparent" style="height:3px;">
+                                    <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="d-flex align-items-center text-white">
+                                    <p class="mb-0">Total Product IN menu</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row m-6">
                     <div class="col-6">
@@ -64,16 +92,22 @@
                         <div class="card radius-10">
                             <div class="card-body" style="background-color:#FD7E7E">
                                 <div class="d-flex align-items-center">
-                                    <h5 class="mb-0 text-white"></h5>
                                     <div class="ms-auto">
-                                        <i class='bx bx-cart fs-3 text-white'></i>
+                                        @php
+                                            $resturant = App\Models\Places::where('type','restaurantes')->count();
+                                        @endphp
+                                        @if ($resturant > 0)
+                                            <h4 class="mb-0 text-white">{{ $resturant }}</h4>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="progress my-3 bg-light-transparent" style="height:3px;">
-                                    <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25"
+                                    aria-valuemin="0" aria-valuemax="100">
+                                </div>
                                 </div>
                                 <div class="d-flex align-items-center text-white">
-                                    <p class="mb-0">Total Services</p>
+                                    <p class="mb-0">Total Resturant</p>
                                 </div>
                             </div>
                         </div>
@@ -82,16 +116,20 @@
                         <div class="card radius-10 ">
                             <div class="card-body" style="background-color:#FD7E7E">
                                 <div class="d-flex align-items-center">
-                                    <h5 class="mb-0 text-white"></h5>
                                     <div class="ms-auto">
-                                        <i class='bx bx-dollar fs-3 text-white'></i>
+                                        @php
+                                            $clinic = App\Models\Places::where('type','clinic')->count();
+                                        @endphp
+                                        @if ($clinic > 0)
+                                            <h4 class="mb-0 text-white">{{ $clinic }}</h4>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="progress my-3 bg-light-transparent" style="height:3px;">
                                     <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="d-flex align-items-center text-white">
-                                    <p class="mb-0">Total Partner</p>
+                                    <p class="mb-0">Total Clinic</p>
                                 </div>
                             </div>
                         </div>
@@ -100,16 +138,20 @@
                         <div class="card radius-10">
                             <div class="card-body" style="background-color:#FD7E7E">
                                 <div class="d-flex align-items-center">
-                                    <h5 class="mb-0 text-white"></h5>
                                     <div class="ms-auto">
-                                        <i class='bx bx-envelope fs-3 text-white'></i>
+                                        @php
+                                            $requestcount = App\Models\ResturantRequest::count();
+                                        @endphp
+                                        @if ($requestcount > 0)
+                                            <h4 class="mb-0 text-white">{{ $requestcount }}</h4>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="progress my-3 bg-light-transparent" style="height:3px;">
                                     <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="d-flex align-items-center text-white">
-                                    <p class="mb-0">Messages</p>
+                                    <p class="mb-0">Request To JoinUs</p>
                                 </div>
                             </div>
                         </div>
@@ -118,16 +160,20 @@
                         <div class="card radius-10">
                             <div class="card-body" style="background-color:#FD7E7E">
                                 <div class="d-flex align-items-center">
-                                    <h5 class="mb-0 text-white"></h5>
                                     <div class="ms-auto">
-                                        <i class='bx bx-envelope fs-3 text-white'></i>
+                                        @php
+                                            $contcatus = App\Models\Content_US::count();
+                                        @endphp
+                                        @if ($contcatus > 0)
+                                            <h4 class="mb-0 text-white">{{ $contcatus }}</h4>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="progress my-3 bg-light-transparent" style="height:3px;">
                                     <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="d-flex align-items-center text-white">
-                                    <p class="mb-0">Messages</p>
+                                    <p class="mb-0">Messages ContactUs</p>
                                 </div>
                             </div>
                         </div>
