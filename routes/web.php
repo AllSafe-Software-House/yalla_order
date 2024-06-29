@@ -105,6 +105,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('places')->group(function () {
         Route::get('/change/status/page/{id}',[PlacesAdminController::class, 'changestatuspage'])->name('change_statuspage')->middleware('permission:ChangeStatus');
         Route::post('/change/status',[PlacesAdminController::class, 'changestatus'])->name('change_status')->middleware('permission:ChangeStatus');
+        Route::post('filter/places', [PlacesAdminController::class, 'filter'])->name('filterplaces');
         // resturant
         Route::prefix('resturant')->group(function () {
             Route::get('/', [PlacesAdminController::class, 'index'])->name('resturantlist')->middleware('permission:showResturant');
@@ -152,6 +153,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', [CategoryAdminController::class, 'index_clinic'])->name('categorycliniclist')->middleware('permission:showClinicCategory');
             Route::get('/add', [CategoryAdminController::class, 'create_clinic'])->name('categoryclinicadd')->middleware('permission:addClinicCategory');
         });
+        Route::post('filter/category', [CategoryAdminController::class, 'filter'])->name('filtercategory');
         Route::post('/store', [CategoryAdminController::class, 'store'])->name('categorystore')->middleware('permission:addCategory|addClinicCategory');
         Route::get('/edit/{id}', [CategoryAdminController::class, 'edit'])->name('categoryedit')->middleware('permission:editCategory|editClinicCategory');
         Route::post('/update/{id}', [CategoryAdminController::class, 'update'])->name('categoryupdate')->middleware('permission:editCategory|editClinicCategory');
@@ -165,6 +167,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [ProductAdminController::class, 'store'])->name('productstore')->middleware('permission:showProduct');
         Route::get('/edit/{id}', [ProductAdminController::class, 'edit'])->name('productedit')->middleware('permission:editProduct');
         Route::post('/update/{id}', [ProductAdminController::class, 'update'])->name('productupdate')->middleware('permission:editProduct');
+        Route::post('filter/product', [ProductAdminController::class, 'filter'])->name('filterationproduct');
         Route::get('/destory/{id}', [ProductAdminController::class, 'destroy'])->name('productdestory')->middleware('permission:deleteProduct');
         Route::prefix('addation')->group(function () {
             Route::get('/', [AddtionAdminController::class, 'index'])->name('addtionlist')->middleware('permission:showAddon');

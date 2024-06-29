@@ -57,6 +57,18 @@
                 </div>
             @endcan
             <div class="card-body">
+                <form action="{{route('filtercategory')}}" class="d-grid" enctype="multipart/form-data" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="mb-3 col-4">
+                            <label for="name" class="py-2">Filter By Category Name:</label>
+                            <input type="text" id="name" class="form-control" name="categoryorder" placeholder="Category Name">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-danger d-flex justify-content-center">Filter</button>
+                </form>
+            </div>
+            <div class="card-body">
                 <div class="table-responsive">
                     <table class="table mg-b-0 text-md-nowrap table-hover ">
                         <thead>

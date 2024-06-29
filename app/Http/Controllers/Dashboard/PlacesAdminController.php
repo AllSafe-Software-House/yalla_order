@@ -261,4 +261,31 @@ class PlacesAdminController extends Controller
         return back()->with('done', "update status sucessfully");
     }
 
+
+
+    public function filter(Request $request)
+    {
+        if(isset($request->nameorder)){
+            $resturant = [];
+            $dataresturant = places::where('name','like',"%$request->nameorder%")->where('type','restaurantes')->get();
+            if($dataresturant){
+                foreach($dataresturant as $dataresult){
+                    $resturant[] = $dataresult;
+                }
+            }
+            return view('Resturant.index' , compact('resturant'));
+        }
+        if(isset($request->nameclinic)){
+            $clinic = [];
+            $dataclinic = places::where('name','like',"%$request->nameclinic%")->where('type','clinic')->get();
+            if($dataclinic){
+                foreach($dataclinic as $dataresult){
+                    $clinic[] = $dataresult;
+                }
+            }
+            return view('Clinic.index' , compact('clinic'));
+        }
+
+    }
+
 }

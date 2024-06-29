@@ -153,13 +153,35 @@ class CategoryAdminController extends Controller
     public function destroy($id)
     {
         $category = Category::where('id', $id)->first();
-        
+
             $category->delete();
-        
+
         return redirect()->back()->with('done', "delete sucessfully");
     }
 
 
+    public function filter(Request $request)
+    {
+        $category = [];
+        if(isset($request->categoryorder)){
+            $datacategory = Category::where('name','like',"%$request->categoryorder%")->where('type','restaurantes')->get();
+            if($datacategory){
+                foreach($datacategory as $dataresult){
+                    $category[] = $dataresult;
+                }
+            }
+            return view('Category.index' , compact('category'));
+        }
+        if(isset($request->categoryclinic)){
+            $datacategoryclinic = Category::where('name','like',"%$request->categoryclinic%")->where('type','clinic')->get();
+            if($datacategoryclinic){
+                foreach($datacategoryclinic as $dataresult){
+                    $category[] = $dataresult;
+                }
+            }
+            return view('Category.index_clinic' , compact('category'));
+        }
 
+    }
 
 }

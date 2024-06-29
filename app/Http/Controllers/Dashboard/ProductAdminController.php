@@ -142,4 +142,43 @@ class ProductAdminController extends Controller
 
         return redirect()->back()->with('done', "deleting sucessful");
     }
+
+
+    //filter
+    public function filter(Request $request){
+        $products = [];
+        $admin = Auth::user();
+        $user_place = Admin::where('user_id',$admin->id)->first();
+        if(isset($request->placename)){
+            $place = Places::where('name','like',"%$request->placename%")->where('type','restaurantes')->get();
+            if($place){
+                foreach($place as $item){
+                    if ($item) {
+                        $productitem = Products::where('place_id',$item->id)->get();
+                        foreach($productitem as $productdata){
+                            $products[] = $productdata;
+                        }
+                    }
+                }
+            }
+        }
+        if(isset($request->productname)){
+            $productitem = Products::where('name','like',"%$request->productname%")->get();
+            if($productitem){
+                foreach($productitem as $item){
+                    $products[] = $item;
+                }
+            }
+        }
+        if(isset($request->productcategory)){
+            $category = Category::where('name','like',"%$request->productcategory%")->where('type','restaurantes')->first();
+            if($category){
+                $productdatacategory = Products::where('category_id',$category->id)->get();
+                foreach($productdatacategory as $dataresult){
+                    $products[] = $dataresult;
+                }
+            }
+        }
+        return view('Products.index' , compact('products'));
+    }
 }

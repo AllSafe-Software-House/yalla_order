@@ -57,6 +57,42 @@
                 </div>
             @endcan
             <div class="card-body">
+                <form action="{{route('filterationproduct')}}" class="d-grid" enctype="multipart/form-data" method="POST">
+                    @csrf
+                    <div class="row">
+                        @php
+                            $checkrole = auth()->user();
+                            $name = $checkrole->roles->pluck('name');
+                            $permission = $checkrole->getAllPermissions();
+                            $searchTerm = 'showProduct';
+                            $found = false;
+                            foreach ($permission as $perm) {
+                                if ($perm->name == $searchTerm) {
+                                    $found = true;
+                                    break;
+                                }
+                            }
+                        @endphp
+                        @if($found == true && $name->contains('SuperAdmin'))
+                            <div class="mb-3 col-4">
+                                <label for="name" class="py-2">Filter By Place Name:</label>
+                                <input type="text" id="name" class="form-control" name="placename" placeholder="Place Name">
+                            </div>
+                        @endif
+                        <div class="mb-3 col-4">
+                            <label for="name" class="py-2">Filter By Product Name:</label>
+                            <input type="text" id="name" class="form-control" name="productname" placeholder="Product Name">
+                        </div>
+                        <div class="mb-3 col-4">
+                            <label for="name" class="py-2">Filter By Product Category:</label>
+                            <input type="text" id="name" class="form-control" name="productcategory" placeholder="Product category">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-danger d-flex justify-content-center">Filter</button>
+                </form>
+            </div>
+            <hr>
+            <div class="card-body">
                 <div class="table-responsive">
                     <table class="table mg-b-0 text-md-nowrap table-hover ">
                         <thead>
