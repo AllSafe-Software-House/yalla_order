@@ -184,6 +184,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/edit/{id}', [SizeAdminController::class, 'edit'])->name('sizeedit')->middleware('permission:editSize');
             Route::post('/update/{id}', [SizeAdminController::class, 'update'])->name('sizeupdate')->middleware('permission:editSize');
             Route::get('/destory/{id}', [SizeAdminController::class, 'destroy'])->name('sizedestory')->middleware('permission:deleteSize');
+            Route::get('/products/{placeid}', [SizeAdminController::class, 'getProducts'])->name('getProducts');
+
         });
     });
 

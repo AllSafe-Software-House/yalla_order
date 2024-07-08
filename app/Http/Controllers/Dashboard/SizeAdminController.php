@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SizeRequest;
 use App\Models\Admin;
+use App\Models\Menues;
 use App\Models\Places;
+use App\Models\Products;
 use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +42,19 @@ class SizeAdminController extends Controller
         return view('Size.create',compact('resturant'));
     }
 
+    public function getProducts($placeid)
+    {
+        $menues = Menues::where('place_id', $placeid)->get();
+        $products = [];
+        foreach ($menues as $product){
+            $item = Products::where('id', $product->id)->first();
+            $products[] = $item;
+        }
+        return response()->json($products);
+    }
+
+
+
     public function store(SizeRequest $request)
     {
         $size = Size::create([
@@ -48,6 +63,7 @@ class SizeAdminController extends Controller
                 "en" => $request->size,
                 "ar" => $request->size_ar,
             ],
+            'menue_id' => $request->menue_id,
             'price' => $request->price,
         ]);
         return redirect()->route('sizelist')->with('done', 'add sucessful');
@@ -71,6 +87,7 @@ class SizeAdminController extends Controller
             "ar" => $request->size_ar,
         ];
         $size->price = $request->price;
+        $size->menue_id = $request->menue_id;
         $size->save();
         return redirect()->route('sizelist')->with('done', "update sucessfully");
     }

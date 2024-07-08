@@ -34,8 +34,8 @@
     <form action="{{ route('sizeupdate' , $size->id) }}" class="d-grid" enctype="multipart/form-data" method="POST">
         @csrf
         <div class="mb-3">
-            <label for="place_id" class="py-2">Resturant:</label>
-            <select  id="place_id" class="form-control" name="place_id">
+            <label for="placeid" class="py-2">Resturant:</label>
+            <select  id="placeid" class="form-control" name="place_id">
                 @php
                     $placename = \App\Models\Places::where('id',$size->places_id)->first();
                 @endphp
@@ -43,6 +43,12 @@
                 @foreach ($resturant as $data )
                         <option value="{{ $data->id }}">{{ $data->name }}</option>
                 @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="product_id" class="py-2">Product Name:</label>
+            <select id="product_id" class="form-control" name="menue_id">
+                <!-- Options will be populated dynamically -->
             </select>
         </div>
         <div class="mb-3">
@@ -64,4 +70,36 @@
 @section('js')
 <!-- Internal Treeview js -->
 <script src="{{ URL::asset('assets/plugins/treeview/treeview.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#placeid').change(function() {
+            var placeid = $(this).val();
+            if (placeid) {
+                $.ajax({
+                    url: '/Product/size/products/' + placeid,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data); // Debug: log data to check the response
+                        $('#product_id').empty();
+                        $('#product_id').append('<option value="">Select Product</option>');
+                        $.each(data, function(key, value) {
+                            if (value !== null) { // Ensure null values are ignored
+                                var productName = value.name.en + ' / ' + value.name.ar;
+                                $('#product_id').append('<option value="'+ value.id +'">'+ productName +'</option>');
+                            }
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error: ' + status + error);
+                    }
+                });
+            } else {
+                $('#product_id').empty();
+                $('#product_id').append('<option value="">Select Product</option>');
+            }
+        });
+    });
+</script>
 @endsection

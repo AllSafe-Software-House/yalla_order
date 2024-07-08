@@ -38,4 +38,8 @@ class Menues extends Model
         return $this->belongsTo(Places::class);
     }
 
+    public function size(){
+        return $this->hasMany(Size::class);
+    }
+
 }

@@ -34,7 +34,7 @@ class OrderController extends Controller
     public function showdetails($place_id, $product_id)
     {
         $resturant = Places::where('id', $place_id)->first();
-        $sizes = Size::with('place')->where('places_id', $place_id)->get();
+        $sizes = Size::with('place')->where('places_id', $place_id)->where('menue_id',$product_id)->get();
         $additem = Addons::with('place')->where('type', 'item')->where('place_id', $place_id)->get();
         $addsaui = Addons::with('place')->where('type', 'sauci')->where('place_id', $place_id)->get();
 
