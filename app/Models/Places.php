@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Notifications\Notifiable;
+
 
 class Places extends Model
 {
-    use HasFactory , HasTranslations;
+    use HasFactory , HasTranslations , Notifiable;
     protected $fillable = [
         'name',
         'descrption',

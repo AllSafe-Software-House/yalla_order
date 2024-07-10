@@ -38,6 +38,8 @@ class TableExport implements FromCollection, WithHeadings ,WithStyles , WithColu
                 $transaction->Qty,
                 $transaction->status == '1' ? 'IN Tracking' : ($transaction->orderTrake->deliverd_statue == '1' ? 'Done' : 'IN Tracking'),
                 $transaction->pay_method,
+                $transaction->created_at,
+
             ];
         });
     }
@@ -56,16 +58,17 @@ class TableExport implements FromCollection, WithHeadings ,WithStyles , WithColu
             'Qty',
             'Status',
             'Payment Method',
+            'Date'
         ];
     }
-    
+
     public function styles(Worksheet $sheet)
     {
         return [
             1 => ['font' => ['bold' => true, 'color' => ['argb' => 'FD7E7E']]],
         ];
     }
-    
+
     public function columnWidths(): array
     {
         return [

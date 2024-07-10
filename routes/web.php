@@ -26,6 +26,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Dashboard\IconsLinksAdminController;
 use App\Http\Controllers\Dashboard\ReservationLidtController;
 use App\Http\Controllers\Dashboard\PromoCodeControllerAdminController;
+use App\Http\Livewire\Notifications;
 
 /*
 |--------------------------------------------------------------------------
@@ -246,6 +247,13 @@ Route::middleware('auth')->group(function () {
         Route::get('list', [ReservationLidtController::class, 'index'])->name('reservation')->middleware('permission:listReservation');
         Route::get('delete/{id}', [ReservationLidtController::class, 'destory'])->name('reservationdestory')->middleware('permission:deleteReservation');
     });
+
+
+    // notifiction
+    Route::prefix('notification')->group(function () {
+        Route::get('/list', [Notifications::class, 'index'])->name('notificationlist');
+    });
+
 
     Route::prefix('LandingPage')->group(function () {
         Route::get('/partone', [LandingPageController::class, 'partone'])->name('partone');

@@ -28,6 +28,7 @@ use App\Http\Requests\ConfirmOrderRequest;
 use App\Http\Resources\AddtionSauiResourse;
 use App\Http\Resources\ReservationcardResource;
 use App\Http\Resources\MyReservationcardResource;
+use App\Notifications\Sendorder;
 
 class OrderController extends Controller
 {
@@ -127,10 +128,12 @@ class OrderController extends Controller
         $order->specail_request = $request->specail_request;
         $order->delivery_method = $request->delivery_method;
         $delivery_method = $request->delivery_method;
+        $place = Places::where('id',$order->place_id)->first();
         if ($request->pay_method == 'cash') {
             $order->pay_method = 'cash';
             $order->save();
             $this->statsorder($order, $delivery_method);
+            $place->notify(new Sendorder($order));
             return ApiResponse::sendresponse(200, "cofirm order", $order);
         } else {
             $order->pay_method = "card";
@@ -140,6 +143,9 @@ class OrderController extends Controller
             return ApiResponse::sendresponse(200, "show i frame payment", $iframe_link);
         }
     }
+
+
+
 
     public function statsorder($order, $delivery_method)
     {
@@ -328,13 +334,6 @@ class OrderController extends Controller
         }
     }
 
-    public function sucess()
-    {
-        return 5;
-    }
 
-    public function fail()
-    {
-        return 4;
-    }
+
 }
