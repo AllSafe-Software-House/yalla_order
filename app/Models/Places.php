@@ -21,7 +21,8 @@ class Places extends Model
         'type',
         'delivery_fee',
         'longitude',
-        'latitude'
+        'latitude',
+        'category_id'
     ];
 
     public $translatable = [
