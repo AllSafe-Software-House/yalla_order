@@ -25,6 +25,7 @@ class NearResource extends JsonResource
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'type' => $this->type,
+            "delivery_fee" => $this->delivery_fee,
             'distance' => $this->distance,
         ];
     }
