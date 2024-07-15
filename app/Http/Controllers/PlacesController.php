@@ -137,4 +137,10 @@ class PlacesController extends Controller
     return ApiResponse::sendresponse(200, "show places",$data);
 }
 
+
+public function showlistclinic(){
+    $clinic = Places::where('type', 'clinic')->get();
+    return ApiResponse::sendresponse(200, "show all clinic",placesResource::collection($clinic));
+}
+
 }
