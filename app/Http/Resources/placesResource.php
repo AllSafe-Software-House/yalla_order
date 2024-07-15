@@ -25,7 +25,8 @@ class placesResource extends JsonResource
             "type" => $this->type,
             "delivery_fee" => $this->delivery_fee,
             'longitude' => $this->longitude ,
-            'latitude' => $this->latitude
+            'latitude' => $this->latitude,
+            'status' => $this->status
         ];
     }
 }
