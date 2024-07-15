@@ -9,6 +9,7 @@ use App\Http\Resources\DoctoreResource;
 use App\Http\Resources\placesResource;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ClinicallResoures;
+use App\Http\Resources\NearResource;
 use App\Http\Resources\ReviewResource;
 use App\Models\Category;
 use App\Models\Doctores;
@@ -115,27 +116,27 @@ class PlacesController extends Controller
 
         // search location
     public function findPropertiesNearMe(Request $request) {
-    $request->validate([
-        'longitude' => ['required', 'numeric', 'between:-180,180'],
-        'latitude' => ['required', 'numeric', 'between:-90,90'],
-        'type' => ['required','string']
-    ]);
+        $request->validate([
+            'longitude' => ['nullable', 'numeric', 'between:-180,180'],
+            'latitude' => ['nullable', 'numeric', 'between:-90,90'],
+            'type' => ['required','string']
+        ]);
 
-    $latitude = $request->latitude;
-    $longitude = $request->longitude;
+        $latitude = $request->latitude;
+        $longitude = $request->longitude;
 
-    $data = Places::where('type',$request->type)
-        ->select("places.*", DB::raw("6371 * acos(cos(radians($latitude))
-            * cos(radians(places.latitude))
-            * cos(radians(places.longitude) - radians($longitude))
-            + sin(radians($latitude))
-            * sin(radians(places.latitude))) AS distance"))
-        ->havingRaw('distance <= 10')
-        ->get(); // Use get() to actually retrieve the data
+        $data = Places::where('type',$request->type)
+            ->select("places.*", DB::raw("6371 * acos(cos(radians($latitude))
+                * cos(radians(places.latitude))
+                * cos(radians(places.longitude) - radians($longitude))
+                + sin(radians($latitude))
+                * sin(radians(places.latitude))) AS distance"))
+            ->havingRaw('distance <= 10')
+            ->get(); // Use get() to actually retrieve the data
 
-    // Return the data as a JSON response
-    return ApiResponse::sendresponse(200, "show places",$data);
-}
+        // Return the data as a JSON response
+        return ApiResponse::sendresponse(200, "show places",NearResource::collection($data));
+    }
 
 
 public function showlistclinic(){
