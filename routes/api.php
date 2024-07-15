@@ -93,6 +93,7 @@ Route::middleware('lang')->group(function () {
             Route::prefix('clinic')->group(function () {
                 Route::get('/list/{category_id}', [PlacesController::class, 'index_clinic']);
                 Route::get('/show/details/{id}', [PlacesController::class, 'showclinicdetails']);
+                Route::get('/show/list', [PlacesController::class, 'showallclinic']);
                 // menu
                 Route::prefix('doctor')->group(function () {
                     Route::get('/list/{id}', [DoctoresController::class, 'show']);
