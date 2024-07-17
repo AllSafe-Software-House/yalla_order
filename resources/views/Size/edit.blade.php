@@ -51,6 +51,7 @@
                 @php
                     $menue = App\Models\Menues::where('id',$data->menue_id)->first();
                 @endphp
+                @dd($data->menue_id)
                 <option value="{{ $data->menue_id }}">{{ $menue }}</option>
             </select>
         </div>
