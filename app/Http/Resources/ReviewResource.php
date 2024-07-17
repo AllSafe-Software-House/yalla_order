@@ -17,9 +17,13 @@ class ReviewResource extends JsonResource
     {
         return [
             "id" => $this->id,
+            "username" => $this->user->name ,
             "user name" => $this->user->name ,
+            "AvrageRate" => $this->rate_num ,
             "Avrage Rate" => $this->rate_num ,
+            "usercomment" => $this->comment ,
             "user comment" => $this->comment ,
+            "userratetime" => Carbon::parse($this->created_at)->format('Y-m-d') ,
             "user rate time" => Carbon::parse($this->created_at)->format('Y-m-d') ,
         ];
     }
