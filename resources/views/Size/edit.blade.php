@@ -48,7 +48,7 @@
         <div class="mb-3">
             <label for="product_id" class="py-2">Product Name:</label>
             <select id="product_id" class="form-control" name="menue_id">
-                <!-- Options will be populated dynamically -->
+                <option value="{{ $data->product_id }}">{{ $data->product->name }}</option>
             </select>
         </div>
         <div class="mb-3">
