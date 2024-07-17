@@ -21,23 +21,31 @@ class MenuesController extends Controller
         if($check){
                 $menues = [
                     'id' =>$menu->id,
+                    'productname' => $menu->product->name,
                     'product name' => $menu->product->name,
+                    'productdescrption' => $menu->product->descrption,
                     'product descrption' => $menu->product->descrption,
+                    'productprice' => $menu->product->price,
                     'product price' => $menu->product->price,
                     'dicount (%)' => $menu->sale,
                     'logo' => asset($menu->product->image),
                     'product status fav' => true,
+                    'productstatusfav' => true,
                 ];
 
         }else{
                 $menues = [
                     'id' =>$menu->id,
                     'product name' => $menu->product->name,
+                    'productname' => $menu->product->name,
                     'product descrption' => $menu->product->descrption,
+                    'productdescrption' => $menu->product->descrption,
                     'product price' => $menu->product->price,
+                    'productprice' => $menu->product->price,
                     'dicount (%)' => $menu->sale,
                     'logo' => asset($menu->product->image),
                     'product status fav' => false,
+                    'productstatusfav' => false,
                 ];
         }
         return $menues;
@@ -106,7 +114,7 @@ class MenuesController extends Controller
         $menubest = Menues::where('count_selling','!=',0)->where('place_id',$id)->orderBy('count_selling','desc')->get();
         return ApiResponse::sendresponse(200, "show best sellin in menu", $menubest );
     }
-    
+
     public function showbycategory($id){
         $category = Category::where('id',$id)->where('type','restaurantes')->first();
         $result = [];
@@ -145,5 +153,5 @@ class MenuesController extends Controller
         }
         return ApiResponse::sendresponse(200, "show clinic by category", $result );
     }
-    
+
 }

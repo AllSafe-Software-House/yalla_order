@@ -29,7 +29,9 @@ class PromocodeController extends Controller
                 'logo' => asset($data->logo),
                 'status' => $status,
                 'promo code id' => $promocodeExists ? $promocodeall->pluck('id')->first() : null,
-                'promo code name' => $promocodeExists ? $promocodeall->pluck('name')->first() : null
+                'promocodeid' => $promocodeExists ? $promocodeall->pluck('id')->first() : null,
+                'promocodename' => $promocodeExists ? $promocodeall->pluck('name')->first() : null,
+                'promo code name' => $promocodeExists ? $promocodeall->pluck('name')->first() : null,
             ];
             $result[] = $placeData;
         }

@@ -94,8 +94,11 @@ class PlacesController extends Controller
         }
         return ApiResponse::sendresponse(200, "show restaurantes",[
             "Total rate" => $rate,
+            "Totalrate" => $rate,
            "resturant info" => new placesResource($restaurantes),
+           "resturantinfo" => new placesResource($restaurantes),
            "best selling" => ProductResource::collection($menubest),
+           "bestselling" => ProductResource::collection($menubest),
            "reviwes" => ReviewResource::collection($review)
         ]);
     }
@@ -110,6 +113,7 @@ class PlacesController extends Controller
         }
         return ApiResponse::sendresponse(200, "show restaurantes", [
             "clinic info" =>new ClinicResource($clinic),
+            "clinicinfo" =>new ClinicResource($clinic),
             "Doctors" => DoctoreResource::collection($doctors)
         ]);
     }
