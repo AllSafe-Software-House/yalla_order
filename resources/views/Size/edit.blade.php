@@ -45,16 +45,15 @@
                 @endforeach
             </select>
         </div>
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="product_id" class="py-2">Product Name:</label>
             <select id="product_id" class="form-control" name="menue_id">
                 @php
                     $menue = App\Models\Menues::where('id',$data->menue_id)->first();
                 @endphp
-                @dd($data->menue_id)
                 <option value="{{ $data->menue_id }}">{{ $menue }}</option>
             </select>
-        </div>
+        </div> --}}
         <div class="mb-3">
             <label for="size" class="py-2">Size Name:</label>
             <input type="text" id="size" class="form-control" name="size" placeholder="Size Name" value="{{ $size->size }}">
