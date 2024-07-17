@@ -48,7 +48,10 @@
         <div class="mb-3">
             <label for="product_id" class="py-2">Product Name:</label>
             <select id="product_id" class="form-control" name="menue_id">
-                <option value="{{ $data->menue_id }}">{{ $data->menue->product }}</option>
+                @php
+                    $menue = App\Models\Menues::where('id',$data->menue_id)->first();
+                @endphp
+                <option value="{{ $data->menue_id }}">{{ $menue }}</option>
             </select>
         </div>
         <div class="mb-3">
