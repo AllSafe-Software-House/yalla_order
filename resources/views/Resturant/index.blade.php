@@ -153,6 +153,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-center">
+                        {!! $resturant->links() !!}
+                    </div>
                 </div>
             </div>
         </div>
