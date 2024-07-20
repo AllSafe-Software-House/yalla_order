@@ -40,7 +40,8 @@ class ProductAdminController extends Controller
 
         $products = Products::with(['places', 'category'])
             ->where($condition)
-            ->get();
+            // ->get();
+            ->paginate(10);
         return view('Products.index', compact('products', 'admin'));
     }
 
