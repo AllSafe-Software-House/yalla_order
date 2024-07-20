@@ -26,30 +26,30 @@ class OrderListController extends Controller
         $user_place = Admin::where('user_id',$admin->id)->first();
         $placeid = $user_place->place_id;
         if($user_place->place_id !== null){
-            $transction = Order::where('place_id',$placeid)->paginate(10);
+            $transction = Order::where('place_id',$placeid)->orderBy('created_at','desc')->paginate(10);
 
         }else{
-            $transction = Order::where('status','1')->paginate(10);
+            $transction = Order::where('status','1')->orderBy('created_at','desc')->paginate(10);
         }
         return view('Order.transaction' , compact('transction'));
     }
-    
+
     public function index()  {
         $admin = Auth::user();
         $user_place = Admin::where('user_id',$admin->id)->first();
         if($user_place->place_id !== null){
-            $order = Order::where('status','1')->where('place_id',$user_place->place_id)->paginate(10);
+            $order = Order::where('status','1')->where('place_id',$user_place->place_id)->orderBy('created_at','desc')->paginate(10);
         }else{
-            $order = Order::where('status','1')->paginate(10);
+            $order = Order::where('status','1')->orderBy('created_at','desc')->paginate(10);
         }
         $trackorders = [];
             foreach($order as $data){
-                $trackorder = OrderTrake::where('order_id',$data->id)->first();
+                $trackorder = OrderTrake::where('order_id',$data->id)->orderBy('created_at','desc')->first();
                 $trackorders[] = $trackorder;
             }
         return view('Order.indexorder' , compact('order','trackorders'));
     }
-    
+
     public function transaction(){
         $admin = Auth::user();
         $user_place = Admin::where('user_id',$admin->id)->first();
@@ -68,8 +68,8 @@ class OrderListController extends Controller
             return view('Order.transaction' , compact('transction'));
         }
     }
-    
-    
+
+
     public function transactiondelete($id){
         $transction = Order::where('id',$id)->first();
         if(!$transction){
@@ -79,7 +79,7 @@ class OrderListController extends Controller
         return redirect()->back()->with('done','delete sucess');
 
     }
-    
+
     public function reset($id)
     {
         $order = Order::find($id);
@@ -99,7 +99,7 @@ class OrderListController extends Controller
                 ];
             }
         };
-       
+
         $data = [
             'placeName' => $order->place->name,
             'invoiceNumber' => $order->numberOrder,
@@ -143,9 +143,9 @@ class OrderListController extends Controller
             if($users){
                 foreach($users as $data){
                     if($user_place->place_id !== null){
-                        $transactiondatauser = Order::where('user_id',$data->id)->where('place_id',$user_place->place_id)->get();
+                        $transactiondatauser = Order::where('user_id',$data->id)->where('place_id',$user_place->place_id)->orderBy('created_at','desc')->get();
                     }else{
-                        $transactiondatauser = Order::where('user_id',$data->id)->get();
+                        $transactiondatauser = Order::where('user_id',$data->id)->orderBy('created_at','desc')->get();
                     }
                     if ($transactiondatauser != NULL) {
                         foreach($transactiondatauser as $transactiondatauser){
@@ -162,9 +162,9 @@ class OrderListController extends Controller
             if($users){
                 foreach($users as $data){
                     if($user_place->place_id !== null){
-                        $transactiondatauser = Order::where('user_id',$data->id)->where('place_id',$user_place->place_id)->get();
+                        $transactiondatauser = Order::where('user_id',$data->id)->where('place_id',$user_place->place_id)->orderBy('created_at','desc')->get();
                     }else{
-                        $transactiondatauser = Order::where('user_id',$data->id)->get();
+                        $transactiondatauser = Order::where('user_id',$data->id)->orderBy('created_at','desc')->get();
                     }
                     if ($transactiondatauser != NULL) {
                         foreach($transactiondatauser as $transactiondatauser){
@@ -180,17 +180,17 @@ class OrderListController extends Controller
         return view('Order.transaction' , compact('transction'));
 
     }
-    
-    
+
+
     public function export()
     {
         $admin = Auth::user();
         $user_place = Admin::where('user_id',$admin->id)->first();
         if($user_place->place_id !== null){
-            $transactions = Order::where('place_id',$user_place->place_id)->get();
+            $transactions = Order::where('place_id',$user_place->place_id)->orderBy('created_at','desc')->get();
 
         }else{
-            $transactions = Order::where('status','1')->get();
+            $transactions = Order::where('status','1')->orderBy('created_at','desc')->get();
         }
         return Excel::download(new TableExport($transactions), 'transactions.xlsx');
     }

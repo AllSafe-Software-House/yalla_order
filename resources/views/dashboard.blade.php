@@ -24,7 +24,7 @@
                 }
             }
         @endphp
-        @if($found == true && $name != 'SuperAdmin')
+        @if ($found == true && $name != 'SuperAdmin')
             <div class="page-content">
                 <div class="row row-cols-1 row-cols-md-2 row-cols-xl-2">
                     <div class="col">
@@ -33,7 +33,7 @@
                                 <div class="d-flex align-items-center">
                                     <div class="ms-auto">
                                         @php
-                                            $order = App\Models\Order::where('place_id',$adminrole->place_id)->count();
+                                            $order = App\Models\Order::where('place_id', $adminrole->place_id)->count();
                                         @endphp
                                         @if ($order > 0)
                                             <h4 class="mb-0 text-white">{{ $order }}</h4>
@@ -43,7 +43,8 @@
                                     </div>
                                 </div>
                                 <div class="progress my-3 bg-light-transparent" style="height:3px;">
-                                    <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-white" role="progressbar" style="width: 55%"
+                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="d-flex align-items-center text-white">
                                     <p class="mb-0">Total Orders</p>
@@ -57,7 +58,7 @@
                                 <div class="d-flex align-items-center">
                                     <div class="ms-auto">
                                         @php
-                                            $menu = App\Models\Menues::where('place_id',$adminrole->place_id)->count();
+                                            $menu = App\Models\Menues::where('place_id', $adminrole->place_id)->count();
                                         @endphp
                                         @if ($menu > 0)
                                             <h4 class="mb-0 text-white">{{ $menu }}</h4>
@@ -67,7 +68,8 @@
                                     </div>
                                 </div>
                                 <div class="progress my-3 bg-light-transparent" style="height:3px;">
-                                    <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-white" role="progressbar" style="width: 55%"
+                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="d-flex align-items-center text-white">
                                     <p class="mb-0">Total Product IN menu</p>
@@ -94,7 +96,7 @@
                                 <div class="d-flex align-items-center">
                                     <div class="ms-auto">
                                         @php
-                                            $resturant = App\Models\Places::where('type','restaurantes')->count();
+                                            $resturant = App\Models\Places::where('type', 'restaurantes')->count();
                                         @endphp
                                         @if ($resturant > 0)
                                             <h4 class="mb-0 text-white">{{ $resturant }}</h4>
@@ -102,9 +104,9 @@
                                     </div>
                                 </div>
                                 <div class="progress my-3 bg-light-transparent" style="height:3px;">
-                                    <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25"
-                                    aria-valuemin="0" aria-valuemax="100">
-                                </div>
+                                    <div class="progress-bar bg-white" role="progressbar" style="width: 55%"
+                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    </div>
                                 </div>
                                 <div class="d-flex align-items-center text-white">
                                     <p class="mb-0">Total Resturant</p>
@@ -118,7 +120,7 @@
                                 <div class="d-flex align-items-center">
                                     <div class="ms-auto">
                                         @php
-                                            $clinic = App\Models\Places::where('type','clinic')->count();
+                                            $clinic = App\Models\Places::where('type', 'clinic')->count();
                                         @endphp
                                         @if ($clinic > 0)
                                             <h4 class="mb-0 text-white">{{ $clinic }}</h4>
@@ -126,7 +128,8 @@
                                     </div>
                                 </div>
                                 <div class="progress my-3 bg-light-transparent" style="height:3px;">
-                                    <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-white" role="progressbar" style="width: 55%"
+                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="d-flex align-items-center text-white">
                                     <p class="mb-0">Total Clinic</p>
@@ -148,7 +151,8 @@
                                     </div>
                                 </div>
                                 <div class="progress my-3 bg-light-transparent" style="height:3px;">
-                                    <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-white" role="progressbar" style="width: 55%"
+                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="d-flex align-items-center text-white">
                                     <p class="mb-0">Request To JoinUs</p>
@@ -170,7 +174,8 @@
                                     </div>
                                 </div>
                                 <div class="progress my-3 bg-light-transparent" style="height:3px;">
-                                    <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-white" role="progressbar" style="width: 55%"
+                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="d-flex align-items-center text-white">
                                     <p class="mb-0">Messages ContactUs</p>
@@ -203,12 +208,20 @@
                 </div>
             </div>
         @endif
+        <div class="page-content">
+            <div class="row m-4">
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                    <img src="{{ asset('assets/img/backgrounds/WebsiteCreator-bro.png') }}" width="50%" alt="">
+                </div>
+            </div>
+        </div>
+
     </div>
 
 @endsection
 
 @section('js')
-    @if($adminrole->place_id !== null)
+    @if ($adminrole->place_id !== null)
         <script src="{{ $chartorder->cdn() }}"></script>
         {{ $chartorder->script() }}
     @elseif($name == 'SuperAdmin')

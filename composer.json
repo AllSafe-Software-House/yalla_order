@@ -15,6 +15,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/socialite": "^5.11",
         "laravel/tinker": "^2.7",
+        "livewire/livewire": "*",
         "maatwebsite/excel": "^3.1",
         "mcamara/laravel-localization": "^2.0",
         "psr/simple-cache": "^3.0",
@@ -45,7 +46,8 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan vendor:publish --force --tag=livewire:assets --ansi"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"

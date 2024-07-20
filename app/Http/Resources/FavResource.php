@@ -16,8 +16,11 @@ class FavResource extends JsonResource
     {
         return [
             'Resturant Name' => $this->resturantName,
+            'Resturant_Name' => $this->resturantName,
             'Resturant Address' => $this->resturantAdress,
-            'product Name' => $this->productName
+            'Resturant_Address' => $this->resturantAdress,
+            'product Name' => $this->productName,
+            'product_Name' => $this->productName,
         ];
     }
 }

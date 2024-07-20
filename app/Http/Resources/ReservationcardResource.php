@@ -17,11 +17,16 @@ class ReservationcardResource extends JsonResource
         return [
             "reservation id" => $this->id,
             "clinic name" => $this->place->name,
+            "clinicname" => $this->place->name,
             "Doctore name" => $this->doctore->name,
+            "Doctorename" => $this->doctore->name,
             'department' => $this->doctore->department,
+            "patientday_booking" => $this->day_booking,
             "patient day_booking" => $this->day_booking,
+            "patienttime_booking" => $this->time_booking,
             "patient time_booking" => $this->time_booking,
-            "total price" => $this->totalAfterSale
+            "totalprice" => $this->totalAfterSale,
+            "total price" => $this->totalAfterSale,
         ];
     }
 }

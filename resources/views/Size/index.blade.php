@@ -63,6 +63,7 @@
                                 <th>name</th>
                                 <th>Price</th>
                                 <th>Resturant Name</th>
+                                <th>Product Name</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
@@ -83,6 +84,15 @@
                                         <hr>
                                         <span style="color:#FD7E7E">English : </span>{{ $data->place->getTranslation('name','en') }}
                                     </td>
+                                    @if ($data->menue_id != null)
+                                        <td>
+                                            <span style="color:#FD7E7E">Arabic : </span>{{ $data->menue->product->getTranslation('name','ar') }}
+                                            <hr>
+                                            <span style="color:#FD7E7E">English : </span>{{ $data->menue->product->getTranslation('name','en') }}
+                                        </td>
+                                    @else
+                                        <td></td>
+                                    @endif
                                     @can('editSize')
                                         <td>
                                             <a href="{{ route('sizeedit', $data->id) }}">

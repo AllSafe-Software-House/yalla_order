@@ -21,7 +21,9 @@ class DoctoreResource extends JsonResource
             'department' => $this->department,
             'days' => json_decode($this->dayes),
             'start time' => $this->starttime,
+            'start_time' => $this->starttime,
             'end time' => $this->endtime,
+            'end_time' => $this->endtime,
             'fees'=>$this->price_fees,
             'sale' => $this->sale
         ];

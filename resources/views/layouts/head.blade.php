@@ -1,5 +1,5 @@
 <!-- Title -->
-<title> Insta Order Dahbord| @yield('title')</title>
+<title> Insta Order Dashbord| @yield('title')</title>
 <!-- Favicon -->
 <link rel="icon" href="{{URL::asset('assets/img/logoinsta.png')}}" type="image/x-icon"/>
 <!-- Icons css -->
@@ -17,18 +17,23 @@
 <!---Skinmodes css-->
 <link href="{{URL::asset('assets/css/skin-modes.css')}}" rel="stylesheet">
 
+@livewireStyles
+
 <link href='https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css' rel='stylesheet' />
 <script src='https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.js'></script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.umd.min.js"></script>
-@yield('css')
-		
-		<style>
-            .close-sidebar {
-                position: absolute;
 
-                cursor: pointer;
-                color:#FD7E7E;
-            }
-        </style>
+@yield('css')
+<style>
+    .close-sidebar {
+        position: absolute;
+
+        cursor: pointer;
+        color:#FD7E7E;
+    }
+    .noti-item:hover{
+        background-color: #d9d9d9;
+    }
+</style>
 

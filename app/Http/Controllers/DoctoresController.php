@@ -43,7 +43,9 @@ class DoctoresController extends Controller
         }
         return ApiResponse::sendresponse(200,"show details doctors", [
             "Total rate" => $rate,
+            "Totalrate" => $rate,
             "Doctor details" => new DoctoreDetailsResource($doctor),
+            "Doctordetails" => new DoctoreDetailsResource($doctor),
             "reviwes" =>ReviewResource::collection($review),
             "fav"=>$doctorsstatusfav
         ]) ;

@@ -16,19 +16,32 @@ class ReservationResource extends JsonResource
     {
         return [
             "reservation id" => $this->id,
+            "reservationid" => $this->id,
+            "clinicname" => $this->place->name,
             "clinic name" => $this->place->name,
+            "Doctorename" => $this->doctore->name,
             "Doctore name" => $this->doctore->name,
             'department' => $this->doctore->department,
+            'detectiontime' => $this->doctore->time,
             'detection time' => $this->doctore->time,
+            'waitingtime' => $this->doctore->wait,
             'waiting time' => $this->doctore->wait,
+            "clinicAddress" => $this->place->address,
             "clinic Address" => $this->place->address,
+            "patientname" => $this->name,
             "patient name" => $this->name,
+            "patientphone" => $this->phone,
             "patient phone" => $this->phone,
+            "patientgender" => $this->gender,
             "patient gender" => $this->gender,
+            "patientage" => $this->age,
             "patient age" => $this->age,
+            "patientday_booking" => $this->day_booking,
             "patient day_booking" => $this->day_booking,
+            "patienttime_booking" => $this->time_booking,
             "patient time_booking" => $this->time_booking,
-            "total price" => $this->totalAfterSale
+            "totalprice" => $this->totalAfterSale,
+            "total price" => $this->totalAfterSale,
         ];
     }
 }

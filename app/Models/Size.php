@@ -11,6 +11,7 @@ class Size extends Model
     use HasFactory , HasTranslations;
     protected $fillable = [
         'places_id',
+        'menue_id',
         'size',
         'price'
     ];
@@ -25,4 +26,9 @@ class Size extends Model
     public function place(){
         return $this->belongsTo(Places::class,'places_id');
     }
+
+    public function menue(){
+        return $this->belongsTo(Menues::class,'menue_id');
+    }
+
 }

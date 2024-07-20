@@ -17,8 +17,11 @@ class MenueResource extends JsonResource
         return [
             'id' => $this->id,
             'product name' => $this->product->name,
+            'product_name' => $this->product->name,
             'product descrption' => $this->product->descrption,
+            'product_descrption' => $this->product->descrption,
             'product price' => $this->product->price,
+            'product_price' => $this->product->price,
             // 'product status fav' => $this->
         ];
     }

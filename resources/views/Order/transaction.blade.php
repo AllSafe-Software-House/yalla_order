@@ -100,6 +100,7 @@
                                 <th>Qty</th>
                                 <th>Status</th>
                                 <th>Pay method</th>
+                                <th>Date</th>
                                 <th>Reset</th>
                                 @can('deleteTransaction')
                                     <th>Delete</th>
@@ -113,7 +114,7 @@
                                         <td>{{ $loop->iteration + ($transction->currentPage() - 1) * $transction->perPage() }}</td>
                                     @else
                                         <td>{{ $loop->iteration }}</td>
-                                    @endif                                    
+                                    @endif
                                     <td>{{ $data->user->name }}</td>
                                     <td>{{ $data->user->phone }}</td>
                                     <td>{{ $data->numberOrder }}</td>
@@ -137,6 +138,7 @@
                                         @endif
                                     @endif
                                     <td>{{ $data->pay_method }}</td>
+                                    <td>{{ $data->created_at }}</td>
                                     <td>
                                         <form id="resetOrderForm-{{ $data->id }}">
                                             @csrf
@@ -155,7 +157,7 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                            
+
                     </table>
                     @if($transction instanceof \Illuminate\Pagination\LengthAwarePaginator || $transction instanceof \Illuminate\Pagination\Paginator)
                         <div class="row">
@@ -168,7 +170,7 @@
                                 {{ $transction->links('pagination::bootstrap-4') }}
                             </div>
                         </div>
-                    @endif 
+                    @endif
                     <br>
                     <a href="{{route('export')}}" class="btn btn-success m-4">Export to Excel</a>
 
@@ -293,7 +295,7 @@
                 printWindow.document.write('<html><head><title>Print Invoice</title></head><body>');
         printWindow.document.write(modalContent);
         printWindow.document.write('</body></html>');
-        
+
         printWindow.document.close(); // close the document
         printWindow.print();
                 printWindow.close();
