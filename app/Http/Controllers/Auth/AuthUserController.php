@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoinRequest;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\UserRegisterRequest;
+use App\Models\Order;
 use App\Models\User;
 use App\Notifications\VerificationEmailNotification;
 use Illuminate\Http\Request;
@@ -76,5 +77,16 @@ class AuthUserController extends Controller
         $userprofile->phone = $request->phone;
         $userprofile->save();
         return ApiResponse::sendresponse(200, "show profile" ,$userprofile );
+    }
+
+
+    public function delete(){
+        $user = Auth::user();
+        $order = Order::where('user_id', $user->id)->get();
+        foreach($order as $order){
+            $order->delete();
+        }
+        $user->delete();
+        return ApiResponse::sendresponse(200, "delete sucess");
     }
 }

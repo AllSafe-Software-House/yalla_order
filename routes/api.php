@@ -53,6 +53,7 @@ Route::middleware('lang')->group(function () {
             Route::post('edit/profile', [AuthUserController::class, 'editprofile']);
             Route::post('/add/address', [AddAddressController::class, 'addaddress']);
             Route::get('/logout', [AuthUserController::class, 'logout']);
+            Route::get('/delete/account', [AuthUserController::class, 'delete']);
         });
         Route::prefix('places')->group(function () {
             Route::post('/search/name', [PlacesController::class, 'searchres']);
