@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->share("info",\App\Models\GeneralInfo::first());
         view()->share("icon",\App\Models\IconsLinks::all());
+        Paginator::useBootstrap();
     }
 }

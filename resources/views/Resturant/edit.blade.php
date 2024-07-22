@@ -31,16 +31,27 @@
 <!-- breadcrumb -->
 @endsection
 @section('content')
-@if ($errors->any())
-    <div class="alert alert-primary">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li> {{ $error }} </li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+
 <div class="card-body">
+    @if (Session::has('done'))
+                <div class="alert alert-success" role="alert">
+                    {{ Session::get('done') }}
+                </div>
+            @endif
+            @if (Session::has('fail'))
+                <div class="alert alert-danger" role="alert">
+                    {{ Session::get('fail') }}
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-primary">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li> {{ $error }} </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
     <form action="{{ Route('update',$place->id) }}" class="d-grid" enctype="multipart/form-data" method="POST">
         @csrf
         <div class="mb-3">

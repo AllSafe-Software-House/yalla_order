@@ -82,7 +82,8 @@ class PlacesAdminController extends Controller
         // if ($user_place->place_id !== null) {
         //     $resturant = Places::where('id', $user_place->place_id)->get();
         // } else {
-        $resturant = Places::where('type', 'restaurantes')->get();
+        $resturant = Places::where('type', 'restaurantes')->paginate(10);
+        // $resturant = Places::where('type', 'restaurantes')->get();
         // }
         return view('Resturant.index', compact('resturant', 'admin'));
     }
