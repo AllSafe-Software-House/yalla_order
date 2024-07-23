@@ -15,39 +15,57 @@ use Illuminate\Support\Facades\Auth;
 class MenuesController extends Controller
 {
     public function checkfav($id){
-        $userid = Auth::user()->id;
-        $check = Favorites::where('user_id',$userid)->where('menue_id',$id)->exists();
-        $menu = Menues::find($id);
-        if($check){
-                $menues = [
-                    'id' =>$menu->id,
-                    'productname' => $menu->product->name,
-                    'product name' => $menu->product->name,
-                    'productdescrption' => $menu->product->descrption,
-                    'product descrption' => $menu->product->descrption,
-                    'productprice' => $menu->product->price,
-                    'product price' => $menu->product->price,
-                    'dicount (%)' => $menu->sale,
-                    'logo' => asset($menu->product->image),
-                    'product status fav' => true,
-                    'productstatusfav' => true,
-                ];
+        if(Auth::check()){
+            $userid = Auth::user()->id;
 
+            $check = Favorites::where('user_id',$userid)->where('menue_id',$id)->exists();
+            $menu = Menues::find($id);
+            if($check){
+                    $menues = [
+                        'id' =>$menu->id,
+                        'productname' => $menu->product->name,
+                        'product name' => $menu->product->name,
+                        'productdescrption' => $menu->product->descrption,
+                        'product descrption' => $menu->product->descrption,
+                        'productprice' => $menu->product->price,
+                        'product price' => $menu->product->price,
+                        'dicount (%)' => $menu->sale,
+                        'logo' => asset($menu->product->image),
+                        'product status fav' => true,
+                        'productstatusfav' => true,
+                    ];
+
+            }else{
+                    $menues = [
+                        'id' =>$menu->id,
+                        'product name' => $menu->product->name,
+                        'productname' => $menu->product->name,
+                        'product descrption' => $menu->product->descrption,
+                        'productdescrption' => $menu->product->descrption,
+                        'product price' => $menu->product->price,
+                        'productprice' => $menu->product->price,
+                        'dicount (%)' => $menu->sale,
+                        'logo' => asset($menu->product->image),
+                        'product status fav' => false,
+                        'productstatusfav' => false,
+                    ];
+            }
         }else{
-                $menues = [
-                    'id' =>$menu->id,
-                    'product name' => $menu->product->name,
-                    'productname' => $menu->product->name,
-                    'product descrption' => $menu->product->descrption,
-                    'productdescrption' => $menu->product->descrption,
-                    'product price' => $menu->product->price,
-                    'productprice' => $menu->product->price,
-                    'dicount (%)' => $menu->sale,
-                    'logo' => asset($menu->product->image),
-                    'product status fav' => false,
-                    'productstatusfav' => false,
-                ];
+            $menues = [
+                'id' =>$menu->id,
+                'product name' => $menu->product->name,
+                'productname' => $menu->product->name,
+                'product descrption' => $menu->product->descrption,
+                'productdescrption' => $menu->product->descrption,
+                'product price' => $menu->product->price,
+                'productprice' => $menu->product->price,
+                'dicount (%)' => $menu->sale,
+                'logo' => asset($menu->product->image),
+                'product status fav' => false,
+                'productstatusfav' => false,
+            ];
         }
+
         return $menues;
     }
 
