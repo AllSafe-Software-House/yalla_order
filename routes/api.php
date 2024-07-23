@@ -45,7 +45,81 @@ Route::post('/forgetpassword', [AuthUserController::class, 'forgetpassword']);
 Route::post('/passwordreset', [EmailVerificationNotificationController::class, 'passwordreset']);
 
 
+
+
 Route::middleware('lang')->group(function () {
+
+
+
+    // start of all routes which don't need user authorization
+
+    Route::prefix('places')->group(function () {
+        Route::post('/search/name', [PlacesController::class, 'searchres']);
+        Route::post('/search/location', [PlacesController::class, 'searchlocation']);
+        Route::post('/NearMe', [PlacesController::class, 'findPropertiesNearMe']);
+        // Route::get('/listfavproduct', [FavoritesController::class, 'listfav']);
+        // restaurant
+        Route::prefix('restaurantes')->group(function () {
+            Route::get('/list', [PlacesController::class, 'show']);
+            Route::get('/show/details/{id}', [PlacesController::class, 'showresdetails']);
+            // menu
+            Route::prefix('menue')->group(function () {
+                Route::get('/list/{id}', [MenuesController::class, 'show']);
+                Route::get('/listbyfilter/{id}/{categid}', [MenuesController::class, 'showbyfilter']);
+                Route::get('/listbyselling/{id}', [MenuesController::class, 'showbestselling']);
+                // Route::post('/add/favproduct/{id}', [FavoritesController::class, 'addfav']);
+                Route::get('show/details/choose/order/{place_id}/{product_id}', [OrderController::class, 'showdetails']);
+            });
+
+
+        });
+        // clinic
+        Route::prefix('clinic')->group(function () {
+            Route::get('/list/{category_id}', [PlacesController::class, 'index_clinic']);
+            Route::get('/show/details/{id}', [PlacesController::class, 'showclinicdetails']);
+            Route::get('/show/list', [PlacesController::class, 'showlistclinic']);
+            // menu
+            Route::prefix('doctor')->group(function () {
+                Route::get('/list/{id}', [DoctoresController::class, 'show']);
+                // Route::post('/add/favdoctor/{id}', [FavoritesController::class, 'addfavdoctore']);
+                // Route::post('/reservation', [ReservationesController::class, 'store']);
+                // Route::get('/summary/reservation/{id}', [ReservationesController::class, 'summaryReservatin']);
+                // Route::get('/confirm/reservation/{id}', [ReservationesController::class, 'confirmresevation']);
+                // Route::post('/getcode', [ReservationesController::class, 'calccode']);
+                // Route::get('/discount', [DoctoresController::class, 'listdiscount']);
+            });
+
+        });
+    });
+    // category
+    Route::prefix('category')->group(function () {
+        Route::get('/list', [CategoryController::class, 'show']);
+        Route::get('/clinic/list', [CategoryController::class, 'showclinic']);
+        Route::get('show/bycategory/{id}', [MenuesController::class, 'showbycategory']);
+        Route::get('show/clinic/bycategory/{id}', [MenuesController::class, 'showclinicbycategory']);
+
+    });
+    // product
+    Route::prefix('products')->group(function () {
+        Route::get('/list', [ProductsController::class, 'show']);
+        Route::get('/listdiscount', [ProductsController::class, 'productdiscount']);
+    });
+    // setting
+    Route::prefix('setting')->group(function () {
+        Route::get('/aboutus', [SettingController::class, 'aboutus']);
+    });
+
+
+
+    // contact us
+    Route::prefix('contactus')->group(function () {
+        Route::post('/', [ContentUSController::class, 'contactus']);
+    });
+
+    // end of all routes which don't need user authorization
+    //=======================================================
+    // start of all routes which need user authorization
+
     Route::middleware(['auth:sanctum'])->group(function () {
         // user
         Route::prefix('user')->group(function () {
@@ -55,22 +129,25 @@ Route::middleware('lang')->group(function () {
             Route::get('/logout', [AuthUserController::class, 'logout']);
             Route::get('/delete/account', [AuthUserController::class, 'delete']);
         });
+
+
+
         Route::prefix('places')->group(function () {
-            Route::post('/search/name', [PlacesController::class, 'searchres']);
-            Route::post('/search/location', [PlacesController::class, 'searchlocation']);
-            Route::post('/NearMe', [PlacesController::class, 'findPropertiesNearMe']);
+            // Route::post('/search/name', [PlacesController::class, 'searchres']);
+            // Route::post('/search/location', [PlacesController::class, 'searchlocation']);
+            // Route::post('/NearMe', [PlacesController::class, 'findPropertiesNearMe']);
             Route::get('/listfavproduct', [FavoritesController::class, 'listfav']);
             // restaurant
             Route::prefix('restaurantes')->group(function () {
-                Route::get('/list', [PlacesController::class, 'show']);
-                Route::get('/show/details/{id}', [PlacesController::class, 'showresdetails']);
+                // Route::get('/list', [PlacesController::class, 'show']);
+                // Route::get('/show/details/{id}', [PlacesController::class, 'showresdetails']);
                 // menu
                 Route::prefix('menue')->group(function () {
-                    Route::get('/list/{id}', [MenuesController::class, 'show']);
-                    Route::get('/listbyfilter/{id}/{categid}', [MenuesController::class, 'showbyfilter']);
-                    Route::get('/listbyselling/{id}', [MenuesController::class, 'showbestselling']);
+                    // Route::get('/list/{id}', [MenuesController::class, 'show']);
+                    // Route::get('/listbyfilter/{id}/{categid}', [MenuesController::class, 'showbyfilter']);
+                    // Route::get('/listbyselling/{id}', [MenuesController::class, 'showbestselling']);
                     Route::post('/add/favproduct/{id}', [FavoritesController::class, 'addfav']);
-                    Route::get('show/details/choose/order/{place_id}/{product_id}', [OrderController::class, 'showdetails']);
+                    // Route::get('show/details/choose/order/{place_id}/{product_id}', [OrderController::class, 'showdetails']);
                 });
                 // order
                 Route::prefix('order')->group(function () {
@@ -92,13 +169,13 @@ Route::middleware('lang')->group(function () {
             });
             // clinic
             Route::prefix('clinic')->group(function () {
-                Route::get('/list/{category_id}', [PlacesController::class, 'index_clinic']);
-                Route::get('/show/details/{id}', [PlacesController::class, 'showclinicdetails']);
-                Route::get('/show/list', [PlacesController::class, 'showlistclinic']);
+                // Route::get('/list/{category_id}', [PlacesController::class, 'index_clinic']);
+                // Route::get('/show/details/{id}', [PlacesController::class, 'showclinicdetails']);
+                // Route::get('/show/list', [PlacesController::class, 'showlistclinic']);
                 // menu
                 Route::prefix('doctor')->group(function () {
-                    Route::get('/list/{id}', [DoctoresController::class, 'show']);
-                    Route::post('/add/favdoctor/{id}', [FavoritesController::class, 'addfavdoctore']);
+                    // Route::get('/list/{id}', [DoctoresController::class, 'show']);
+                    // Route::post('/add/favdoctor/{id}', [FavoritesController::class, 'addfavdoctore']);
                     Route::post('/reservation', [ReservationesController::class, 'store']);
                     Route::get('/summary/reservation/{id}', [ReservationesController::class, 'summaryReservatin']);
                     Route::get('/confirm/reservation/{id}', [ReservationesController::class, 'confirmresevation']);
@@ -114,21 +191,21 @@ Route::middleware('lang')->group(function () {
         });
         // category
         Route::prefix('category')->group(function () {
-            Route::get('/list', [CategoryController::class, 'show']);
-            Route::get('/clinic/list', [CategoryController::class, 'showclinic']);
-            Route::get('show/bycategory/{id}', [MenuesController::class, 'showbycategory']);
-            Route::get('show/clinic/bycategory/{id}', [MenuesController::class, 'showclinicbycategory']);
+            // Route::get('/list', [CategoryController::class, 'show']);
+            // Route::get('/clinic/list', [CategoryController::class, 'showclinic']);
+            // Route::get('show/bycategory/{id}', [MenuesController::class, 'showbycategory']);
+            // Route::get('show/clinic/bycategory/{id}', [MenuesController::class, 'showclinicbycategory']);
 
         });
         // product
         Route::prefix('products')->group(function () {
-            Route::get('/list', [ProductsController::class, 'show']);
+            // Route::get('/list', [ProductsController::class, 'show']);
             Route::get('/listdiscount', [ProductsController::class, 'productdiscount']);
         });
         // setting
-        Route::prefix('setting')->group(function () {
-            Route::get('/aboutus', [SettingController::class, 'aboutus']);
-        });
+        // Route::prefix('setting')->group(function () {
+        //     Route::get('/aboutus', [SettingController::class, 'aboutus']);
+        // });
 
         // promocode list
         Route::prefix('promocode')->group(function () {
@@ -138,14 +215,20 @@ Route::middleware('lang')->group(function () {
         });
 
         // contact us
-        Route::prefix('contactus')->group(function () {
-            Route::post('/', [ContentUSController::class, 'contactus']);
-        });
+        // Route::prefix('contactus')->group(function () {
+        //     Route::post('/', [ContentUSController::class, 'contactus']);
+        // });
 
 
 
 
     });
+
+
+    // end of all routes which need user authorization
+
 });
+
+
 
 
