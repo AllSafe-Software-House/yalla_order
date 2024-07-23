@@ -51,6 +51,7 @@ class MenuesController extends Controller
                     ];
             }
         }else{
+            $menu = Menues::find($id);
             $menues = [
                 'id' =>$menu->id,
                 'product name' => $menu->product->name,
