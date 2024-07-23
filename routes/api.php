@@ -200,7 +200,7 @@ Route::middleware('lang')->group(function () {
         // product
         Route::prefix('products')->group(function () {
             // Route::get('/list', [ProductsController::class, 'show']);
-            Route::get('/listdiscount', [ProductsController::class, 'productdiscount']);
+            // Route::get('/listdiscount', [ProductsController::class, 'productdiscount']);
         });
         // setting
         // Route::prefix('setting')->group(function () {
