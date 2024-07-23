@@ -25,7 +25,11 @@ class DoctoresController extends Controller
         ->where('doctores.id',$id)
         ->first();
         $review = Reviews::where('doctore_id',$doctor->id)->with('doctor','user')->get();
-        $check = Favorites::where('user_id',$user->id)->where('doctore_id',$id)->exists();
+        if(Auth::check()){
+            $check = Favorites::where('user_id',$user->id)->where('doctore_id',$id)->exists();
+        }else{
+            $check = Favorites::where('doctore_id',$id)->exists();
+        }
         $totalrate = Reviews::where('doctore_id',$id)->first();
         if(!$totalrate){
             $rate = 0;
