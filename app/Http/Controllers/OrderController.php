@@ -87,6 +87,16 @@ class OrderController extends Controller
         } else {
             $promo_code_id = null;
         }
+
+
+        // if ($request->use_wallet==1) {
+        //     // Deduct wallet balance
+        //     $amount_to_use = $request->amount_from_wallet;
+        //     $user_wallet = $user->wallet;
+        //     $user_wallet->withdraw($user->id, $walletAmount);
+        // }
+
+
         $addtocard = Order::create([
             "Qty" =>  $request->qty,
             "user_id" => $user->id,

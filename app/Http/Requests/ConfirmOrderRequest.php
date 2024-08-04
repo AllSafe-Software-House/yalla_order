@@ -26,7 +26,7 @@ class ConfirmOrderRequest extends FormRequest
         return [
             "specail_request" => ["nullable","string"],
             "delivery_method" => ["required","string","in:delivery,onsite"],
-            "pay_method" => ["required","in:card,cash"]
+            "pay_method" => ["required","in:card"]
         ];
     }
 }

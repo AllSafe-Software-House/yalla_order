@@ -30,7 +30,9 @@ class OrderRequest extends FormRequest
             "size_id" => ["required","integer","exists:sizes,id"],
             "item" => ["nullable","exists:addons,id"],
             "sauce"=> ["nullable","exists:addons,id"],
-            "promo_code_id" =>["nullable","exists:promo_codes,id"]
+            "promo_code_id" =>["nullable","exists:promo_codes,id"],
+            // "use_wallet"=>["nullable","in:0,1"],
+            // "amount_from_wallet"=>["nullable","integer"],
         ];
     }
 }
