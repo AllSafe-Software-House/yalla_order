@@ -54,16 +54,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $data)
+                            @foreach ($data as $data_item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->name }}</td>
-                                    <td>{{ $data->email }}</td>
-                                    <td>{{ $data->phone }}</td>
-                                    <td>{{ $data->address }}</td>
-                                    <td>{{ $data->wallet->balance ?? 0 }}</td>
+                                    <td>{{ $data_item->name }}</td>
+                                    <td>{{ $data_item->email }}</td>
+                                    <td>{{ $data_item->phone }}</td>
+                                    <td>{{ $data_item->address }}</td>
+                                    <td>{{ $data_item->wallet->balance ?? 0 }}</td>
                                     <td>
-                                        <a href="{{ route('userTransactions', $data->id) }}">
+                                        <a href="{{ route('userTransactions', $data_item->id) }}">
                                             <button class="btn btn-info">transactions</button>
                                         </a>
                                     </td>
