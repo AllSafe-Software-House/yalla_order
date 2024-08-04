@@ -68,7 +68,7 @@ class UsersController extends Controller
 
 
     public function userTransactions(User $user){
-        $user = User::find($id);
+        // $user = User::find($id);
         $transactions = $user->walletTransactions;
         return view('users.transactions', compact('user','transactions'));
     }
