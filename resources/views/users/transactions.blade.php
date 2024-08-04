@@ -3,7 +3,7 @@
     <!--Internal   Notify -->
     <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
 @section('title')
-    User
+    User Transactions
 @stop
 
 
@@ -13,8 +13,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="my-auto mb-0 content-title">Users</h4><span class="mt-1 mb-0 mr-2 text-muted tx-13"> /
-                List Users</span>
+            <h4 class="my-auto mb-0 content-title">User Transactions</h4><span class="mt-1 mb-0 mr-2 text-muted tx-13"> /
+                List of User Transactions for {{ $user->name }}</span>
         </div>
     </div>
 </div>
@@ -45,28 +45,23 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Address</th>
-                                <th>User Wallet</th>
-                                <th>User Transactions</th>
+                                <th>Amount</th>
+                                <th>Type</th>
+                                <th>Order Id</th>
+                                <th>User Id</th>
+                                <th>Created At</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $data)
+                            @foreach ($transactions as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->name }}</td>
-                                    <td>{{ $data->email }}</td>
-                                    <td>{{ $data->phone }}</td>
-                                    <td>{{ $data->address }}</td>
-                                    <td>{{ $data->wallet->balance ?? 0 }}</td>
-                                    <td>
-                                        <a href="{{ route('userTransactions', $data->id) }}">
-                                            <button class="btn btn-info">transactions</button>
-                                        </a>
-                                    </td>
+                                    <td>{{ $data->amount }}</td>
+                                    <td>{{ $data->type }}</td>
+                                    <td>{{ $data->order_id }}</td>
+                                    <td>{{ $data->user_id }}</td>
+                                    <td>{{ $data->created_at }}</td>
+
                                 </tr>
                             @endforeach
                         </tbody>

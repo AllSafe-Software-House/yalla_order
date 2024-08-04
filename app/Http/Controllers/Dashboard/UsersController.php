@@ -65,6 +65,15 @@ class UsersController extends Controller
         return view('users.show', compact('user'));
     }
 
+
+
+    public function userTransactions(User $user){
+        $user = User::find($id);
+        $transactions = $user->walletTransactions;
+        return view('users.transactions', compact('user','transactions'));
+    }
+
+
     public function edit($id)
     {
         $user = User::find($id);
