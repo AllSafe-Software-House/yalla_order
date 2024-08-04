@@ -92,7 +92,7 @@ Route::middleware('auth')->group(function () {
         // Route::get('/edit/{id}', [UsersController::class, 'edit'])->name('usersedit');
         // Route::post('/update/{id}', [UsersController::class, 'update'])->name('usersupdate');
         Route::get('/destory/{id}', [UsersController::class, 'destroy'])->name('usersdestory')->middleware('permission:deleteUser');
-        Route::get('/user-transactions/{users}', [UsersController::class, 'userTransactions'])->name('userTransactions');
+        Route::get('/user-transactions/{user_id}', [UsersController::class, 'userTransactions'])->name('userTransactions');
     });
     // roles
     Route::prefix('roles')->group(function () {
