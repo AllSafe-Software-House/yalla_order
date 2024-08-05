@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class GeneralSetting extends Model
 {
+    protected $table = 'settings';
     protected $fillable = ['key', 'value'];
 
     public function applyCashback($order)
