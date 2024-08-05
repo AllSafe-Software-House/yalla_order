@@ -153,6 +153,11 @@ class PlacesAdminController extends Controller
             'delivery_fee' => $request->delivery_fee,
             'category_id' => $request->category_id
         ]);
+
+
+        $resturant->wallet()->create(['balance'=>0]);
+
+
         if ($place == 'clinic') {
             return redirect()->route('cliniclist')->with('done', 'add sucessful');
         } else {
