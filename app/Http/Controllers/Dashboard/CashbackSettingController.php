@@ -9,7 +9,17 @@ class CashbackSettingController extends Controller
 {
     public function index()
     {
-        $settings = GeneralSetting::whereIn('key', ['cashback_enabled', 'cashback_amount', 'cashback_percentage', 'cashback_limit'])->pluck('value', 'key')->toArray();
+        $defaults = [
+            'cashback_enabled' => 0,
+            'cashback_amount' => 0,
+            'cashback_percentage' => 0,
+            'cashback_limit' => 0,
+        ];
+
+        $settings = GeneralSetting::whereIn('key', array_keys($defaults))->pluck('value', 'key')->toArray();
+
+        // Merge defaults with existing settings
+        $settings = array_merge($defaults, $settings);
         return view('cashback-settings.index', compact('settings'));
     }
 
