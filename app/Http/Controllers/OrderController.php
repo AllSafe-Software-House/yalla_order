@@ -15,7 +15,9 @@ use App\Helper\ApiResponse;
 use App\Models\Promo_Codes;
 use Illuminate\Http\Request;
 use App\Models\Reservationes;
+use App\Models\GeneralSetting;
 use App\Models\PaymentOperation;
+use App\Notifications\Sendorder;
 use App\Http\Resources\SizeResourse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -28,7 +30,6 @@ use App\Http\Requests\ConfirmOrderRequest;
 use App\Http\Resources\AddtionSauiResourse;
 use App\Http\Resources\ReservationcardResource;
 use App\Http\Resources\MyReservationcardResource;
-use App\Notifications\Sendorder;
 
 class OrderController extends Controller
 {
@@ -234,7 +235,7 @@ class OrderController extends Controller
         $ordernum = $orderdetails->numberOrder;
         $tokenjsonresponse = $this->gettoken();
         $order = $this->orderdata($integration_id, $ordernum, $ifram_id);
-        $datauser = $this->datauser($integration_id, $order['amount_cents'], $order['id'],$tokenjsonresponse);
+        return $datauser = $this->datauser($integration_id, $order['amount_cents'], $order['id'],$tokenjsonresponse);
         $iframe_link = 'https://accept.paymobsolutions.com/api/acceptance/iframes/' . $ifram_id . '?payment_token=' . $datauser['token'];
         return $iframe_link;
 
@@ -334,6 +335,13 @@ class OrderController extends Controller
                 'order_id' => $request->merchant_order_id,
                 'status' => '1'
             ]);
+
+            $order = Order::find($request->merchant_order_id);
+            if($order){
+                // Apply cashback
+                $this->applyCashback($order);
+            }
+
             $data = [
                 "order id" => $request->merchant_order_id,
                 "payment" => $payment_details,
@@ -342,6 +350,42 @@ class OrderController extends Controller
         } else {
             return ApiResponse::sendresponse(404, "fail payment");
         }
+    }
+
+
+
+    public function applyCashback($order)
+    {
+        $enabled = GeneralSetting::where('key', 'cashback_enabled')->value('value');
+        $amount = GeneralSetting::where('key', 'cashback_amount')->value('value');
+        $percentage = GeneralSetting::where('key', 'cashback_percentage')->value('value');
+        $limit = GeneralSetting::where('key', 'cashback_limit')->value('value');
+
+        if (!$enabled) {
+            return;
+        }
+
+        if ($order->price < $limit) {
+            return;
+        }
+
+        $cashbackAmount = 0;
+        if ($amount > 0) {
+            $cashbackAmount = $amount;
+        } elseif ($percentage > 0) {
+            $cashbackAmount = $order->price * ($percentage / 100);
+        }
+
+        // Apply cashback to user's wallet
+        $order->user->wallet->cashback($cashbackAmount, $order->id);
+
+        // Log cashback transaction
+        $order->user->walletTransactions()->create([
+            'amount' => $cashbackAmount,
+            'type' => 'cashback',
+            'order_id'=>$order->id,
+            // 'description' => "Cashback for order #{$order->id}",
+        ]);
     }
 
 

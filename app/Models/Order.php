@@ -27,7 +27,8 @@ class Order extends Model
         'delivery_fee',
         'promo_code_id',
         'numberOrder',
-        'pay_method'
+        'pay_method',
+        'merchant_order_id'
     ];
 
 
