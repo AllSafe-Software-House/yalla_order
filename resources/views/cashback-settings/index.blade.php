@@ -35,7 +35,10 @@
                                         <h6 class="mb-0">Cashback Enabled</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="checkbox" name="cashback_enabled" value="{{ $settings['cashback_enabled'] }}" class="form-control @error('cashback_enabled') is-invalid @enderror" id="cashback_enabled" placeholder="cashback enabled" />
+                                        <input type="checkbox" name="cashback_enabled" value="{{ $settings['cashback_enabled'] }}"
+                                        @if($settings['cashback_enabled'] == 0)
+                                            checked
+                                        @endif class="form-control @error('cashback_enabled') is-invalid @enderror" id="cashback_enabled" placeholder="cashback enabled" />
                                         @error('cashback_enabled')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
