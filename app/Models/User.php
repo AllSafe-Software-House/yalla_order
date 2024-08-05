@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function wallet()
     {
-        return $this->morphOne(Wallet::class, 'walletable');
+        return $this->morphOne(UserWallet::class, 'walletable');
     }
 
     public function walletTransactions()
