@@ -269,7 +269,7 @@ class OrderController extends Controller
                 'auth_token' => $tokenjson['token'],
                 "delivery_needed" => "false",
                 "amount_cents" => $totalprice * 100,
-                // "merchant_order_id" => $order->numberOrder
+                "merchant_order_id" => $order->numberOrder
             ]);
 
         return $response_order->object();
@@ -301,9 +301,9 @@ class OrderController extends Controller
             "billing_data" => [
                 "first_name"            => $first_name,
                 "last_name"             => $last_name,
-                "phone_number"          => $user->phone??"NA",
+                "phone_number"          => "NA",
                 // "phone_number"          => $user->phone ?: "NA",
-                "email"                 => $user->email??"NA",
+                "email"                 => $user->email,
                 "apartment"             => "NA",
                 "floor"                 => "NA",
                 "street"                => "na",
