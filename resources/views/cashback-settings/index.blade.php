@@ -16,34 +16,47 @@
 
 
 @section('content')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<div class="page-content">
+    <div class="container">
+        <div class="main-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="{{ route('cashback-settings.update') }}" method="POST">
+                                @csrf
+                                @method('PUT')
 
-<form action="{{ route('cashback-settings.update') }}" method="POST">
-    @csrf
-    @method('PUT')
+                                <div>
+                                    <label for="cashback_enabled">Cashback Enabled:</label>
+                                    <input type="checkbox" id="cashback_enabled" name="cashback_enabled" value="1" {{ $settings['cashback_enabled'] ? 'checked' : '' }}>
+                                </div>
 
-    <div>
-        <label for="cashback_enabled">Cashback Enabled:</label>
-        <input type="checkbox" id="cashback_enabled" name="cashback_enabled" value="1" {{ $settings['cashback_enabled'] ? 'checked' : '' }}>
+                                <div>
+                                    <label for="cashback_amount">Cashback Amount:</label>
+                                    <input type="number" step="0.01" id="cashback_amount" name="cashback_amount" value="{{ $settings['cashback_amount'] }}">
+                                </div>
+
+                                <div>
+                                    <label for="cashback_percentage">Cashback Percentage:</label>
+                                    <input type="number" step="0.01" id="cashback_percentage" name="cashback_percentage" value="{{ $settings['cashback_percentage'] }}">
+                                </div>
+
+                                <div>
+                                    <label for="cashback_limit">Minimum Order Amount:</label>
+                                    <input type="number" step="0.01" id="cashback_limit" name="cashback_limit" value="{{ $settings['cashback_limit'] }}">
+                                </div>
+
+                                <button type="submit">Update Settings</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div>
-        <label for="cashback_amount">Cashback Amount:</label>
-        <input type="number" step="0.01" id="cashback_amount" name="cashback_amount" value="{{ $settings['cashback_amount'] }}">
-    </div>
-
-    <div>
-        <label for="cashback_percentage">Cashback Percentage:</label>
-        <input type="number" step="0.01" id="cashback_percentage" name="cashback_percentage" value="{{ $settings['cashback_percentage'] }}">
-    </div>
-
-    <div>
-        <label for="cashback_limit">Minimum Order Amount:</label>
-        <input type="number" step="0.01" id="cashback_limit" name="cashback_limit" value="{{ $settings['cashback_limit'] }}">
-    </div>
-
-    <button type="submit">Update Settings</button>
-</form>
-
+</div>
 @endsection
 
 
