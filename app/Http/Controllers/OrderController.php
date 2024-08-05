@@ -150,7 +150,7 @@ class OrderController extends Controller
             $order->pay_method = "card";
             $order->save();
             $ordernum = $order->numberOrder;
-            return $iframe_link = $this->checkout($id);
+            $iframe_link = $this->checkout($id);
             return ApiResponse::sendresponse(200, "show i frame payment", $iframe_link);
         }
     }
@@ -235,7 +235,7 @@ class OrderController extends Controller
         $ordernum = $orderdetails->numberOrder;
         $tokenjsonresponse = $this->gettoken();
         $order = $this->orderdata($integration_id, $ordernum, $ifram_id);
-        return $datauser = $this->datauser($integration_id, $order['amount_cents'], $order['id'],$tokenjsonresponse);
+        $datauser = $this->datauser($integration_id, $order['amount_cents'], $order['id'],$tokenjsonresponse);
         $iframe_link = 'https://accept.paymobsolutions.com/api/acceptance/iframes/' . $ifram_id . '?payment_token=' . $datauser['token'];
         return $iframe_link;
 
@@ -336,11 +336,11 @@ class OrderController extends Controller
                 'status' => '1'
             ]);
 
-            $order = Order::find($request->merchant_order_id);
-            if($order){
-                // Apply cashback
-                $this->applyCashback($order);
-            }
+            // $order = Order::where('merchant_order_id',$request->merchant_order_id)->first();
+            // if($order){
+            //     // Apply cashback
+            //     $this->applyCashback($order);
+            // }
 
             $data = [
                 "order id" => $request->merchant_order_id,
