@@ -28,24 +28,67 @@
                                 @csrf
                                 @method('PUT')
 
-                                <div>
-                                    <label for="cashback_enabled">Cashback Enabled:</label>
-                                    <input type="checkbox" id="cashback_enabled" name="cashback_enabled" value="1" {{ $settings['cashback_enabled'] ? 'checked' : '' }}>
+
+
+                                <div class="mb-3 row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Cashback Enabled</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="checkbox" name="cashback_enabled" value="{{ $settings['cashback_enabled'] }}" class="form-control @error('cashback_enabled') is-invalid @enderror" id="cashback_enabled" placeholder="cashback enabled" />
+                                        @error('cashback_enabled')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
                                 </div>
 
-                                <div>
+                                {{-- <div>
                                     <label for="cashback_amount">Cashback Amount:</label>
                                     <input type="number" step="0.01" id="cashback_amount" name="cashback_amount" value="{{ $settings['cashback_amount'] }}">
+                                </div> --}}
+
+                                <div class="mb-3 row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Cashback Amount:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="number" name="cashback_amount"  value="{{ $settings['cashback_amount'] }}" class="form-control @error('cashback_amount') is-invalid @enderror" id="cashback_amount" placeholder="cashback amount" />
+                                        @error('cashback_amount')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
                                 </div>
 
-                                <div>
+                                {{-- <div>
                                     <label for="cashback_percentage">Cashback Percentage:</label>
                                     <input type="number" step="0.01" id="cashback_percentage" name="cashback_percentage" value="{{ $settings['cashback_percentage'] }}">
+                                </div> --}}
+
+
+                                <div class="mb-3 row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Cashback Percentage:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="number" step="0.01" name="cashback_percentage"  value="{{ $settings['cashback_percentage'] }}" class="form-control @error('cashback_percentage') is-invalid @enderror" id="cashback_percentage" placeholder="cashback amount" />
+                                        @error('cashback_percentage')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
                                 </div>
 
-                                <div>
-                                    <label for="cashback_limit">Minimum Order Amount:</label>
-                                    <input type="number" step="0.01" id="cashback_limit" name="cashback_limit" value="{{ $settings['cashback_limit'] }}">
+
+
+                                <div class="mb-3 row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Minimum Order Amount:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="number" step="0.01" name="cashback_limit" value="{{ $settings['cashback_limit'] }}" class="form-control @error('cashback_limit') is-invalid @enderror" id="cashback_limit" placeholder="cashback amount" />
+                                        @error('cashback_limit')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
                                 </div>
 
                                 <button type="submit">Update Settings</button>
