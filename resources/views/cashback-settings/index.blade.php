@@ -91,7 +91,14 @@
                                     </div>
                                 </div>
 
-                                <button type="submit">Update Settings</button>
+                                {{-- <button type="submit">Update Settings</button> --}}
+
+                                <div class="row">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="submit" class="px-4 btn btn-primary" value="Update Settings" />
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
