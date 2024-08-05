@@ -269,7 +269,7 @@ class OrderController extends Controller
                 'auth_token' => $tokenjson['token'],
                 "delivery_needed" => "false",
                 "amount_cents" => $totalprice * 100,
-                "merchant_order_id" => $order->numberOrder
+                // "merchant_order_id" => $order->numberOrder
             ]);
 
         return $response_order->object();
@@ -301,9 +301,9 @@ class OrderController extends Controller
             "billing_data" => [
                 "first_name"            => $first_name,
                 "last_name"             => $last_name,
-                "phone_number"          => "NA",
+                "phone_number"          => $user->phone??"NA",
                 // "phone_number"          => $user->phone ?: "NA",
-                "email"                 => $user->email,
+                "email"                 => $user->email??"NA",
                 "apartment"             => "NA",
                 "floor"                 => "NA",
                 "street"                => "na",
@@ -340,11 +340,11 @@ class OrderController extends Controller
                 'status' => '1'
             ]);
 
-            // $order = Order::where('payment_order_id',$request->id)->first();
-            // if($order){
-            //     // Apply cashback
-            //     $this->applyCashback($order);
-            // }
+            $order = Order::where('payment_order_id',$request->id)->first();
+            if($order){
+                // Apply cashback
+                $this->applyCashback($order);
+            }
 
             $data = [
                 "order id" => $request->merchant_order_id,
