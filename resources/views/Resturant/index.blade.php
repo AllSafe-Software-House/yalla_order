@@ -13,7 +13,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Resturantes</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+            <h4 class="my-auto mb-0 content-title">Resturantes</h4><span class="mt-1 mb-0 mr-2 text-muted tx-13"> /
                 List Resturantes</span>
         </div>
     </div>
@@ -45,7 +45,7 @@
                 </div>
             @endif
             @can('addResturant')
-                <div class="card-header pb-0">
+                <div class="pb-0 card-header">
                     <div class="d-flex justify-content-between">
                         <div class="col-lg-12 margin-tb">
                             <div class="pull-right col-12">
@@ -83,6 +83,8 @@
                                 <th>End Work Time</th>
                                 <th>Address</th>
                                 <th>Delivery Fee</th>
+                                <th>Resturant Wallet</th>
+                                <th>Resturant Transactions</th>
                                 @can('showMenu')
                                     <th>Menu</th>
                                 @endcan
@@ -125,7 +127,12 @@
                                         <span style="color:#FD7E7E">English : </span>{{ $data->getTranslation('address','en') }}
                                     </td>
                                     <td>{{ $data->delivery_fee }}</td>
-
+                                    <td>{{ $data->wallet->balance ?? 0 }}</td>
+                                    <td>
+                                        <a href="{{ route('resturantTransactions', $data->id) }}">
+                                            <button class="btn btn-info">transactions</button>
+                                        </a>
+                                    </td>
                                     @can('showMenu')
                                         <td>
                                             <a href="{{ route('menulist', $data->id) }}">

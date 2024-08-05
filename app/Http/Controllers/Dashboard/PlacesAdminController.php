@@ -62,6 +62,13 @@ class PlacesAdminController extends Controller
         return $imagepath;
     }
 
+    public function resturantTransactions($id){
+        $resturant = Places::find($id);
+        // return $user;
+        $transactions = $resturant->walletTransactions;
+        return view('Resturant.transactions', compact('resturant','transactions'));
+    }
+
     public function resturant_request()
     {
         $admin = Auth::user();
@@ -110,6 +117,14 @@ class PlacesAdminController extends Controller
     {
         $category = Category::where('type', 'clinic')->get();
         return view('Clinic.create',compact('category'));
+    }
+
+
+    public function clinicTransactions($id){
+        $clinic = Places::find($id);
+        // return $user;
+        $transactions = $clinic->walletTransactions;
+        return view('Clinic.transactions', compact('clinic','transactions'));
     }
 
     public function store(PlacesRequest $request)

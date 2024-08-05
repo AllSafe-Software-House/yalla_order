@@ -31,6 +31,16 @@ class Places extends Model
         'address'
     ];
 
+    public function wallet()
+    {
+        return $this->morphOne(UserWallet::class, 'walletable');
+    }
+
+    public function walletTransactions()
+    {
+        return $this->morphMany(WalletTransaction::class,'transactionable');
+    }
+
     public function categories()
     {
         return $this->belongsToMany(Category::class);

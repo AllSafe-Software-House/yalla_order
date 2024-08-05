@@ -111,6 +111,7 @@ Route::middleware('auth')->group(function () {
         // resturant
         Route::prefix('resturant')->group(function () {
             Route::get('/', [PlacesAdminController::class, 'index'])->name('resturantlist')->middleware('permission:showResturant');
+            Route::get('/resturant-transactions/{id}', [PlacesAdminController::class, 'resturantTransactions'])->name('resturantTransactions');
             Route::get('/resturants-requests', [PlacesAdminController::class, 'resturant_request'])->name('resturantRequest')->middleware('permission:showResturant');
             Route::delete('/resturants-requests/{id}/delete', [PlacesAdminController::class, 'destroy_resturant_request'])->name('resturant_request.destroy');
             Route::get('/add', [PlacesAdminController::class, 'create'])->name('resturantadd')->middleware('permission:addResturant');
@@ -127,6 +128,7 @@ Route::middleware('auth')->group(function () {
         // clinic
         Route::prefix('clinic')->group(function () {
             Route::get('/', [PlacesAdminController::class, 'index_clinic'])->name('cliniclist')->middleware('permission:showClinic');
+            Route::get('/clinic-transactions/{id}', [PlacesAdminController::class, 'clinicTransactions'])->name('clinicTransactions');
             Route::get('/add', [PlacesAdminController::class, 'create_clinic'])->name('clinicadd')->middleware('permission:addClinic');
             Route::prefix('doctor')->group(function () {
                 Route::get('/{id}', [DoctorController::class, 'index'])->name('doctorlist')->middleware('permission:showDoctor');
