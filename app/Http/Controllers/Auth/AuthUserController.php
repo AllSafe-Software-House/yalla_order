@@ -28,6 +28,7 @@ class AuthUserController extends Controller
             'phone' => $request->phone
         ]);
         $token = $user->createToken($user->name . '@allsafe')->plainTextToken;
+        $user->wallet()->create(['balance'=>0]);
         return ApiResponse::sendresponse(200, "register sucess", $token);
     }
 

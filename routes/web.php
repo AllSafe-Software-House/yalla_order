@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Notifications;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AddonsController;
@@ -23,10 +24,10 @@ use App\Http\Controllers\Dashboard\SettingAdminController;
 use App\Http\Controllers\Dashboard\CategoryAdminController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Dashboard\CashbackSettingController;
 use App\Http\Controllers\Dashboard\IconsLinksAdminController;
 use App\Http\Controllers\Dashboard\ReservationLidtController;
 use App\Http\Controllers\Dashboard\PromoCodeControllerAdminController;
-use App\Http\Livewire\Notifications;
 
 /*
 |--------------------------------------------------------------------------
@@ -192,6 +193,10 @@ Route::middleware('auth')->group(function () {
 
         });
     });
+
+
+    Route::get('/cashback-settings', [CashbackSettingController::class, 'index'])->name('cashback-settings.index');
+    Route::put('/cashback-settings', [CashbackSettingController::class, 'update'])->name('cashback-settings.update');
 
     // setting
     Route::prefix('setting')->group(function () {
