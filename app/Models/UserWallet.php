@@ -12,9 +12,15 @@ class UserWallet extends Model
         'id',
     ];
 
-    public function user()
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class,'user_id');
+    // }
+
+
+    public function walletable()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->morphTo();
     }
 
 
@@ -23,7 +29,7 @@ class UserWallet extends Model
         $this->balance += $amount;
         $this->save();
 
-        $this->user()->create([
+        $this->walletable()->create([
             'amount' => $amount,
             'type' => 'deposit',
             // 'description' => 'Wallet deposit',
@@ -36,7 +42,7 @@ class UserWallet extends Model
             $this->balance -= $amount;
             $this->save();
 
-            $this->user()->create([
+            $this->walletable()->create([
                 'amount' => -$amount,
                 'type' => 'withdraw',
                 // 'description' => 'Wallet withdrawal',
@@ -53,7 +59,7 @@ class UserWallet extends Model
         $this->balance += $amount;
         $this->save();
 
-        $this->user()->create([
+        $this->walletable()->create([
             'amount' => $amount,
             'type' => 'cashback',
             'order_id'=>$orderId,
@@ -66,7 +72,7 @@ class UserWallet extends Model
         $this->balance += $amount;
         $this->save();
 
-        $this->user()->create([
+        $this->walletable()->create([
             'amount' => $amount,
             'type' => 'refund',
             'order_id'=>$orderId,

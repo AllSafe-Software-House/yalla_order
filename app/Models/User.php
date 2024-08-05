@@ -52,12 +52,12 @@ class User extends Authenticatable
 
     public function wallet()
     {
-        return $this->hasOne(UserWallet::class,'user_id');
+        return $this->morphOne(Wallet::class, 'walletable');
     }
 
     public function walletTransactions()
     {
-        return $this->hasMany(WalletTransaction::class,'user_id');
+        return $this->morphOne(WalletTransaction::class,'transactionable');
     }
 
     public function orders()
