@@ -240,7 +240,8 @@ class OrderController extends Controller
         }
         $order_price_in_cents = $orderdetails->price * 100 ;
         $datauser = $this->datauser($integration_id, $order_price_in_cents, $orderdetails->payment_order_id,$tokenjsonresponse);
-        $iframe_link = 'https://accept.paymobsolutions.com/api/acceptance/iframes/' . $ifram_id . '?payment_token=' . $datauser['token'];
+        $iframe_link = 'https://accept.paymob.com/api/acceptance/iframes/' . $ifram_id . '?payment_token=' . $datauser['token'];
+        // $iframe_link = 'https://accept.paymobsolutions.com/api/acceptance/iframes/' . $ifram_id . '?payment_token=' . $datauser['token'];
         return $iframe_link;
 
     }
