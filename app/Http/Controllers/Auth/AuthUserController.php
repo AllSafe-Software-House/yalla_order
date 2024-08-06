@@ -43,7 +43,7 @@ class AuthUserController extends Controller
         if (!$user || !Hash::check($request->password, $user->password)) {
             return ApiResponse::sendresponse(422, "Username or password incorrect");
         }
-        $user->tokens()->delete();
+        // $user->tokens()->delete();
         $token = $user->createToken($user->name . '@allsafe')->plainTextToken;
         return ApiResponse::sendresponse(200, "login sucess", $token);
     }
