@@ -464,7 +464,9 @@ class OrderController extends Controller
         $user = $order->user;
         $wallet = $user->wallet;
         $walletBalance = $wallet->balance;
-
+       return  array(['walletBalance'=>$walletBalance ,
+            'order_price'=>$order_price
+        ]);
         // Check if cashback balance is sufficient to cover the order price
         if ($walletBalance >= $order_price) {
             // Deduct the order price from the cashback balance
