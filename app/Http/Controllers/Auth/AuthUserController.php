@@ -43,8 +43,9 @@ class AuthUserController extends Controller
         if (!$user || !Hash::check($request->password, $user->password)) {
             return ApiResponse::sendresponse(422, "Username or password incorrect");
         }
-        return $user->tokens()->get();
-        $token = $user->createToken($user->name . '@allsafe' . request()->ip())->plainTextToken;
+        $token_count = $user->tokens()->count();
+        // $token_count++;
+        $token = $user->createToken($user->name . '@allsafe-' . $token_count++)->plainTextToken;
         return ApiResponse::sendresponse(200, "login sucess", $token);
     }
 
