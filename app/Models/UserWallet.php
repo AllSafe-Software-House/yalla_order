@@ -43,7 +43,7 @@ class UserWallet extends Model
             $this->save();
 
             $this->walletable()->create([
-                'amount' => -$amount,
+                'amount' => $amount,
                 'type' => 'withdraw',
                 // 'description' => 'Wallet withdrawal',
             ]);

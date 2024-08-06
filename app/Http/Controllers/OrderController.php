@@ -145,8 +145,21 @@ class OrderController extends Controller
             $order->save();
             $this->statsorder($order, $delivery_method);
             $place->notify(new Sendorder($order));
+
             return ApiResponse::sendresponse(200, "cofirm order", $order);
-        } else {
+        }elseif($request->pay_method == 'cashback_wallet'){
+            $order->pay_method = 'cashback wallet';
+            $order->save();
+            $this->statsorder($order, $delivery_method);
+            $place->notify(new Sendorder($order));
+            $use_cashback = $this->useCashback($order);
+
+            if($use_cashback == false){
+                return ApiResponse::sendresponse(401, "there is no enough balance in wallet to use ");
+            }
+            $this->applyCashback($order);
+            return ApiResponse::sendresponse(200, "cofirm order", $order);
+        }else {
             $order->pay_method = "card";
             $order->save();
             $ordernum = $order->numberOrder;
@@ -238,7 +251,12 @@ class OrderController extends Controller
             $order = $this->orderdata($integration_id, $ordernum, $ifram_id);
             $orderdetails->update(['payment_order_id'=>$order['id']]);
         }
-        $order_price_in_cents = $orderdetails->price * 100 ;
+        if($orderdetails->delivery_method == 'delivery'){
+            $order_price_in_cents = ( $orderdetails->price + $orderdetails->place->delivery_fee ) * 100;
+        }else{
+            $order_price_in_cents = $orderdetails->price * 100;
+        }
+        // $order_price_in_cents = $orderdetails->price * 100 ;
         $datauser = $this->datauser($integration_id, $order_price_in_cents, $orderdetails->payment_order_id,$tokenjsonresponse);
         $iframe_link = 'https://accept.paymob.com/api/acceptance/iframes/' . $ifram_id . '?payment_token=' . $datauser['token'];
         // $iframe_link = 'https://accept.paymobsolutions.com/api/acceptance/iframes/' . $ifram_id . '?payment_token=' . $datauser['token'];
@@ -263,7 +281,12 @@ class OrderController extends Controller
     public function orderdata($integration_id, $numberOrder, $ifram_id)
     {
         $order = Order::where('numberOrder',$numberOrder)->first();
-        $totalprice = $order->price;
+        if($order->delivery_method == 'delivery'){
+            $totalprice = ( $order->price + $order->place->delivery_fee ) * 100;
+        }else{
+            $totalprice = $order->price * 100;
+        }
+        // $totalprice = $order->price;
         $tokenjson = $this->gettoken();
         $response_order = Http::withHeaders([
             "content-type" => 'application/json'
@@ -272,7 +295,7 @@ class OrderController extends Controller
             ->post("https://accept.paymobsolutions.com/api/ecommerce/orders", [
                 'auth_token' => $tokenjson['token'],
                 "delivery_needed" => "false",
-                "amount_cents" => $totalprice * 100,
+                "amount_cents" => $totalprice,
                 "merchant_order_id" => $order->numberOrder
             ]);
 
@@ -344,7 +367,7 @@ class OrderController extends Controller
                 'status' => '1'
             ]);
 
-            $order = Order::where('payment_order_id',$request->id)->first();
+            $order = Order::where('payment_order_id',$request->order)->first();
             if($order){
                 // Apply cashback
                 $this->applyCashback($order);
@@ -373,7 +396,13 @@ class OrderController extends Controller
             return;
         }
 
-        if ($order->price < $limit) {
+        if($order->delivery_method == 'delivery'){
+            $order_price = ( $order->price + $order->place->delivery_fee ) ;
+        }else{
+            $order_price = $order->price ;
+        }
+
+        if ($order_price < $limit) {
             return;
         }
 
@@ -381,19 +410,107 @@ class OrderController extends Controller
         if ($amount > 0) {
             $cashbackAmount = $amount;
         } elseif ($percentage > 0) {
-            $cashbackAmount = $order->price * ($percentage / 100);
+            $cashbackAmount = $order_price * ($percentage / 100);
         }
 
         // Apply cashback to user's wallet
         $order->user->wallet->cashback($cashbackAmount, $order->id);
 
         // Log cashback transaction
-        $order->user->walletTransactions()->create([
-            'amount' => $cashbackAmount,
-            'type' => 'cashback',
-            'order_id'=>$order->id,
-            // 'description' => "Cashback for order #{$order->id}",
+        // $order->user->walletTransactions()->create([
+        //     'amount' => $cashbackAmount,
+        //     'type' => 'cashback',
+        //     'order_id'=>$order->id,
+        //     // 'description' => "Cashback for order #{$order->id}",
+        // ]);
+    }
+
+
+
+    public function useCashback($order)
+    {
+        // Check if cashback is enabled
+        $enabled = GeneralSetting::where('key', 'cashback_enabled')->value('value');
+        if (!$enabled) {
+            return false;
+        }
+
+        // Get cashback settings
+        $amount = GeneralSetting::where('key', 'cashback_amount')->value('value');
+        $percentage = GeneralSetting::where('key', 'cashback_percentage')->value('value');
+        $limit = GeneralSetting::where('key', 'cashback_limit')->value('value');
+
+        // Calculate order price considering delivery method
+        if ($order->delivery_method == 'delivery') {
+            $order_price = $order->price + $order->place->delivery_fee;
+        } else {
+            $order_price = $order->price;
+        }
+
+        // Check if the order price meets the cashback limit
+        // if ($order_price < $limit) {
+        //     return;
+        // }
+
+        // Calculate cashback amount
+        // $cashbackAmount = 0;
+        // if ($amount > 0) {
+        //     $cashbackAmount = $amount;
+        // } elseif ($percentage > 0) {
+        //     $cashbackAmount = $order_price * ($percentage / 100);
+        // }
+
+        // Get user's cashback balance
+        $user = $order->user;
+        $wallet = $user->wallet;
+        $walletBalance = $wallet->balance;
+
+        // Check if cashback balance is sufficient to cover the order price
+        if ($walletBalance >= $order_price) {
+            // Deduct the order price from the cashback balance
+            $wallet->balance -= $order_price;
+            $order->total_paid_with_cashback = $order_price;
+            $wallet->save();
+        }
+        //  elseif ($walletBalance > 0) {
+        //     // Use whatever is available in the cashback balance
+        //     $wallet->balance = 0;
+        //     $order->total_paid_with_cashback = $walletBalance;
+        // }
+         else {
+            // No cashback balance to use
+            return false;
+        }
+
+        // Save the updated wallet balance
+        $wallet->save();
+
+        // $order->user->wallet->withdraw($order_price, $order->id);
+
+        // Log cashback transaction
+        $user->walletTransactions()->create([
+            'amount' => $order_price,
+            'type' => 'withdraw',
+            'order_id' => $order->id,
+            // 'description' => "Cashback used for order #{$order->id}",
         ]);
+
+        // Save the order with the applied cashback amount
+        $order->save();
+
+        // Apply additional cashback amount to the wallet if applicable
+        // if ($cashbackAmount > 0) {
+        //     $wallet->balance += $cashbackAmount;
+        //     $wallet->save();
+
+        //     // Log the cashback earned transaction
+        //     $user->walletTransactions()->create([
+        //         'amount' => $cashbackAmount,
+        //         'type' => 'cashback_earned',
+        //         'order_id' => $order->id,
+        //         'description' => "Cashback earned for order #{$order->id}",
+        //     ]);
+        // }
     }
 
 

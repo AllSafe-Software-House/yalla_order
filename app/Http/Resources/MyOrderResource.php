@@ -15,6 +15,11 @@ class MyOrderResource extends JsonResource
      */
     public function toArray($request)
     {
+        if($this->delivery_method == 'delivery'){
+            $total_price = $this->price + $this->place->delivery_fee;
+        }else{
+            $total_price = $this->price ;
+        }
         return [
             'Order Id' => $this->id,
             'User Address' => $this->user->address,
@@ -32,7 +37,7 @@ class MyOrderResource extends JsonResource
             'menuid' => $this->menue->id,
             'menu_image' => asset($this->menue->product->image),
             'Price' =>$this->price,
-            'Total' => $this->price + $this->place->delivery_fee,
+            'Total' => $total_price,
             'Date' => Carbon::parse($this->created_at)->format('Y-m-d')
         ];
     }
