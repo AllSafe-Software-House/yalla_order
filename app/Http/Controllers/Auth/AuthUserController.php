@@ -107,7 +107,7 @@ class AuthUserController extends Controller
             $user->wallet()->create(['balance'=>0]);
         }
         $balance = $user->wallet?$user->wallet->balance:0;
-        return ApiResponse::sendresponse(200, "show balance" ,$balance );
+        return ApiResponse::sendresponse(200, "user balance" ,$balance );
     }
 
 }
