@@ -464,22 +464,23 @@ class OrderController extends Controller
         $user = $order->user;
         $wallet = $user->wallet;
         $walletBalance = $wallet->balance;
-       return  array(['walletBalance'=>$walletBalance ,
-            'order_price'=>$order_price
-        ]);
+    //    return  array(['walletBalance'=>$walletBalance ,
+    //         'order_price'=>$order_price
+    //     ]);
         // Check if cashback balance is sufficient to cover the order price
         if ($walletBalance >= $order_price) {
             // Deduct the order price from the cashback balance
             $wallet->balance -= $order_price;
             // $order->total_paid_with_cashback = $order_price;
             $wallet->save();
+            return 'true';
         }else {
             // No cashback balance to use
-            return false;
+            return 'false';
         }
 
         // Save the updated wallet balance
-        $wallet->save();
+        // $wallet->save();
 
         // $order->user->wallet->withdraw($order_price, $order->id);
 
@@ -492,7 +493,7 @@ class OrderController extends Controller
         ]);
 
         // Save the order with the applied cashback amount
-        $order->save();
+        // $order->save();
 
         // Apply additional cashback amount to the wallet if applicable
         // if ($cashbackAmount > 0) {
