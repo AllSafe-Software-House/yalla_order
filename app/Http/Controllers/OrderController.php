@@ -471,13 +471,7 @@ class OrderController extends Controller
             $wallet->balance -= $order_price;
             // $order->total_paid_with_cashback = $order_price;
             $wallet->save();
-        }
-        //  elseif ($walletBalance > 0) {
-        //     // Use whatever is available in the cashback balance
-        //     $wallet->balance = 0;
-        //     $order->total_paid_with_cashback = $walletBalance;
-        // }
-         else {
+        }else {
             // No cashback balance to use
             return false;
         }

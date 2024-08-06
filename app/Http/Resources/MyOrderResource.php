@@ -37,7 +37,7 @@ class MyOrderResource extends JsonResource
             'menuid' => $this->menue->id,
             'menu_image' => asset($this->menue->product->image),
             'Price' =>$this->price,
-            'Total' => $total_price,
+            'Total' => $this->price + $this->place->delivery_fee,
             'Date' => Carbon::parse($this->created_at)->format('Y-m-d')
         ];
     }
