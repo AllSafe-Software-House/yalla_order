@@ -417,15 +417,15 @@ class OrderController extends Controller
         }
 
         // Apply cashback to user's wallet
-        $order->user->wallet->cashback($cashbackAmount, $order->id);
+        // $order->user->wallet->cashback($cashbackAmount, $order->id);
 
         // Log cashback transaction
-        // $order->user->walletTransactions()->create([
-        //     'amount' => $cashbackAmount,
-        //     'type' => 'cashback',
-        //     'order_id'=>$order->id,
-        //     // 'description' => "Cashback for order #{$order->id}",
-        // ]);
+        $order->user->walletTransactions()->create([
+            'amount' => $cashbackAmount,
+            'type' => 'cashback',
+            'order_id'=>$order->id,
+            // 'description' => "Cashback for order #{$order->id}",
+        ]);
     }
 
 
