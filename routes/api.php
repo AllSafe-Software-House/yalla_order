@@ -128,6 +128,8 @@ Route::middleware('lang')->group(function () {
             Route::post('/add/address', [AddAddressController::class, 'addaddress']);
             Route::get('/logout', [AuthUserController::class, 'logout']);
             Route::get('/delete/account', [AuthUserController::class, 'delete']);
+            Route::get('/user-transactions', [AuthUserController::class, 'userTransactions']);
+            Route::get('/user-balance', [AuthUserController::class, 'userBalance']);
         });
 
 

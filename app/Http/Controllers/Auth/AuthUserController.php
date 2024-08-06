@@ -90,4 +90,24 @@ class AuthUserController extends Controller
         $user->delete();
         return ApiResponse::sendresponse(200, "delete sucess");
     }
+
+
+
+    public function userTransactions(){
+        $user = Auth::user();
+        // return $user;
+        $transactions = $user->walletTransactions;
+        return ApiResponse::sendresponse(200, "show transactions" ,$transactions );
+    }
+
+    public function userBalance(){
+        $user = Auth::user();
+        // return $user;
+        if(!$user->wallet){
+            $user->wallet()->create(['balance'=>0]);
+        }
+        $balance = $user->wallet?$user->wallet->balance:0;
+        return ApiResponse::sendresponse(200, "show balance" ,$balance );
+    }
+
 }
