@@ -234,7 +234,7 @@ class OrderController extends Controller
         $orderdetails = Order::find($id);
         $ordernum = $orderdetails->numberOrder;
         $tokenjsonresponse = $this->gettoken();
-        if($orderdetails->payment_order_id != null){
+        if($orderdetails->payment_order_id == null){
             $order = $this->orderdata($integration_id, $ordernum, $ifram_id);
             $orderdetails->update(['payment_order_id'=>$order['id']]);
         }
