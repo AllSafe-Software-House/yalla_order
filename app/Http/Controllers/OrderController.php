@@ -152,9 +152,9 @@ class OrderController extends Controller
             $order->save();
             $this->statsorder($order, $delivery_method);
             $place->notify(new Sendorder($order));
-            return $use_cashback = $this->useCashback($order);
+            $use_cashback = $this->useCashback($order);
 
-            if($use_cashback == false){
+            if($use_cashback == 'false'){
                 return ApiResponse::sendresponse(401, "there is no enough balance in wallet to use ");
             }
             $this->applyCashback($order);
@@ -473,7 +473,7 @@ class OrderController extends Controller
             $wallet->balance -= $order_price;
             // $order->total_paid_with_cashback = $order_price;
             $wallet->save();
-            return 'true';
+            // return 'true';
         }else {
             // No cashback balance to use
             return 'false';
