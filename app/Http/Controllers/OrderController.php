@@ -235,7 +235,7 @@ class OrderController extends Controller
         $ordernum = $orderdetails->numberOrder;
         $tokenjsonresponse = $this->gettoken();
         $order = $this->orderdata($integration_id, $ordernum, $ifram_id);
-        $orderdetails->update(['payment_order_id'=>$order->id]);
+        $orderdetails->update(['payment_order_id'=>$order['id']]);
         $datauser = $this->datauser($integration_id, $order['amount_cents'], $order['id'],$tokenjsonresponse);
         $iframe_link = 'https://accept.paymobsolutions.com/api/acceptance/iframes/' . $ifram_id . '?payment_token=' . $datauser['token'];
         return $iframe_link;
@@ -272,7 +272,7 @@ class OrderController extends Controller
                 "merchant_order_id" => $order->numberOrder
             ]);
 
-        return $response_order->object();
+        // return $response_order->object();
 
         $order_json = $response_order->json();
         return $order_json;
