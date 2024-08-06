@@ -44,7 +44,7 @@ class AuthUserController extends Controller
             return ApiResponse::sendresponse(422, "Username or password incorrect");
         }
         // $user->tokens()->delete();
-        $token = $user->createToken($user->name . '@allsafe')->plainTextToken;
+        $token = $user->createToken($user->name . '@allsafe' . request()->ip())->plainTextToken;
         return ApiResponse::sendresponse(200, "login sucess", $token);
     }
 
