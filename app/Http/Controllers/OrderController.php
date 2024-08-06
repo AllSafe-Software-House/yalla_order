@@ -469,7 +469,7 @@ class OrderController extends Controller
         if ($walletBalance >= $order_price) {
             // Deduct the order price from the cashback balance
             $wallet->balance -= $order_price;
-            $order->total_paid_with_cashback = $order_price;
+            // $order->total_paid_with_cashback = $order_price;
             $wallet->save();
         }
         //  elseif ($walletBalance > 0) {
