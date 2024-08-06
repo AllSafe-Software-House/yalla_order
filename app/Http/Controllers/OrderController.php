@@ -148,6 +148,9 @@ class OrderController extends Controller
 
             return ApiResponse::sendresponse(200, "cofirm order", $order);
         }elseif($request->pay_method == 'cashback_wallet'){
+            if($order->status == '1'){
+                return ApiResponse::sendresponse(401, "this order is already confirmed");
+            }
             $order->pay_method = 'cashback wallet';
             $order->save();
             $this->statsorder($order, $delivery_method);
