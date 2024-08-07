@@ -249,7 +249,7 @@ class OrderController extends Controller
         $ifram_id = env('Iframe_id');
         $orderdetails = Order::find($id);
         $ordernum = $orderdetails->numberOrder;
-        $tokenjsonresponse = $this->gettoken();
+        return $tokenjsonresponse = $this->gettoken();
         if($orderdetails->payment_order_id == null){
             $order = $this->orderdata($integration_id, $ordernum, $ifram_id);
             $orderdetails->update(['payment_order_id'=>$order['id']]);
