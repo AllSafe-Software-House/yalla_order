@@ -321,39 +321,87 @@ class OrderController extends Controller
             $first_name = explode(" ", $name)[0];
             $last_name = explode(" ", $name)[1];
         }
-        $response_user = Http::withHeaders([
-            'content-type' => 'application/json'
-        ])->post('https://accept.paymob.com/v1/intention/', [
-            // ])->post('https://accept.paymobsolutions.com/api/acceptance/payment_keys', [
-            "auth_token" => $tokenjsonresponse['token'],
-            "expiration" => 36000,
-            "amount_cents" => $amount_cents,
-            "order_id" => $order_id,
-            "billing_data" => [
-                "first_name"            => $first_name,
-                "last_name"             => $last_name,
-                "phone_number"          => "NA",
-                // "phone_number"          => $user->phone ?: "NA",
-                "email"                 => $user->email,
-                "apartment"             => "NA",
-                "floor"                 => "NA",
-                "street"                => "na",
-                // "street"                => $user->address,
-                "building"              => "NA",
-                "shipping_method"       => "NA",
-                // "postal_code"           => $user->postal_code,
-                // "city"                  => $user->city,
-                // "state"                 => $user->state ?: "NA",
-                // "country"               => $user->country,
-                "postal_code"           => "postal_code",
-                "city"                  => "city",
-                "state"                 =>  "NA",
-                "country"               => "country",
-            ],
-            "currency" => "EGP",
-            "integration_id" => $integration_id
-        ]);
+        // $response_user = Http::withHeaders([
+        //     'content-type' => 'application/json'
+        // ])->post('https://accept.paymobsolutions.com/api/acceptance/payment_keys', [
+        //     "auth_token" => $tokenjsonresponse['token'],
+        //     "expiration" => 36000,
+        //     "amount_cents" => $amount_cents,
+        //     "order_id" => $order_id,
+        //     "billing_data" => [
+        //         "first_name"            => $first_name,
+        //         "last_name"             => $last_name,
+        //         "phone_number"          => "NA",
+        //         // "phone_number"          => $user->phone ?: "NA",
+        //         "email"                 => $user->email,
+        //         "apartment"             => "NA",
+        //         "floor"                 => "NA",
+        //         "street"                => "na",
+        //         // "street"                => $user->address,
+        //         "building"              => "NA",
+        //         "shipping_method"       => "NA",
+        //         // "postal_code"           => $user->postal_code,
+        //         // "city"                  => $user->city,
+        //         // "state"                 => $user->state ?: "NA",
+        //         // "country"               => $user->country,
+        //         "postal_code"           => "postal_code",
+        //         "city"                  => "city",
+        //         "state"                 =>  "NA",
+        //         "country"               => "country",
+        //     ],
+        //     "currency" => "EGP",
+        //     "integration_id" => $integration_id
+        // ]);
 
+
+        $client = new Client();
+        $headers = [
+        'Authorization' => $tokenjsonresponse['token'],
+        'Content-Type' => 'application/json'
+        ];
+        $body = '{
+        "amount": '.$amount_cents.',
+        "currency": "EGP",
+        "payment_methods": [
+            12,
+            "card",
+            "you can add Integration id directly or your integration name"
+        ],
+        "items": [
+            {
+            "name": "Item name 1",
+            "amount": 1,
+            "description": "Watch",
+            "quantity": 1
+            }
+        ],
+        "billing_data": {
+            "apartment": "6",
+            "first_name": "Ammar",
+            "last_name": "Sadek",
+            "street": "938, Al-Jadeed Bldg",
+            "building": "939",
+            "phone_number": "+96824480228",
+            "country": "OMN",
+            "email": "AmmarSadek@gmail.com",
+            "floor": "1",
+            "state": "Alkhuwair"
+        },
+        "customer": {
+            "first_name": "Ammar",
+            "last_name": "Sadek",
+            "email": "AmmarSadek@gmail.com",
+            "extras": {
+            "re": "22"
+            }
+        },
+        "extras": {
+            "ee": 22
+        }
+        }';
+        $request = new Request('POST', 'https://accept.paymob.com/v1/intention/', $headers, $body);
+        $res = $client->sendAsync($request)->wait();
+        return $res->getBody();
 
         $userdate_json = $response_user->json();
         return $userdate_json;
