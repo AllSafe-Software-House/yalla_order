@@ -368,10 +368,10 @@ class OrderController extends Controller
             'Content-Type' => 'application/json'
         ];
 
-        return $body = [
+        $body = [
             "amount" => $amount_cents,
             "currency" => "EGP",
-            "payment_methods" => [(int)$integration_id],
+            "payment_methods" => [123,(int)$integration_id],
             "items" => [
                 [
                     "name" => "Item name 1",
