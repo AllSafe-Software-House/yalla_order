@@ -260,7 +260,7 @@ class OrderController extends Controller
             $order_price_in_cents = $orderdetails->price * 100;
         }
         // $order_price_in_cents = $orderdetails->price * 100 ;
-        $datauser = $this->datauser($integration_id, $order_price_in_cents, $orderdetails->payment_order_id,$tokenjsonresponse);
+        return $datauser = $this->datauser($integration_id, $order_price_in_cents, $orderdetails->payment_order_id,$tokenjsonresponse);
          $responseArray = json_decode($datauser, true);
         return $clientSecret = $responseArray->original;
         return $this->getFinalUrl($datauser['original']['client_secret']);
@@ -412,7 +412,7 @@ class OrderController extends Controller
         $response = Http::withHeaders($headers)->post($url, $body);
 
         if ($response->successful()) {
-            return response()->json($response->object());
+            return $response->object();
         } else {
             return response()->json([
                 'error' => 'Request failed',
