@@ -371,7 +371,7 @@ class OrderController extends Controller
         return $body = [
             "amount" => $amount_cents,
             "currency" => "EGP",
-            "payment_methods" => [$integration_id],
+            "payment_methods" => [(int)$integration_id],
             "items" => [
                 [
                     "name" => "Item name 1",
