@@ -261,7 +261,7 @@ class OrderController extends Controller
         }
         // $order_price_in_cents = $orderdetails->price * 100 ;
         $datauser = $this->datauser($integration_id, $order_price_in_cents, $orderdetails->payment_order_id,$tokenjsonresponse);
-        return $responseArray = json_decode($datauser, true);
+         $responseArray = json_decode($datauser, true);
         return $clientSecret = $responseArray['original'];
         return $this->getFinalUrl($datauser['original']['client_secret']);
         $iframe_link = 'https://accept.paymob.com/api/acceptance/iframes/' . $ifram_id . '?payment_token=' . $datauser['token'];
