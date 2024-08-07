@@ -313,6 +313,7 @@ class OrderController extends Controller
     {
         $user = Auth::user();
         $name = $user->name;
+        $secret_key = env('PAYMOB_SECRET_KEY');
         // check name to get lastname
         if ((count(explode(" ", $name)) == 1)) {
             $first_name = $name;
@@ -362,14 +363,14 @@ class OrderController extends Controller
         $authToken = 'YOUR_AUTH_TOKEN'; // Replace with your actual auth token
 
         $headers = [
-            'Authorization' => 'Token ' . $tokenjsonresponse['token'],
+            'Authorization' => 'Token ' . $secret_key,
             'Content-Type' => 'application/json'
         ];
 
         $body = [
             "amount" => $amount_cents,
             "currency" => "EGP",
-            "payment_methods" => [1, 47],
+            "payment_methods" => [$integration_id],
             "items" => [
                 [
                     "name" => "Item name 1",
