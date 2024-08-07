@@ -411,7 +411,7 @@ class OrderController extends Controller
         $response = Http::withHeaders($headers)->post($url, $body);
 
         if ($response->successful()) {
-            return response()->json($response->json());
+            return response()->json($response->object());
         } else {
             return response()->json([
                 'error' => 'Request failed',
