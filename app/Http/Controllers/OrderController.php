@@ -30,7 +30,7 @@ use App\Http\Requests\ConfirmOrderRequest;
 use App\Http\Resources\AddtionSauiResourse;
 use App\Http\Resources\ReservationcardResource;
 use App\Http\Resources\MyReservationcardResource;
-use GuzzleHttp\Client;
+
 class OrderController extends Controller
 {
     public function showdetails($place_id, $product_id)
@@ -260,7 +260,7 @@ class OrderController extends Controller
             $order_price_in_cents = $orderdetails->price * 100;
         }
         // $order_price_in_cents = $orderdetails->price * 100 ;
-        $datauser = $this->datauser($integration_id, $order_price_in_cents, $orderdetails->payment_order_id,$tokenjsonresponse);
+        return $datauser = $this->datauser($integration_id, $order_price_in_cents, $orderdetails->payment_order_id,$tokenjsonresponse);
         $iframe_link = 'https://accept.paymob.com/api/acceptance/iframes/' . $ifram_id . '?payment_token=' . $datauser['token'];
         // $iframe_link = 'https://accept.paymobsolutions.com/api/acceptance/iframes/' . $ifram_id . '?payment_token=' . $datauser['token'];
         return $iframe_link;
@@ -354,58 +354,68 @@ class OrderController extends Controller
         // ]);
 
 
+        // $userdate_json = $response_user->json();
+        // return $userdate_json;
 
-        $client = new Client();
-        $token = $tokenjsonresponse['token']; // Replace with your actual auth token
-        $amount_cents = 1000; // Example amount in cents
-        $order_id = 123456; // Example order ID
-        $first_name = 'Ammar';
-        $last_name = 'Sadek';
-        $email = 'AmmarSadek@gmail.com';
-        $integration_id = 'YOUR_INTEGRATION_ID'; // Replace with your actual integration ID
+
+        $url = 'https://accept.paymob.com/v1/intention/';
+        $authToken = 'YOUR_AUTH_TOKEN'; // Replace with your actual auth token
 
         $headers = [
+            'Authorization' => 'Token ' . $tokenjsonresponse['token'],
             'Content-Type' => 'application/json'
         ];
 
-        $body = json_encode([
-            "auth_token" => $token,
-            "expiration" => 36000,
-            "amount_cents" => $amount_cents,
-            "order_id" => $order_id,
+        $body = [
+            "amount" => $amount_cents,
+            "currency" => "EGP",
+            "payment_methods" => [1, 47],
+            "items" => [
+                [
+                    "name" => "Item name 1",
+                    "amount" => $amount_cents,
+                    "description" => "Item description 1",
+                    "quantity" => 1
+                ]
+            ],
             "billing_data" => [
+                "apartment" => "sympl",
                 "first_name" => $first_name,
                 "last_name" => $last_name,
-                "phone_number" => "NA",
-                "email" => $email,
-                "apartment" => "NA",
-                "floor" => "NA",
-                "street" => "na",
+                "street" => "NA",
                 "building" => "NA",
-                "shipping_method" => "NA",
-                "postal_code" => "postal_code",
-                "city" => "city",
-                "state" => "NA",
-                "country" => "country"
+                "phone_number" => "+201125773493",
+                "city" => "NA",
+                "country" => "EG",
+                "email" => $user->email,
+                "floor" => "NA",
+                "state" => "NA"
             ],
-            "currency" => "EGP",
-            "integration_id" => $integration_id
-        ]);
+            "customer" => [
+                "first_name" => $first_name,
+                "last_name" => $last_name,
+                "email" => $user->email,
+                "extras" => [
+                    "re" => "22"
+                ]
+            ],
+            "extras" => [
+                "ee" => 22
+            ]
+        ];
 
-        try {
-            $response = $client->post('https://accept.paymobsolutions.com/api/acceptance/payment_keys', [
-                'headers' => $headers,
-                'body' => $body
+        $response = Http::withHeaders($headers)->post($url, $body);
+
+        if ($response->successful()) {
+            return response()->json($response->json());
+        } else {
+            return response()->json([
+                'error' => 'Request failed',
+                'status' => $response->status(),
+                'body' => $response->body()
             ]);
-
-            return $response->getBody();
-        } catch (Exception $e) {
-            return 'Error: ' . $e->getMessage();
         }
 
-
-        $userdate_json = $response_user->json();
-        return $userdate_json;
     }
 
 
