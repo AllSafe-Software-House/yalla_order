@@ -31,7 +31,6 @@ use App\Http\Resources\AddtionSauiResourse;
 use App\Http\Resources\ReservationcardResource;
 use App\Http\Resources\MyReservationcardResource;
 use GuzzleHttp\Client;
-
 class OrderController extends Controller
 {
     public function showdetails($place_id, $product_id)
@@ -355,54 +354,55 @@ class OrderController extends Controller
         // ]);
 
 
+
         $client = new Client();
+        $token = $tokenjsonresponse['token']; // Replace with your actual auth token
+        $amount_cents = 1000; // Example amount in cents
+        $order_id = 123456; // Example order ID
+        $first_name = 'Ammar';
+        $last_name = 'Sadek';
+        $email = 'AmmarSadek@gmail.com';
+        $integration_id = 'YOUR_INTEGRATION_ID'; // Replace with your actual integration ID
+
         $headers = [
-        'Authorization' => $tokenjsonresponse['token'],
-        'Content-Type' => 'application/json'
+            'Content-Type' => 'application/json'
         ];
-        $body = '{
-        "amount": '.$amount_cents.',
-        "currency": "EGP",
-        "payment_methods": [
-            12,
-            "card",
-            "you can add Integration id directly or your integration name"
-        ],
-        "items": [
-            {
-            "name": "Item name 1",
-            "amount": 1,
-            "description": "Watch",
-            "quantity": 1
-            }
-        ],
-        "billing_data": {
-            "apartment": "6",
-            "first_name": "Ammar",
-            "last_name": "Sadek",
-            "street": "938, Al-Jadeed Bldg",
-            "building": "939",
-            "phone_number": "+96824480228",
-            "country": "OMN",
-            "email": "AmmarSadek@gmail.com",
-            "floor": "1",
-            "state": "Alkhuwair"
-        },
-        "customer": {
-            "first_name": "Ammar",
-            "last_name": "Sadek",
-            "email": "AmmarSadek@gmail.com",
-            "extras": {
-            "re": "22"
-            }
-        },
-        "extras": {
-            "ee": 22
+
+        $body = json_encode([
+            "auth_token" => $token,
+            "expiration" => 36000,
+            "amount_cents" => $amount_cents,
+            "order_id" => $order_id,
+            "billing_data" => [
+                "first_name" => $first_name,
+                "last_name" => $last_name,
+                "phone_number" => "NA",
+                "email" => $email,
+                "apartment" => "NA",
+                "floor" => "NA",
+                "street" => "na",
+                "building" => "NA",
+                "shipping_method" => "NA",
+                "postal_code" => "postal_code",
+                "city" => "city",
+                "state" => "NA",
+                "country" => "country"
+            ],
+            "currency" => "EGP",
+            "integration_id" => $integration_id
+        ]);
+
+        try {
+            $response = $client->post('https://accept.paymobsolutions.com/api/acceptance/payment_keys', [
+                'headers' => $headers,
+                'body' => $body
+            ]);
+
+            return $response->getBody();
+        } catch (Exception $e) {
+            return 'Error: ' . $e->getMessage();
         }
-        }';
-        $request = new Request('POST', 'https://accept.paymob.com/v1/intention/', $headers, $body);
-        $res = $client->sendAsync($request)->wait();
-        return $res->getBody();
+
 
         $userdate_json = $response_user->json();
         return $userdate_json;
