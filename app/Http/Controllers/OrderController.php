@@ -311,7 +311,7 @@ class OrderController extends Controller
     // step 3 get data user
     public function datauser($integration_id, $amount_cents, $order_id,$tokenjsonresponse)
     {
-        return $integration_id;
+        // return $integration_id;
         $user = Auth::user();
         $name = $user->name;
         $secret_key = env('PAYMOB_SECRET_KEY');
@@ -368,7 +368,7 @@ class OrderController extends Controller
             'Content-Type' => 'application/json'
         ];
 
-        $body = [
+        return $body = [
             "amount" => $amount_cents,
             "currency" => "EGP",
             "payment_methods" => [$integration_id],
