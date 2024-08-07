@@ -260,7 +260,9 @@ class OrderController extends Controller
             $order_price_in_cents = $orderdetails->price * 100;
         }
         // $order_price_in_cents = $orderdetails->price * 100 ;
-        return $datauser = $this->datauser($integration_id, $order_price_in_cents, $orderdetails->payment_order_id,$tokenjsonresponse);
+        $datauser = $this->datauser($integration_id, $order_price_in_cents, $orderdetails->payment_order_id,$tokenjsonresponse);
+        return $datauser['original']['client_secret'];
+        return $this->getFinalUrl($datauser['original']['client_secret']);
         $iframe_link = 'https://accept.paymob.com/api/acceptance/iframes/' . $ifram_id . '?payment_token=' . $datauser['token'];
         // $iframe_link = 'https://accept.paymobsolutions.com/api/acceptance/iframes/' . $ifram_id . '?payment_token=' . $datauser['token'];
         return $iframe_link;
@@ -418,6 +420,13 @@ class OrderController extends Controller
             ]);
         }
 
+    }
+
+
+    public function getFinalUrl($client_secret)
+    {
+        $public_key = env('PAYMOB_PUBLIC_KEY');
+        $url = 'https://accept.paymob.com/unifiedcheckout/?publicKey='.$public_key.'&clientSecret='.$client_secret;
     }
 
 
