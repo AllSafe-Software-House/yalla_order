@@ -323,7 +323,8 @@ class OrderController extends Controller
         }
         $response_user = Http::withHeaders([
             'content-type' => 'application/json'
-        ])->post('https://accept.paymobsolutions.com/api/acceptance/payment_keys', [
+        ])->post('https://accept.paymob.com/v1/intention/', [
+            // ])->post('https://accept.paymobsolutions.com/api/acceptance/payment_keys', [
             "auth_token" => $tokenjsonresponse['token'],
             "expiration" => 36000,
             "amount_cents" => $amount_cents,
