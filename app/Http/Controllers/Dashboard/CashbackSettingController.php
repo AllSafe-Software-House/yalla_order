@@ -29,8 +29,8 @@ class CashbackSettingController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'cashback_enabled' => 'required|boolean',
-            'cashback_type' => 'required|boolean',
+            'cashback_enabled' => 'required',
+            'cashback_type' => 'required',
             'cashback_amount' => 'required|numeric',
             'cashback_percentage' => 'required|numeric',
             'cashback_limit' => 'required|numeric',
