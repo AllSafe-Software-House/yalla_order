@@ -15,6 +15,8 @@ class CashbackSettingController extends Controller
             'cashback_percentage' => 0,
             'cashback_limit' => 0,
             'cashback_type'=>0,
+            'points_per_money'=>0,
+            'money_per_point'=>0,
         ];
 
         $settings = GeneralSetting::whereIn('key', array_keys($defaults))->pluck('value', 'key')->toArray();
@@ -32,6 +34,8 @@ class CashbackSettingController extends Controller
             'cashback_amount' => 'required|numeric',
             'cashback_percentage' => 'required|numeric',
             'cashback_limit' => 'required|numeric',
+            'money_per_point' => 'required|numeric',
+            'points_per_money' => 'required|numeric',
         ]);
 
         GeneralSetting::updateOrCreate(['key' => 'cashback_enabled'], ['value' => $request->cashback_enabled]);
@@ -39,6 +43,8 @@ class CashbackSettingController extends Controller
         GeneralSetting::updateOrCreate(['key' => 'cashback_amount'], ['value' => $request->cashback_amount]);
         GeneralSetting::updateOrCreate(['key' => 'cashback_percentage'], ['value' => $request->cashback_percentage]);
         GeneralSetting::updateOrCreate(['key' => 'cashback_limit'], ['value' => $request->cashback_limit]);
+        GeneralSetting::updateOrCreate(['key' => 'points_per_money'], ['value' => $request->points_per_money]);
+        GeneralSetting::updateOrCreate(['key' => 'money_per_point'], ['value' => $request->money_per_point]);
 
         return redirect()->back()->with('success', 'Cashback settings updated successfully.');
     }
