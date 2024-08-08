@@ -97,12 +97,18 @@
                                                 @error('points_per_money')
                                                     <span class="text-danger">{{$message}}</span>
                                                 @enderror
+                                                <p>
+                                                    <small class="form-text text-muted">amount in points.</small>
+                                                </p>
                                             </div>
                                             <div class="col-6">
                                                 <input type="number" step="0.01" name="money_per_point" value="{{ $settings['money_per_point'] }}" class="form-control @error('money_per_point') is-invalid @enderror" id="money_per_point" placeholder="Dollars per point" />
                                                 @error('money_per_point')
                                                     <span class="text-danger">{{$message}}</span>
                                                 @enderror
+                                                <p>
+                                                    <small class="form-text text-muted">equal in cash units.</small>
+                                                </p>
                                             </div>
                                         </div>
                                         <small class="form-text text-muted">Specify how many points equal how much cash and vice versa.</small>
