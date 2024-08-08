@@ -32,7 +32,7 @@
                                     <div class="col-sm-9 text-secondary">
                                         <input type="hidden" name="cashback_enabled" value="off">
                                         <input type="checkbox" name="cashback_enabled" id="cashback_enabled_toggle"
-                                        @if($settings['cashback_enabled']) checked @endif
+                                        @if($settings['cashback_enabled']=='on') checked @endif
                                         data-toggle="toggle" data-on="Enabled" data-off="Disabled">
                                         @error('cashback_enabled')
                                             <span class="text-danger">{{$message}}</span>
