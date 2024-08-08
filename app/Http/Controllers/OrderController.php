@@ -467,7 +467,7 @@ class OrderController extends Controller
         $percentage = GeneralSetting::where('key', 'cashback_percentage')->value('value');
         $limit = GeneralSetting::where('key', 'cashback_limit')->value('value');
 
-        if (!$enabled) {
+        if (!$enabled=='on') {
             return;
         }
 
@@ -506,7 +506,7 @@ class OrderController extends Controller
     {
         // Check if cashback is enabled
         $enabled = GeneralSetting::where('key', 'cashback_enabled')->value('value');
-        if (!$enabled) {
+        if (!$enabled=='on') {
             return false;
         }
 
