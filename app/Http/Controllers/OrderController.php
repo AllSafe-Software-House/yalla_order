@@ -466,7 +466,7 @@ class OrderController extends Controller
         $amount = GeneralSetting::where('key', 'cashback_amount')->value('value');
         $percentage = GeneralSetting::where('key', 'cashback_percentage')->value('value');
         $limit = GeneralSetting::where('key', 'cashback_limit')->value('value');
-
+        $pointsPerMoney = GeneralSetting::where('key', 'points_per_money')->value('value');
         if (!$enabled=='on') {
             return;
         }
@@ -487,6 +487,10 @@ class OrderController extends Controller
         } elseif ($percentage > 0) {
             $cashbackAmount = $order_price * ($percentage / 100);
         }
+
+
+        // Convert cashback amount to points
+        // $cashbackPoints = $cashbackAmount * $pointsPerMoney;
 
         // Apply cashback to user's wallet
         // $order->user->wallet->cashback($cashbackAmount, $order->id);
@@ -514,7 +518,8 @@ class OrderController extends Controller
         $amount = GeneralSetting::where('key', 'cashback_amount')->value('value');
         $percentage = GeneralSetting::where('key', 'cashback_percentage')->value('value');
         $limit = GeneralSetting::where('key', 'cashback_limit')->value('value');
-
+        $pointsPerMoney = GeneralSetting::where('key', 'points_per_money')->value('value');
+        $moneyPerPoint = GeneralSetting::where('key', 'money_per_point')->value('value');
         // Calculate order price considering delivery method
         if ($order->delivery_method == 'delivery') {
             $order_price = $order->price + $order->place->delivery_fee;
@@ -539,13 +544,18 @@ class OrderController extends Controller
         $user = $order->user;
         $wallet = $user->wallet;
         $walletBalance = $wallet->balance;
+
+        $get_rate_for_one_point = $moneyPerPoint / $pointsPerMoney;
+        // Convert wallet balance (points) to equivalent money
+        $walletBalanceInMoney = $walletBalance * $get_rate_for_one_point;
+
     //    return  array(['walletBalance'=>$walletBalance ,
     //         'order_price'=>$order_price
     //     ]);
         // Check if cashback balance is sufficient to cover the order price
-        if ($walletBalance >= $order_price) {
+        if ($walletBalanceInMoney >= $order_price) {
             // Deduct the order price from the cashback balance
-            $wallet->balance -= $order_price;
+            $wallet->balance -= ( $order_price / $get_rate_for_one_point ) ;
             // $order->total_paid_with_cashback = $order_price;
             $wallet->save();
             // return 'true';
