@@ -148,6 +148,12 @@
                 }
             });
 
+            $('#cashback_type_toggle').change(function() {
+                if (!$(this).prop('checked')) {
+                    $(this).val('off');
+                }
+            });
+
             // Toggle visibility of fields based on cashback type
             function toggleCashbackFields() {
                 if ($('#cashback_type_toggle').prop('checked')) {
