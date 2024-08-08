@@ -31,8 +31,8 @@ class CashbackSettingController extends Controller
         $request->validate([
             'cashback_enabled' => 'required',
             'cashback_type' => 'required',
-            'cashback_amount' => 'required|numeric',
-            'cashback_percentage' => 'required|numeric',
+            'cashback_amount' => 'nullable|numeric',
+            'cashback_percentage' => 'nullable|numeric',
             'cashback_limit' => 'required|numeric',
             'money_per_point' => 'required|numeric',
             'points_per_money' => 'required|numeric',
@@ -40,8 +40,8 @@ class CashbackSettingController extends Controller
 
         GeneralSetting::updateOrCreate(['key' => 'cashback_enabled'], ['value' => $request->cashback_enabled]);
         GeneralSetting::updateOrCreate(['key' => 'cashback_type'], ['value' => $request->cashback_type]);
-        GeneralSetting::updateOrCreate(['key' => 'cashback_amount'], ['value' => $request->cashback_amount]);
-        GeneralSetting::updateOrCreate(['key' => 'cashback_percentage'], ['value' => $request->cashback_percentage]);
+        GeneralSetting::updateOrCreate(['key' => 'cashback_amount'], ['value' => $request->cashback_amount ?? 0]);
+        GeneralSetting::updateOrCreate(['key' => 'cashback_percentage'], ['value' => $request->cashback_percentage ?? 0]);
         GeneralSetting::updateOrCreate(['key' => 'cashback_limit'], ['value' => $request->cashback_limit]);
         GeneralSetting::updateOrCreate(['key' => 'points_per_money'], ['value' => $request->points_per_money]);
         GeneralSetting::updateOrCreate(['key' => 'money_per_point'], ['value' => $request->money_per_point]);
