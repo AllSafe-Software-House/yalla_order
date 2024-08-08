@@ -86,30 +86,32 @@
                                     </div>
                                 </div>
 
-                                <div class="mb-3 row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Points per Cash Money:</h6>
+                                <div class="row">
+
+                                    <div class="mb-3 col-6">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Points :</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="number" step="0.01" name="points_per_money" value="{{ $settings['points_per_money'] }}" class="form-control @error('points_per_money') is-invalid @enderror" id="points_per_money" placeholder="Points per dollar" />
+                                            @error('points_per_money')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </div>
                                     </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <input type="number" step="0.01" name="points_per_money" value="{{ $settings['points_per_money'] }}" class="form-control @error('points_per_money') is-invalid @enderror" id="points_per_money" placeholder="Points per dollar" />
-                                        @error('points_per_money')
-                                            <span class="text-danger">{{$message}}</span>
-                                        @enderror
+
+                                    <div class="mb-3 col-6">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Cash Money per Point:</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="number" step="0.01" name="money_per_point" value="{{ $settings['money_per_point'] }}" class="form-control @error('money_per_point') is-invalid @enderror" id="money_per_point" placeholder="Dollars per point" />
+                                            @error('money_per_point')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div class="mb-3 row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Cash Money per Point:</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <input type="number" step="0.01" name="money_per_point" value="{{ $settings['money_per_point'] }}" class="form-control @error('money_per_point') is-invalid @enderror" id="money_per_point" placeholder="Dollars per point" />
-                                        @error('money_per_point')
-                                            <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-
                                 <div class="row">
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-9 text-secondary">
