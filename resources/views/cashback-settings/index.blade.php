@@ -31,7 +31,7 @@
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <input type="hidden" name="cashback_enabled" value="off">
-                                        <input type="checkbox" name="cashback_enabled" value="{{ $settings['cashback_enabled'] }}" id="cashback_enabled_toggle"
+                                        <input type="checkbox" name="cashback_enabled"  id="cashback_enabled_toggle"
                                         @if($settings['cashback_enabled']=='on') checked @endif
                                         data-toggle="toggle" data-on="Enabled" data-off="Disabled">
                                         @error('cashback_enabled')
@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <input type="hidden" name="cashback_type" value="off">
-                                        <input type="checkbox" name="cashback_type" value="{{ $settings['cashback_type'] }}" id="cashback_type_toggle"
+                                        <input type="checkbox" name="cashback_type"  id="cashback_type_toggle"
                                         @if($settings['cashback_type'] == 'percentage') checked @endif
                                         data-toggle="toggle" data-on="Percentage" data-off="Amount">
                                     </div>
