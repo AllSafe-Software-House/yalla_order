@@ -139,6 +139,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-toggle@2.2.2/js/bootstrap-toggle.min.js"></script>
     <script>
         $(document).ready(function() {
+
+
+            $('#cashback_enabled_toggle').change(function() {
+                if (!$(this).prop('checked')) {
+                    $(this).val('off');
+                }
+            });
+
             // Toggle visibility of fields based on cashback type
             function toggleCashbackFields() {
                 if ($('#cashback_type_toggle').prop('checked')) {
