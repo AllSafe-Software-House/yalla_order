@@ -1,19 +1,16 @@
 @extends('layouts.master')
 @section('css')
-    <!--Internal   Notify -->
+    <!--Internal Notify -->
     <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-toggle@2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+@endsection
+
 @section('title')
     CashBack Setting
 @stop
 
-
-@endsection
 @section('page-header')
-
-
-
 @endsection
-
 
 @section('content')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -28,73 +25,90 @@
                                 @csrf
                                 @method('PUT')
 
-
-
                                 <div class="mb-3 row">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Cashback Enabled</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="checkbox" name="cashback_enabled" value="{{ $settings['cashback_enabled'] }}"
-                                        @if($settings['cashback_enabled'] == 0)
-                                            checked
-                                        @endif class="form-control @error('cashback_enabled') is-invalid @enderror" id="cashback_enabled" placeholder="cashback enabled" />
+                                        <input type="checkbox" name="cashback_enabled" id="cashback_enabled_toggle"
+                                        @if($settings['cashback_enabled']) checked @endif
+                                        data-toggle="toggle" data-on="Enabled" data-off="Disabled">
                                         @error('cashback_enabled')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
                                 </div>
 
-                                {{-- <div>
-                                    <label for="cashback_amount">Cashback Amount:</label>
-                                    <input type="number" step="0.01" id="cashback_amount" name="cashback_amount" value="{{ $settings['cashback_amount'] }}">
-                                </div> --}}
-
                                 <div class="mb-3 row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Cashback Type</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="checkbox" name="cashback_type" id="cashback_type_toggle"
+                                        @if($settings['cashback_type'] == 'percentage') checked @endif
+                                        data-toggle="toggle" data-on="Percentage" data-off="Amount">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 row" id="cashback_amount_row">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Cashback Amount:</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="number" name="cashback_amount"  value="{{ $settings['cashback_amount'] }}" class="form-control @error('cashback_amount') is-invalid @enderror" id="cashback_amount" placeholder="cashback amount" />
+                                        <input type="number" name="cashback_amount" value="{{ $settings['cashback_amount'] }}" class="form-control @error('cashback_amount') is-invalid @enderror" id="cashback_amount" placeholder="cashback amount" />
                                         @error('cashback_amount')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
                                 </div>
 
-                                {{-- <div>
-                                    <label for="cashback_percentage">Cashback Percentage:</label>
-                                    <input type="number" step="0.01" id="cashback_percentage" name="cashback_percentage" value="{{ $settings['cashback_percentage'] }}">
-                                </div> --}}
-
-
-                                <div class="mb-3 row">
+                                <div class="mb-3 row" id="cashback_percentage_row">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Cashback Percentage:</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="number" step="0.01" name="cashback_percentage"  value="{{ $settings['cashback_percentage'] }}" class="form-control @error('cashback_percentage') is-invalid @enderror" id="cashback_percentage" placeholder="cashback amount" />
+                                        <input type="number" step="0.01" name="cashback_percentage" value="{{ $settings['cashback_percentage'] }}" class="form-control @error('cashback_percentage') is-invalid @enderror" id="cashback_percentage" placeholder="cashback percentage" />
                                         @error('cashback_percentage')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
                                 </div>
 
-
-
                                 <div class="mb-3 row">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Minimum Order Amount:</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="number" step="0.01" name="cashback_limit" value="{{ $settings['cashback_limit'] }}" class="form-control @error('cashback_limit') is-invalid @enderror" id="cashback_limit" placeholder="cashback amount" />
+                                        <input type="number" step="0.01" name="cashback_limit" value="{{ $settings['cashback_limit'] }}" class="form-control @error('cashback_limit') is-invalid @enderror" id="cashback_limit" placeholder="Minimum order amount" />
                                         @error('cashback_limit')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
                                 </div>
 
-                                {{-- <button type="submit">Update Settings</button> --}}
+                                <div class="mb-3 row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Points per Dollar:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="number" step="0.01" name="points_per_dollar" value="{{ $settings['points_per_dollar'] }}" class="form-control @error('points_per_dollar') is-invalid @enderror" id="points_per_dollar" placeholder="Points per dollar" />
+                                        @error('points_per_dollar')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Dollars per Point:</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="number" step="0.01" name="dollars_per_point" value="{{ $settings['dollars_per_point'] }}" class="form-control @error('dollars_per_point') is-invalid @enderror" id="dollars_per_point" placeholder="Dollars per point" />
+                                        @error('dollars_per_point')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
 
                                 <div class="row">
                                     <div class="col-sm-3"></div>
@@ -112,9 +126,34 @@
 </div>
 @endsection
 
-
 @section('js')
-    <!--Internal  Notify js -->
+    <!--Internal Notify js -->
     <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-toggle@2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Toggle visibility of fields based on cashback type
+            function toggleCashbackFields() {
+                if ($('#cashback_type_toggle').prop('checked')) {
+                    $('#cashback_amount_row').hide();
+                    $('#cashback_percentage_row').show();
+                } else {
+                    $('#cashback_amount_row').show();
+                    $('#cashback_percentage_row').hide();
+                }
+            }
+
+            toggleCashbackFields();
+
+            $('#cashback_type_toggle').change(function() {
+                toggleCashbackFields();
+                if ($(this).prop('checked')) {
+                    $('#cashback_amount').val(0); // Set amount to 0 if percentage is selected
+                } else {
+                    $('#cashback_percentage').val(0); // Set percentage to 0 if amount is selected
+                }
+            });
+        });
+    </script>
 @endsection
