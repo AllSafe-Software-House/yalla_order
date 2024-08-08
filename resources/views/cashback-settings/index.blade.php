@@ -30,7 +30,8 @@
                                         <h6 class="mb-0">Cashback Enabled</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="checkbox" name="cashback_enabled" value="off" id="cashback_enabled_toggle"
+                                        <input type="hidden" name="cashback_enabled" value="off">
+                                        <input type="checkbox" name="cashback_enabled" id="cashback_enabled_toggle"
                                         @if($settings['cashback_enabled']) checked @endif
                                         data-toggle="toggle" data-on="Enabled" data-off="Disabled">
                                         @error('cashback_enabled')
